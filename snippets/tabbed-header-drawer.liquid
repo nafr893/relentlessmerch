@@ -1,5 +1,5 @@
 {%- doc -%}
- Renders a tabbed header drawer menu with SHOP, NEW, and EXPLORE tabs.
+ Renders a tabbed header drawer menu with ARTISTS, APPAREL, and EXPLORE tabs.
 
 
  @param {object} linklist - The linklist to render
@@ -17,14 +17,9 @@
  assign block_settings = block.settings
  assign image_border_radius = block_settings.image_border_radius | default: 0
 
-
- # Load configuration
- render 'tabbed-drawer-config', linklist: linklist
-
-
  # Define tabs
- assign tabs = 'shop,pursuit,explore' | split: ','
- assign active_tab = 'shop'
+ assign tabs = 'artists,apparel,explore' | split: ','
+ assign active_tab = 'artists'
 %}
 
 
@@ -62,11 +57,46 @@
      data-tabbed-drawer
      class="tabbed-drawer motion-reduce color-{{ block_settings.color_scheme }}"
    >
-     {%- comment -%} Tab Navigation with Close Button (4-column grid) {%- endcomment -%}
+     {%- comment -%} Drawer Header: MENU title + Close Button {%- endcomment -%}
+     <div class="tabbed-drawer__header">
+       <span class="tabbed-drawer__header-title">{{ block_settings.tabbed_drawer_title | default: 'MENU' }}</span>
+       <button
+         class="tabbed-drawer__close-button"
+         type="button"
+         aria-label="{{ 'actions.close' | t }}"
+         on:click="/close"
+       >
+         <span class="svg-wrapper header-drawer-icon header-drawer-icon--close">
+           {{- 'icon-close.svg' | inline_asset_content -}}
+         </span>
+       </button>
+     </div>
+
+
+     {%- comment -%} Search Bar {%- endcomment -%}
+     <div class="tabbed-drawer__search">
+       <form action="{{ routes.search_url }}" method="get" role="search" class="tabbed-drawer__search-form">
+         <input type="hidden" name="type" value="product">
+         <span class="svg-wrapper tabbed-drawer__search-icon">
+           {{- 'icon-search.svg' | inline_asset_content -}}
+         </span>
+         <input
+           type="search"
+           name="q"
+           placeholder="SEARCH..."
+           class="tabbed-drawer__search-input"
+           aria-label="{{ 'general.search.search' | t }}"
+           autocomplete="off"
+         >
+       </form>
+     </div>
+
+
+     {%- comment -%} Tab Navigation (no close button — it lives in the header above) {%- endcomment -%}
      {% render 'tabbed-drawer-tabs',
        tabs: tabs,
        active_tab: active_tab,
-       include_close: true
+       include_close: false
      %}
 
 
@@ -94,21 +124,6 @@
      </div>
 
 
-     {%- comment -%} Featured Banner (appears on all tabs) {%- endcomment -%}
-     <div class="tabbed-drawer__featured-banner"
-       {% if block_settings.tabbed_banner_image %}
-         style="background-image: url('{{ block_settings.tabbed_banner_image | image_url: width: 800 }}'); background-size: cover; background-position: center;"
-       {% endif %}
-     >
-       <div class="tabbed-drawer__banner-content">
-         <h3 class="tabbed-drawer__banner-title">{{ block_settings.tabbed_banner_title | default: 'LIFETIME WARRANTY' | newline_to_br }}</h3>
-         <a href="{{ block_settings.tabbed_banner_url | default: '/pages/warranty' }}" class="button button--secondary tabbed-drawer__banner-cta">
-           {{ block_settings.tabbed_banner_cta | default: 'LEARN MORE' }}
-         </a>
-       </div>
-     </div>
-
-
      {%- comment -%} Backdrop {%- endcomment -%}
      <div class="tabbed-drawer__backdrop" on:click="/close"></div>
    </div>
@@ -117,8 +132,7 @@
 
 
 {% stylesheet %}
- /* Tabbed Header Drawer Styles
-    */
+ /* Tabbed Header Drawer Styles */
 
 
  /* Hide on desktop */
@@ -203,32 +217,38 @@
  }
 
 
- /* Tab Navigation - 4-column grid (3 tabs + close button) */
- .tabbed-drawer__tabs {
-   display: grid;
-   grid-template-columns: 1fr 1fr 1fr auto;
-   position: sticky;
-   top: 0;
-   background: var(--color-background);
+ /* Drawer Header Row: MENU title + close button */
+ .tabbed-drawer__header {
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   padding: 1.25rem 1rem;
    border-bottom: 1px solid #e5e5e5;
-   z-index: 5;
-   padding: 0;
-   margin: 0;
+   flex-shrink: 0;
  }
 
 
- /* Close Button (4th column) */
+ .tabbed-drawer__header-title {
+   font-family: var(--font-heading-family);
+   font-size: 0.875rem;
+   font-weight: 700;
+   letter-spacing: 0.05em;
+   text-transform: uppercase;
+ }
+
+
+ /* Close Button (in drawer header) */
  .tabbed-drawer__close-button {
    display: flex;
    align-items: center;
    justify-content: center;
-   width: 3rem;
-   min-width: 3rem;
+   width: 2.5rem;
+   height: 2.5rem;
    padding: 0;
    background: transparent;
    border: none;
-   border-left: 1px solid #e5e5e5;
    cursor: pointer;
+   flex-shrink: 0;
  }
 
 
@@ -240,6 +260,74 @@
  .tabbed-drawer__close-button .header-drawer-icon {
    width: var(--icon-size-xs, 1.25rem);
    height: var(--icon-size-xs, 1.25rem);
+ }
+
+
+ /* Search Bar */
+ .tabbed-drawer__search {
+   padding: 0.75rem 1rem;
+   border-bottom: 1px solid #e5e5e5;
+   flex-shrink: 0;
+ }
+
+
+ .tabbed-drawer__search-form {
+   display: flex;
+   align-items: center;
+   gap: 0.625rem;
+   border: 1px solid #e5e5e5;
+   border-radius: 4px;
+   padding: 0.625rem 0.875rem;
+ }
+
+
+ .tabbed-drawer__search-icon {
+   flex-shrink: 0;
+   display: flex;
+   align-items: center;
+   width: 1.125rem;
+   height: 1.125rem;
+   opacity: 0.5;
+ }
+
+
+ .tabbed-drawer__search-icon svg {
+   width: 100%;
+   height: 100%;
+ }
+
+
+ .tabbed-drawer__search-input {
+   flex: 1;
+   border: none;
+   outline: none;
+   background: transparent;
+   font-family: var(--font-heading-family);
+   font-size: 0.8125rem;
+   letter-spacing: 0.08em;
+   color: var(--color-foreground);
+   padding: 0;
+ }
+
+
+ .tabbed-drawer__search-input::placeholder {
+   color: var(--color-foreground);
+   opacity: 0.45;
+ }
+
+
+ /* Tab Navigation - equal columns, no close button */
+ .tabbed-drawer__tabs {
+   display: grid;
+   grid-template-columns: repeat(var(--tab-count, 3), 1fr);
+   position: sticky;
+   top: 0;
+   background: var(--color-background);
+   border-bottom: 1px solid #e5e5e5;
+   z-index: 5;
+   padding: 0;
+   margin: 0;
+   flex-shrink: 0;
  }
 
 
@@ -317,8 +405,7 @@
  .tabbed-drawer__content {
    display: flex;
    flex-direction: column;
-   gap: 0.5rem;
-   padding-bottom: 40px;
+   gap: 0;
  }
 
 
@@ -328,29 +415,66 @@
  }
 
 
- .tabbed-drawer__heading {
+ /* Section title (SHOP BY NAME heading) */
+ .tabbed-drawer__section-title {
    font-family: var(--font-heading-family);
-   font-size: 1rem;
+   font-size: 0.875rem;
    font-weight: 700;
    letter-spacing: 0.05em;
    margin: 0 0 0.5rem 0;
    text-transform: uppercase;
+   padding-bottom: 0.625rem;
+   border-bottom: 1px solid #e5e5e5;
  }
 
 
- .tabbed-drawer__section-title {
+ /* Artist List */
+ .tabbed-drawer__artist-list {
+   list-style: none;
+   padding: 0;
+   margin: 0.5rem 0 1rem 0;
+ }
+
+
+ .tabbed-drawer__artist-item {
+   padding: 0;
+ }
+
+
+ .tabbed-drawer__artist-link {
+   display: block;
+   padding: 0.4rem 0.5rem;
    font-family: var(--font-heading-family);
-   font-size: 1.25rem;
-   font-weight: 700;
+   font-size: 0.875rem;
    letter-spacing: 0.05em;
-   margin: 0 0 0.25rem 0;
+   color: var(--color-foreground);
+   text-decoration: none;
    text-transform: uppercase;
+   transition: opacity 0.2s ease;
+ }
+
+
+ .tabbed-drawer__artist-link:hover {
+   opacity: 0.7;
+ }
+
+
+ /* Shop All row (with top separator) */
+ .tabbed-drawer__shop-all-row {
+   padding-top: 0.75rem;
+   border-top: 1px solid #e5e5e5;
  }
 
 
  /* Accordion Styles */
  .tabbed-drawer__accordion {
    border: none;
+   border-bottom: 1px solid #e5e5e5;
+ }
+
+
+ .tabbed-drawer__accordion:first-child {
+   border-top: 1px solid #e5e5e5;
  }
 
 
@@ -358,7 +482,7 @@
    display: flex;
    justify-content: space-between;
    align-items: center;
-   padding: 0.75rem 0;
+   padding: 1rem 0;
    font-family: var(--font-h5--family);
    font-size: 0.875rem;
    font-weight: 600;
@@ -366,7 +490,6 @@
    cursor: pointer;
    list-style: none;
    text-transform: uppercase;
-  
  }
 
 
@@ -375,21 +498,24 @@
  }
 
 
- .tabbed-drawer__accordion-trigger .icon-caret {
-   width: 1rem;
-   height: 1rem;
+ /* + / × toggle icon */
+ .tabbed-drawer__accordion-icon {
+   font-size: 1.25rem;
+   font-weight: 300;
+   line-height: 1;
    transition: transform 0.2s ease;
+   flex-shrink: 0;
  }
 
 
- .tabbed-drawer__accordion[open] .icon-caret {
-   transform: rotate(180deg);
+ .tabbed-drawer__accordion[open] .tabbed-drawer__accordion-icon {
+   transform: rotate(45deg);
  }
 
 
  .tabbed-drawer__accordion-content {
-  
-  }
+   padding-bottom: 0.75rem;
+ }
 
 
  .tabbed-drawer__accordion-content ul {
@@ -415,10 +541,10 @@
  }
 
 
- /* Link Item */
+ /* Link Item (Shop All style) */
  .tabbed-drawer__link-item {
    display: block;
-   padding-bottom:1.25rem;
+   padding-bottom: 1.25rem;
    font-family: var(--font-heading-family);
    font-size: 0.875rem;
    font-weight: 600;
@@ -435,172 +561,12 @@
  }
 
 
- /* Promo Section Heading (above the card) */
- .tabbed-drawer__promo-heading {
-   font-family: var(--font-heading-family);
-   font-size: 1.25rem;
-   font-weight: 700;
-   letter-spacing: 0.05em;
-   text-transform: uppercase;
-   margin: 0 0 0.75rem 0;
- }
-
-
- /* Promo Section */
- .tabbed-drawer__promo {
-   display: flex;
-   flex-direction: row;
-   align-items: center;
-   gap: 1rem;
-   background: #f3f3f3;
-   border: 1px solid #e0e0e0;
-   border-radius: 4px;
-   overflow: hidden;
-   padding: 0;
- }
-
-
- .tabbed-drawer__promo-image {
-   flex-shrink: 0;
-   width: 110px;
-   height: 110px;
-   overflow: hidden;
- }
-
-
- .tabbed-drawer__promo-image img {
-   width: 100%;
-   height: 100%;
-   object-fit: cover;
-   display: block;
- }
-
-
- .tabbed-drawer__promo-body {
-   display: flex;
-   flex-direction: column;
-   gap: 0.5rem;
-   padding: 0.75rem 0.75rem 0.75rem 0;
- }
-
-
- .tabbed-drawer__promo-title {
-   font-family: var(--font-heading-family);
-   font-size: 16px;
-   font-weight: 700;
-   margin: 0;
-   text-transform: uppercase;
-   letter-spacing: 0.04em;
- }
-
-
- .tabbed-drawer__promo-cta {
-   width: fit-content;
-   background: #ffffff;
-   padding: 10px 16px;
-   border: 1px solid #d1d1d1;
-   font-size: 11px;
- }
-
-
- /* Image Cards Grid (NEW Tab) */
- .tabbed-drawer__cards-grid {
-   display: flex;
-   flex-direction: column;
-   gap: 1rem;
- }
-
-
- .tabbed-drawer__card {
-   display: block;
-   text-decoration: none;
-   color: var(--color-foreground);
-   position: relative;
-   overflow: hidden;
-   border-radius: var(--menu-image-border-radius, 0);
- }
-
-
- .tabbed-drawer__card-image {
-  height: 21dvh;
-   background-size: cover;
-   background-position: center;
-   position: relative;
- }
-
-
- .tabbed-drawer__card-overlay {
-   position: absolute;
-   bottom: 0;
-   left: 0;
-   right: 0;
-   padding: 0.75rem 1rem;
-   background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
-   color: white;
- }
-
-
- .tabbed-drawer__card-title {
-   font-family: var(--font-heading-family);
-   font-size: 22px;
-   font-weight: 700;
-   margin: 0 0 0.5rem 0;
-   letter-spacing: 0.05em;
-   text-transform: uppercase;
- }
-
-
- .tabbed-drawer__card-cta {
-   font-size: 0.875rem;
-   font-weight: 600;
-   text-decoration: underline;
-   letter-spacing: 0.05em;
-   text-transform: uppercase;
- }
-
-
- /* Text Menu (EXPLORE Tab) */
- .tabbed-drawer__text-menu {
-   list-style: none;
-   padding: 0;
-   margin: 0;
- }
-
-
- .tabbed-drawer__text-menu-item {
-   border-bottom: 1px solid var(--color-border);
- }
-
-
- .tabbed-drawer__text-menu-item:last-child {
-   border-bottom: none;
- }
-
-
- .tabbed-drawer__text-link {
-   display: block;
-   padding: 1rem 0;
-   font-family: var(--font-h5--family);
-   font-size: 0.875rem;
-   font-weight: 500;
-   letter-spacing: 0.05em;
-   color: var(--color-foreground);
-   text-decoration: none;
-   text-transform: uppercase;
-   transition: opacity 0.2s ease;
- }
-
-
- .tabbed-drawer__text-link:hover {
-   opacity: 0.7;
- }
-
-
  /* Account Section */
  .tabbed-drawer__account-section {
    padding: 1.5rem 1rem;
    border-top: 1px solid #e5e5e5;
    background: #f9f9f9;
+   flex-shrink: 0;
  }
 
 
@@ -620,62 +586,12 @@
    color: var(--color-foreground);
    text-decoration: none;
    transition: opacity 0.2s ease;
-font-family: var(--font-h5--family);
+   font-family: var(--font-h5--family);
  }
 
 
  .tabbed-drawer__account-link:hover {
    opacity: 0.7;
- }
-
-
- /* Featured Banner */
- .tabbed-drawer__featured-banner {
-   background-color: #2c3e50;
-   background-image: url('{{ 'placeholder.svg' | asset_url }}');
-   background-size: cover;
-   background-position: center;
-   padding: 2rem 1rem;
-   text-align: center;
-   color: white;
- }
-
-
- .tabbed-drawer__banner-content {
-   display: flex;
-   flex-direction: column;
-   align-items: start;
-   gap: 1rem;
- }
-
-
- .tabbed-drawer__banner-title {
-   font-family: var(--font-heading-family);
-   font-size: 26px;
-   font-weight: 700;
-   line-height: 1.2;
-   margin: 0;
-   letter-spacing: 0.05em;
-   text-transform: uppercase;
- }
-
-
- .tabbed-drawer__banner-cta {
-   background: rgba(187,187,187, 0.17);
-   color: #f9f9f9;
-   border-color: #f9f9f9;
-   width: fit-content;
-   height: 30px;
-   padding-left: 8px, 14px;
-   font-size: 12px;
-   font-family: Ibm Plex Mono;
-   font-weight: 600;
-   border: 1px solid #f9f9f9;
- }
-
-
- .tabbed-drawer__banner-cta:hover {
-   background: rgba(187, 187, 187, 0.25);
  }
 
 
@@ -721,26 +637,12 @@ font-family: var(--font-h5--family);
  .tabbed-drawer__panels::-webkit-scrollbar-thumb:hover {
    background: var(--color-foreground);
  }
-span.svg-wrapper.header-drawer-icon.header-drawer-icon--close {
- svg {
- fill: #888888 !important;
- color: #888888 !important;
-}
-}
 
 
-.tabbed-drawer__promo-image {
-   border-right: 1px solid #d5d5d5;
-}
-
-
-.tabbed-drawer__promo {
- border-radius: 0px;
+ span.svg-wrapper.header-drawer-icon.header-drawer-icon--close {
+   svg {
+     fill: #888888 !important;
+     color: #888888 !important;
+   }
  }
-
-
 {% endstylesheet %}
-
-
-
-

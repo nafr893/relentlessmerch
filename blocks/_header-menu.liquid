@@ -1445,6 +1445,165 @@
    },
    {
      "type": "header",
+     "content": "Tabbed Drawer - ARTISTS Tab",
+     "visible_if": "{{ block.settings.mobile_drawer_style == 'tabbed' }}"
+   },
+   {
+     "type": "text",
+     "id": "tabbed_artists_section_heading",
+     "label": "Section Heading",
+     "default": "SHOP BY NAME",
+     "visible_if": "{{ block.settings.mobile_drawer_style == 'tabbed' }}"
+   },
+   {
+     "type": "link_list",
+     "id": "tabbed_artists_menu",
+     "label": "Artists Menu",
+     "info": "Select a Shopify menu whose links are your artist names",
+     "visible_if": "{{ block.settings.mobile_drawer_style == 'tabbed' }}"
+   },
+   {
+     "type": "text",
+     "id": "tabbed_artists_shop_all_text",
+     "label": "Shop All Link Text",
+     "default": "SHOP ALL",
+     "visible_if": "{{ block.settings.mobile_drawer_style == 'tabbed' }}"
+   },
+   {
+     "type": "url",
+     "id": "tabbed_artists_shop_all_url",
+     "label": "Shop All Link URL",
+     "visible_if": "{{ block.settings.mobile_drawer_style == 'tabbed' }}"
+   },
+   {
+     "type": "header",
+     "content": "Tabbed Drawer - APPAREL Tab",
+     "visible_if": "{{ block.settings.mobile_drawer_style == 'tabbed' }}"
+   },
+   {
+     "type": "text",
+     "id": "tabbed_apparel_accordion_1_title",
+     "label": "Accordion 1 Title",
+     "default": "SHIRTS",
+     "visible_if": "{{ block.settings.mobile_drawer_style == 'tabbed' }}"
+   },
+   {
+     "type": "link_list",
+     "id": "tabbed_apparel_accordion_1_menu",
+     "label": "Accordion 1 Menu",
+     "visible_if": "{{ block.settings.mobile_drawer_style == 'tabbed' }}"
+   },
+   {
+     "type": "text",
+     "id": "tabbed_apparel_accordion_2_title",
+     "label": "Accordion 2 Title",
+     "default": "OUTERWEAR",
+     "visible_if": "{{ block.settings.mobile_drawer_style == 'tabbed' }}"
+   },
+   {
+     "type": "link_list",
+     "id": "tabbed_apparel_accordion_2_menu",
+     "label": "Accordion 2 Menu",
+     "visible_if": "{{ block.settings.mobile_drawer_style == 'tabbed' }}"
+   },
+   {
+     "type": "text",
+     "id": "tabbed_apparel_accordion_3_title",
+     "label": "Accordion 3 Title",
+     "default": "HEADWEAR",
+     "visible_if": "{{ block.settings.mobile_drawer_style == 'tabbed' }}"
+   },
+   {
+     "type": "link_list",
+     "id": "tabbed_apparel_accordion_3_menu",
+     "label": "Accordion 3 Menu",
+     "visible_if": "{{ block.settings.mobile_drawer_style == 'tabbed' }}"
+   },
+   {
+     "type": "text",
+     "id": "tabbed_apparel_accordion_4_title",
+     "label": "Accordion 4 Title",
+     "default": "ACCESSORIES",
+     "visible_if": "{{ block.settings.mobile_drawer_style == 'tabbed' }}"
+   },
+   {
+     "type": "link_list",
+     "id": "tabbed_apparel_accordion_4_menu",
+     "label": "Accordion 4 Menu",
+     "visible_if": "{{ block.settings.mobile_drawer_style == 'tabbed' }}"
+   },
+   {
+     "type": "text",
+     "id": "tabbed_apparel_shop_all_text",
+     "label": "Shop All Link Text",
+     "default": "SHOP ALL",
+     "visible_if": "{{ block.settings.mobile_drawer_style == 'tabbed' }}"
+   },
+   {
+     "type": "url",
+     "id": "tabbed_apparel_shop_all_url",
+     "label": "Shop All Link URL",
+     "visible_if": "{{ block.settings.mobile_drawer_style == 'tabbed' }}"
+   },
+   {
+     "type": "header",
+     "content": "Tabbed Drawer - EXPLORE Tab",
+     "visible_if": "{{ block.settings.mobile_drawer_style == 'tabbed' }}"
+   },
+   {
+     "type": "text",
+     "id": "tabbed_explore_accordion_1_title",
+     "label": "Accordion 1 Title",
+     "default": "ARTIST SERVICES",
+     "visible_if": "{{ block.settings.mobile_drawer_style == 'tabbed' }}"
+   },
+   {
+     "type": "link_list",
+     "id": "tabbed_explore_accordion_1_menu",
+     "label": "Accordion 1 Menu",
+     "visible_if": "{{ block.settings.mobile_drawer_style == 'tabbed' }}"
+   },
+   {
+     "type": "text",
+     "id": "tabbed_explore_accordion_2_title",
+     "label": "Accordion 2 Title",
+     "default": "BRAND",
+     "visible_if": "{{ block.settings.mobile_drawer_style == 'tabbed' }}"
+   },
+   {
+     "type": "link_list",
+     "id": "tabbed_explore_accordion_2_menu",
+     "label": "Accordion 2 Menu",
+     "visible_if": "{{ block.settings.mobile_drawer_style == 'tabbed' }}"
+   },
+   {
+     "type": "text",
+     "id": "tabbed_explore_accordion_3_title",
+     "label": "Accordion 3 Title",
+     "default": "NEWS",
+     "visible_if": "{{ block.settings.mobile_drawer_style == 'tabbed' }}"
+   },
+   {
+     "type": "link_list",
+     "id": "tabbed_explore_accordion_3_menu",
+     "label": "Accordion 3 Menu",
+     "visible_if": "{{ block.settings.mobile_drawer_style == 'tabbed' }}"
+   },
+   {
+     "type": "text",
+     "id": "tabbed_explore_accordion_4_title",
+     "label": "Accordion 4 Title",
+     "default": "CONTACT",
+     "visible_if": "{{ block.settings.mobile_drawer_style == 'tabbed' }}"
+   },
+   {
+     "type": "link_list",
+     "id": "tabbed_explore_accordion_4_menu",
+     "label": "Accordion 4 Menu",
+     "visible_if": "{{ block.settings.mobile_drawer_style == 'tabbed' }}"
+   },
+   {
+     "type": "header",
      "content": "Tabbed Drawer - Bottom Sections",
      "visible_if": "{{ block.settings.mobile_drawer_style == 'tabbed' }}"
    },

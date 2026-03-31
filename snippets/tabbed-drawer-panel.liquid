@@ -2,7 +2,7 @@
  Renders a single tab panel with content routing based on tab ID.
 
 
- @param {string} tab - The tab ID ('shop', 'pursuit', or 'explore')
+ @param {string} tab - The tab ID ('artists', 'apparel', or 'explore')
  @param {object} linklist - The menu linklist for navigation items
  @param {string} active_tab - The initially active tab ID
  @param {object} block - The block object for settings
@@ -11,7 +11,7 @@
 
 
  @example
- {% render 'tabbed-drawer-panel', tab: 'shop', linklist: linklist, active_tab: 'shop', block_settings: block_settings %}
+ {% render 'tabbed-drawer-panel', tab: 'artists', linklist: linklist, active_tab: 'artists', block_settings: block_settings %}
 {%- enddoc -%}
 
 
@@ -25,207 +25,113 @@
  {% unless tab == active_tab %}hidden{% endunless %}
 >
  {% case tab %}
-   {% when 'shop' %}
-     {%- comment -%} SHOP Tab Content {%- endcomment -%}
-     <div class="tabbed-drawer__content tabbed-drawer__content--shop">
-       <div class="tabbed-drawer__section">
-         <a href="{{ block_settings.tabbed_shop_heading_1_url | default: '#' }}" class="tabbed-drawer__heading-link">
-           <h3 class="tabbed-drawer__heading">{{ block_settings.tabbed_shop_heading_1 | default: 'BEST SELLERS' }}</h3>
-         </a>
-       </div>
 
+   {% when 'artists' %}
+     {%- comment -%} ARTISTS Tab — scrollable menu list {%- endcomment -%}
+     <div class="tabbed-drawer__content tabbed-drawer__content--artists">
 
-       <div class="tabbed-drawer__section">
-         <a href="{{ block_settings.tabbed_shop_heading_2_url | default: '#' }}" class="tabbed-drawer__heading-link">
-           <h3 class="tabbed-drawer__heading">{{ block_settings.tabbed_shop_heading_2 | default: '' }}</h3>
-         </a>
-       </div>
-
-
-       {% if block_settings.tabbed_shop_accordion_1_menu != blank %}
+       {% if block_settings.tabbed_artists_menu != blank %}
          <div class="tabbed-drawer__section">
-           <details class="tabbed-drawer__accordion"{% if block_settings.tabbed_shop_accordion_1_open %} open{% endif %}>
-             <summary class="tabbed-drawer__accordion-trigger">
-               <span>{{ block_settings.tabbed_shop_accordion_1 | default: 'SHOP BY CATEGORY' }}</span>
-               <span class="svg-wrapper icon-caret">
-                 {{ 'icon-caret.svg' | inline_asset_content }}
-               </span>
-             </summary>
-             <div class="tabbed-drawer__accordion-content">
-               <ul class="menu-drawer__menu" role="list">
-                 {% for link in linklists[block_settings.tabbed_shop_accordion_1_menu].links %}
-                   <li><a href="{{ link.url }}" class="tabbed-drawer__accordion-link">{{ link.title }}</a></li>
-                 {% endfor %}
-               </ul>
-             </div>
-           </details>
+           <h3 class="tabbed-drawer__section-title">
+             {{ block_settings.tabbed_artists_section_heading | default: 'SHOP BY NAME' }}
+           </h3>
+           <ul class="tabbed-drawer__artist-list" role="list">
+             {% for link in linklists[block_settings.tabbed_artists_menu].links %}
+               <li class="tabbed-drawer__artist-item">
+                 <a href="{{ link.url }}" class="tabbed-drawer__artist-link">{{ link.title }}</a>
+               </li>
+             {% endfor %}
+           </ul>
          </div>
        {% endif %}
 
-
-       {% if block_settings.tabbed_shop_accordion_2_menu != blank %}
-         <div class="tabbed-drawer__section">
-           <details class="tabbed-drawer__accordion"{% if block_settings.tabbed_shop_accordion_2_open %} open{% endif %}>
-             <summary class="tabbed-drawer__accordion-trigger">
-               <span>{{ block_settings.tabbed_shop_accordion_2 | default: 'SHOP BY PURPOSE' }}</span>
-               <span class="svg-wrapper icon-caret">
-                 {{ 'icon-caret.svg' | inline_asset_content }}
-               </span>
-             </summary>
-             <div class="tabbed-drawer__accordion-content">
-               <ul class="menu-drawer__menu" role="list">
-                 {% for link in linklists[block_settings.tabbed_shop_accordion_2_menu].links %}
-                   <li><a href="{{ link.url }}" class="tabbed-drawer__accordion-link">{{ link.title }}</a></li>
-                 {% endfor %}
-               </ul>
-             </div>
-           </details>
-         </div>
-       {% endif %}
-
-
-       <div class="tabbed-drawer__section">
-         <a href="{{ block_settings.tabbed_shop_link_url | default: '/collections/all' }}" class="tabbed-drawer__link-item">
-           {{ block_settings.tabbed_shop_link_text | default: 'SHOP ALL' }}
+       <div class="tabbed-drawer__shop-all-row">
+         <a
+           href="{{ block_settings.tabbed_artists_shop_all_url | default: '/collections/all' }}"
+           class="tabbed-drawer__link-item"
+         >
+           {{ block_settings.tabbed_artists_shop_all_text | default: 'SHOP ALL' }}
          </a>
        </div>
 
-
-       {% if block_settings.tabbed_shop_promo_heading != blank %}
-         <h4 class="tabbed-drawer__promo-heading">{{ block_settings.tabbed_shop_promo_heading }}</h4>
-       {% endif %}
-
-
-       <div class="tabbed-drawer__promo">
-         {% if block_settings.tabbed_shop_promo_image %}
-           <div class="tabbed-drawer__promo-image">
-             <img
-               src="{{ block_settings.tabbed_shop_promo_image | image_url: width: 200 }}"
-               alt="{{ block_settings.tabbed_shop_promo_title | default: 'Planning a Hunt?' }}"
-               width="200"
-               loading="lazy"
-             >
-           </div>
-         {% endif %}
-         <div class="tabbed-drawer__promo-body">
-           <h4 class="tabbed-drawer__promo-title">{{ block_settings.tabbed_shop_promo_title | default: 'Planning a Hunt?' }}</h4>
-           <a href="{{ block_settings.tabbed_shop_promo_url | default: '/pages/system-builder' }}" class="button button--secondary tabbed-drawer__promo-cta">
-             {{ block_settings.tabbed_shop_promo_cta | default: 'BUILD YOUR SYSTEM' }}
-           </a>
-         </div>
-       </div>
      </div>
 
 
-   {% when 'pursuit' %}
-     {%- comment -%} PURSUIT Tab Content - Image Cards {%- endcomment -%}
-     <div class="tabbed-drawer__content tabbed-drawer__content--pursuit">
-       <div class="tabbed-drawer__cards-grid">
-         {%- comment -%} Card 1 {%- endcomment -%}
-         <a href="{{ block_settings.tabbed_new_card_1_url | default: '/collections/range-gear' }}" class="tabbed-drawer__card">
-           <div class="tabbed-drawer__card-image"
-             {% if block_settings.tabbed_new_card_1_image %}
-               style="background-image: url('{{ block_settings.tabbed_new_card_1_image | image_url: width: 800 }}')"
-             {% else %}
-               style="background-image: url('{{ 'placeholder.svg' | asset_url }}')"
+   {% when 'apparel' %}
+     {%- comment -%} APPAREL Tab — accordions with selectable menus + Shop All {%- endcomment -%}
+     <div class="tabbed-drawer__content tabbed-drawer__content--apparel">
+
+       {% for i in (1..4) %}
+         {% assign title_key = 'tabbed_apparel_accordion_' | append: i | append: '_title' %}
+         {% assign menu_key  = 'tabbed_apparel_accordion_' | append: i | append: '_menu' %}
+         {% assign accordion_title = block_settings[title_key] %}
+         {% assign accordion_menu  = block_settings[menu_key] %}
+
+         {% if accordion_title != blank or accordion_menu != blank %}
+           <details class="tabbed-drawer__accordion">
+             <summary class="tabbed-drawer__accordion-trigger">
+               <span>{{ accordion_title | default: 'SECTION' }}</span>
+               <span class="tabbed-drawer__accordion-icon">+</span>
+             </summary>
+             {% if accordion_menu != blank %}
+               <div class="tabbed-drawer__accordion-content">
+                 <ul role="list">
+                   {% for link in linklists[accordion_menu].links %}
+                     <li>
+                       <a href="{{ link.url }}" class="tabbed-drawer__accordion-link">{{ link.title }}</a>
+                     </li>
+                   {% endfor %}
+                 </ul>
+               </div>
              {% endif %}
-           >
-             <div class="tabbed-drawer__card-overlay">
-               <h3 class="tabbed-drawer__card-title">{{ block_settings.tabbed_new_card_1_title | default: 'RANGE GEAR' }}</h3>
-               <span class="tabbed-drawer__card-cta">{{ block_settings.tabbed_new_card_cta | default: 'SHOP NOW' }}</span>
-             </div>
-           </div>
-         </a>
+           </details>
+         {% endif %}
+       {% endfor %}
 
-
-         {%- comment -%} Card 2 {%- endcomment -%}
-         <a href="{{ block_settings.tabbed_new_card_2_url | default: '/collections/hunting-gear' }}" class="tabbed-drawer__card">
-           <div class="tabbed-drawer__card-image"
-             {% if block_settings.tabbed_new_card_2_image %}
-               style="background-image: url('{{ block_settings.tabbed_new_card_2_image | image_url: width: 800 }}')"
-             {% else %}
-               style="background-image: url('{{ 'placeholder.svg' | asset_url }}')"
-             {% endif %}
-           >
-             <div class="tabbed-drawer__card-overlay">
-               <h3 class="tabbed-drawer__card-title">{{ block_settings.tabbed_new_card_2_title | default: 'HUNTING GEAR' }}</h3>
-               <span class="tabbed-drawer__card-cta">{{ block_settings.tabbed_new_card_cta | default: 'SHOP NOW' }}</span>
-             </div>
-           </div>
-         </a>
-
-
-         {%- comment -%} Card 3 {%- endcomment -%}
-         <a href="{{ block_settings.tabbed_new_card_3_url | default: '/collections/upland-gear' }}" class="tabbed-drawer__card">
-           <div class="tabbed-drawer__card-image"
-             {% if block_settings.tabbed_new_card_3_image %}
-               style="background-image: url('{{ block_settings.tabbed_new_card_3_image | image_url: width: 800 }}')"
-             {% else %}
-               style="background-image: url('{{ 'placeholder.svg' | asset_url }}')"
-             {% endif %}
-           >
-             <div class="tabbed-drawer__card-overlay">
-               <h3 class="tabbed-drawer__card-title">{{ block_settings.tabbed_new_card_3_title | default: 'UPLAND GEAR' }}</h3>
-               <span class="tabbed-drawer__card-cta">{{ block_settings.tabbed_new_card_cta | default: 'SHOP NOW' }}</span>
-             </div>
-           </div>
+       <div class="tabbed-drawer__shop-all-row">
+         <a
+           href="{{ block_settings.tabbed_apparel_shop_all_url | default: '/collections/all' }}"
+           class="tabbed-drawer__link-item"
+         >
+           {{ block_settings.tabbed_apparel_shop_all_text | default: 'SHOP ALL' }}
          </a>
        </div>
+
      </div>
 
 
    {% when 'explore' %}
-     {%- comment -%} EXPLORE Tab Content - Text List {%- endcomment -%}
+     {%- comment -%} EXPLORE Tab — accordions with selectable menus {%- endcomment -%}
      <div class="tabbed-drawer__content tabbed-drawer__content--explore">
-       <h3 class="tabbed-drawer__section-title">EXPLORE</h3>
-       <ul class="tabbed-drawer__text-menu" role="list">
-         {% if block_settings.tabbed_explore_link_1_text != blank %}
-           <li class="tabbed-drawer__text-menu-item">
-             <a href="{{ block_settings.tabbed_explore_link_1_url | default: '/pages/about' }}" class="tabbed-drawer__text-link">
-               {{ block_settings.tabbed_explore_link_1_text }}
-             </a>
-           </li>
+
+       {% for i in (1..4) %}
+         {% assign title_key = 'tabbed_explore_accordion_' | append: i | append: '_title' %}
+         {% assign menu_key  = 'tabbed_explore_accordion_' | append: i | append: '_menu' %}
+         {% assign accordion_title = block_settings[title_key] %}
+         {% assign accordion_menu  = block_settings[menu_key] %}
+
+         {% if accordion_title != blank or accordion_menu != blank %}
+           <details class="tabbed-drawer__accordion">
+             <summary class="tabbed-drawer__accordion-trigger">
+               <span>{{ accordion_title | default: 'SECTION' }}</span>
+               <span class="tabbed-drawer__accordion-icon">+</span>
+             </summary>
+             {% if accordion_menu != blank %}
+               <div class="tabbed-drawer__accordion-content">
+                 <ul role="list">
+                   {% for link in linklists[accordion_menu].links %}
+                     <li>
+                       <a href="{{ link.url }}" class="tabbed-drawer__accordion-link">{{ link.title }}</a>
+                     </li>
+                   {% endfor %}
+                 </ul>
+               </div>
+             {% endif %}
+           </details>
          {% endif %}
-         {% if block_settings.tabbed_explore_link_2_text != blank %}
-           <li class="tabbed-drawer__text-menu-item">
-             <a href="{{ block_settings.tabbed_explore_link_2_url | default: '/pages/field-notes' }}" class="tabbed-drawer__text-link">
-               {{ block_settings.tabbed_explore_link_2_text }}
-             </a>
-           </li>
-         {% endif %}
-         {% if block_settings.tabbed_explore_link_3_text != blank %}
-           <li class="tabbed-drawer__text-menu-item">
-             <a href="{{ block_settings.tabbed_explore_link_3_url | default: '/pages/manufacturing' }}" class="tabbed-drawer__text-link">
-               {{ block_settings.tabbed_explore_link_3_text }}
-             </a>
-           </li>
-         {% endif %}
-         {% if block_settings.tabbed_explore_link_4_text != blank %}
-           <li class="tabbed-drawer__text-menu-item">
-             <a href="{{ block_settings.tabbed_explore_link_4_url | default: '/pages/pricing' }}" class="tabbed-drawer__text-link">
-               {{ block_settings.tabbed_explore_link_4_text }}
-             </a>
-           </li>
-         {% endif %}
-         {% if block_settings.tabbed_explore_link_5_text != blank %}
-           <li class="tabbed-drawer__text-menu-item">
-             <a href="{{ block_settings.tabbed_explore_link_5_url | default: '/pages/military-discount' }}" class="tabbed-drawer__text-link">
-               {{ block_settings.tabbed_explore_link_5_text }}
-             </a>
-           </li>
-         {% endif %}
-         {% if block_settings.tabbed_explore_link_6_text != blank %}
-           <li class="tabbed-drawer__text-menu-item">
-             <a href="{{ block_settings.tabbed_explore_link_6_url | default: '/pages/contact' }}" class="tabbed-drawer__text-link">
-               {{ block_settings.tabbed_explore_link_6_text }}
-             </a>
-           </li>
-         {% endif %}
-       </ul>
+       {% endfor %}
+
      </div>
+
  {% endcase %}
 </div>
-
-
-
-
