@@ -39,8 +39,9 @@
 {% endcapture %}
 
 {% capture account_icon %}
-  <span slot="signed-out-avatar" class="svg-wrapper account-button__icon" style="display:flex;width:0.9rem;height:0.9rem;fill:currentColor;stroke:currentColor;">
-    {{- 'icon-account.svg' | inline_asset_content -}}
+  <span slot="signed-out-avatar" class="svg-wrapper account-button__icon" aria-hidden="true" style="display:flex;width:0.9rem;height:0.9rem;">
+    <!-- use asset as mask so icon can be styled by CSS -->
+    <span class="svg-icon svg-icon--account" role="img" style="--icon-src: url('{{ 'icon-account.svg' | asset_url }}');"></span>
   </span>
 {% endcapture %}
 
@@ -277,15 +278,26 @@
     height: .9rem;
   }
 
-  /* Make account icon inherit header color for correct contrast */
+  /* Ensure account icon tints to header foreground for proper contrast */
   .account-button__icon {
-    color: var(--color-account-icon);
+    color: var(--color-account-icon); /* already set on header rows */
   }
-  .account-button__icon svg,
-  .account-button__icon svg * {
-    color: currentColor !important;
-    fill: currentColor !important;
-    stroke: currentColor !important;
+
+  .svg-icon--account {
+    display: inline-block;
+    width: 0.9rem;
+    height: 0.9rem;
+    background-color: currentColor;
+    /* Safari/WebKit */
+    -webkit-mask-image: var(--icon-src);
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    -webkit-mask-size: contain;
+    /* Standard */
+    mask-image: var(--icon-src);
+    mask-repeat: no-repeat;
+    mask-position: center;
+    mask-size: contain;
   }
 
   shopify-account {
