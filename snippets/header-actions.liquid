@@ -39,7 +39,7 @@
 {% endcapture %}
 
 {% capture account_icon %}
-  <span slot="signed-out-avatar" class="svg-wrapper account-button__icon" aria-hidden="true" style="display:flex;width:0.9rem;height:0.9rem;">
+  <span slot="signed-out-avatar" class="svg-wrapper account-button__icon" aria-hidden="true" style="display:flex;width:0.9rem;height:0.9rem; color: var(--color-account-icon);">
     <!-- use asset as mask so icon can be styled by CSS -->
     <span class="svg-icon svg-icon--account" role="img" style="--icon-src: url('{{ 'icon-account.svg' | asset_url }}');"></span>
   </span>
@@ -269,9 +269,10 @@
     background: transparent;
   }
 
+  /* use the header row variable so icon contrasts automatically */
   .account-button__icon,
   .account-button__text {
-    color: white;
+    color: var(--color-account-icon) !important;
     transition: color var(--header-content-transition-timing);
     -webkit-font-smoothing: antialiased;
     width: .9rem;
@@ -280,7 +281,7 @@
 
   /* Ensure account icon tints to header foreground for proper contrast */
   .account-button__icon {
-    color: var(--color-account-icon); /* already set on header rows */
+    color: var(--color-account-icon) !important;
   }
 
   .svg-icon--account {
