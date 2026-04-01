@@ -512,13 +512,19 @@
  }
 
 
- .tabbed-drawer__tab--active::after {
+ .tabbed-drawer__tab-label {
+   position: relative;
+   display: inline-block;
+ }
+
+
+ .tabbed-drawer__tab--active .tabbed-drawer__tab-label::after {
    content: '';
    position: absolute;
-   bottom: -2px;
-   left: 0;
-   right: 0;
-   height: 3px;
+   top: -4px;
+   right: -6px;
+   width: 5px;
+   height: 5px;
    background: var(--color-foreground);
  }
 

@@ -24,7 +24,7 @@
      on:click="tabbed-header-drawer/switchTab?tabId={{ tab }}"
      ref="tabButtons[]"
    >
-     {{ tab | upcase }}
+     <span class="tabbed-drawer__tab-label">{{ tab | upcase }}</span>
    </button>
  {% endfor %}
 
