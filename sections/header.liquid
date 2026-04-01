@@ -405,8 +405,8 @@
   /* ── Mobile header: logo | divider | search | account+cart | hamburger ── */
   #header-component .header__columns {
     grid-template-areas: 'logo divider search actions drawer' !important;
-    grid-template-columns: auto 1px 1fr auto auto !important;
-    column-gap: 0.5rem !important;
+    grid-template-columns: auto auto 1fr auto auto !important;
+    column-gap: 0 !important;
     padding-inline: 0.75rem 0 !important;
   }
   .header-col-divider {
@@ -415,6 +415,7 @@
     width: 1px !important;
     background-color: var(--color-border, #e5e5e5) !important;
     display: block !important;
+    margin-inline: 0.5rem !important;
     margin-block: 0.5rem !important;
   }
   #header-component .header__columns .header-logo {
