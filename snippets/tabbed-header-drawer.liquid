@@ -374,7 +374,12 @@
  }
 
 
- /* Reset (clear) button inside search */
+ /* Reset (clear) button inside search — hidden until input has value */
+ .tabbed-drawer__search-reset[hidden] {
+   display: none;
+ }
+
+
  .tabbed-drawer__search-reset {
    flex-shrink: 0;
    display: flex;
