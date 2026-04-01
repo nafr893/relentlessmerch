@@ -42,7 +42,6 @@
   "
   {{ block.shopify_attributes }}
 >
-<div class="header-divider" style="width: 1px; height: 100%; background: #242424; padding-left: 5px; padding-right: 5px; "> </div>
   {% liquid
     assign logo_width = settings.logo_height | times: settings.logo.aspect_ratio | ceil
     assign logo_width_mobile = settings.logo_height_mobile | times: settings.logo.aspect_ratio | ceil
@@ -82,6 +81,8 @@
     </span>
   {% endif %}
 </a>
+
+<div class="header-divider" style="width: 1px; height: 100%; background: #242424; padding-left: 5px; padding-right: 5px; "> </div>
 
 {% stylesheet %}
   .header-logo {
