@@ -8,12 +8,11 @@
       }
 
       .cls-1, .cls-2 {
-        stroke: currentColor;
+        stroke: #000;
         stroke-miterlimit: 10;
       }
 
       .cls-2 {
-        fill: currentColor;
         stroke-width: 10px;
       }
     </style>
