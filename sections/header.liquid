@@ -1119,21 +1119,21 @@
   @media screen and (max-width: 749px) {
     /* New 4-area grid: logo | search | actions | drawer */
     #header-component[data-menu-style='drawer'] .header__columns {
-      grid-template-areas: 'logo search actions drawer';
-      grid-template-columns: auto 1fr auto auto;
-      column-gap: var(--gap-sm, 0.5rem);
-      padding-inline: var(--padding-sm) 0;
+      grid-template-areas: 'logo search actions drawer' !important;
+      grid-template-columns: auto 1fr auto auto !important;
+      column-gap: 0.5rem !important;
+      padding-inline: 0.5rem 0 !important;
     }
 
     /* Logo: far left */
     #header-component[data-menu-style='drawer'] .header__columns .header-logo {
-      grid-area: logo;
+      grid-area: logo !important;
       justify-self: start;
     }
 
     /* Search bar: flexible middle slot */
     #header-component[data-menu-style='drawer'] .header__columns .search-action {
-      grid-area: search;
+      grid-area: search !important;
       align-self: center;
       width: 100%;
       display: flex !important;
@@ -1141,19 +1141,19 @@
 
     /* Account + Cart: right of search */
     #header-component[data-menu-style='drawer'] .header__columns header-actions {
-      grid-area: actions;
+      grid-area: actions !important;
       justify-self: end;
     }
 
-    /* Hamburger: far right */
+    /* Hamburger / tabbed drawer: far right */
     #header-component[data-menu-style='drawer'] .header__columns tabbed-header-drawer {
-      grid-area: drawer;
+      grid-area: drawer !important;
       justify-self: end;
     }
 
     /* Style the search button as an inline bar */
     #header-component[data-menu-style='drawer'] .header__columns .search-action .header-actions__action {
-      display: flex;
+      display: flex !important;
       align-items: center;
       gap: 0.5rem;
       width: 100%;
@@ -1167,7 +1167,7 @@
       justify-content: flex-start;
     }
 
-    /* Un-hide the "Search" text label and style it as a placeholder */
+    /* Un-hide the "Search" text label — acts as placeholder text */
     #header-component[data-menu-style='drawer'] .header__columns .search-action .mobile\:hidden {
       display: inline-block !important;
       font-size: 0.75rem;
@@ -1181,7 +1181,7 @@
       flex: 1;
     }
 
-    /* Search icon sizing inside the bar */
+    /* Search icon inside the bar */
     #header-component[data-menu-style='drawer'] .header__columns .search-action .svg-wrapper {
       flex-shrink: 0;
       opacity: 0.5;
