@@ -24,14 +24,8 @@
       </span>
 
       <span class="svg-wrapper {% if display_style != 'icon' %}desktop:hidden{% endif %}">
-  <img 
-    src="{{ 'icon-search.svg' | asset_url }}" 
-    alt="Search"
-    width="24" 
-    height="24"
-    loading="lazy"
-  >
-</span>
+        {{ 'icon-search.svg' | inline_asset_content }}
+      </span>
       <p class="placeholder">Search...</p>
     </button>
   </search-button>
