@@ -24,7 +24,8 @@
       </span>
 
       <span class="svg-wrapper {% if display_style != 'icon' %}desktop:hidden{% endif %}">
-        {{ 'icon-search.svg' | inline_asset_content }}
+        <!-- use the SVG asset as a mask so the icon can be colored by CSS -->
+        <span class="svg-icon svg-icon--search" aria-hidden="true" role="img" style="--icon-src: url('{{ 'icon-search.svg' | asset_url }}');"></span>
       </span>
       <p class="placeholder">Search...</p>
     </button>
@@ -35,7 +36,6 @@
   .search-action {
     --search-border-radius: var(--style-border-radius-inputs);
     --search-border-width: var(--style-border-width-inputs);
-
     display: flex;
   }
 
@@ -83,8 +83,27 @@
     padding: 0px; 
     color: #888888;
   }
-  .svg-wrapper {
-    fill: #ffffff;
-    color: #ffffff;
+
+/* replace previous .svg-wrapper fill rules with mask-based icon styling */
+  .svg-wrapper { color: inherit; } /* keep wrapper color inheritance */
+
+  /* masked icon element that tints based on currentColor / --color-foreground */
+  .svg-icon {
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+    color: var(--color-foreground);
+    background-color: currentColor;
+    /* Safari/WebKit */
+    -webkit-mask-image: var(--icon-src);
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    -webkit-mask-size: contain;
+    /* Standard */
+    mask-image: var(--icon-src);
+    mask-repeat: no-repeat;
+    mask-position: center;
+    mask-size: contain;
   }
+  .svg-icon--search { width: 1rem; height: 1rem; }
 {% endstylesheet %}
