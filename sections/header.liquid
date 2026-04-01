@@ -402,12 +402,20 @@
 
 <style>
 @media screen and (max-width: 749px) {
-  /* ── Mobile header: logo | search | account+cart | hamburger ── */
+  /* ── Mobile header: logo | divider | search | account+cart | hamburger ── */
   #header-component .header__columns {
-    grid-template-areas: 'logo search actions drawer' !important;
-    grid-template-columns: auto 1fr auto auto !important;
+    grid-template-areas: 'logo divider search actions drawer' !important;
+    grid-template-columns: auto 1px 1fr auto auto !important;
     column-gap: 0.5rem !important;
     padding-inline: 0.75rem 0 !important;
+  }
+  .header-col-divider {
+    grid-area: divider !important;
+    align-self: stretch !important;
+    width: 1px !important;
+    background-color: var(--color-border, #e5e5e5) !important;
+    display: block !important;
+    margin-block: 0.5rem !important;
   }
   #header-component .header__columns .header-logo {
     grid-area: logo !important;
@@ -439,12 +447,6 @@
     height: auto !important;
     min-height: 0 !important;
     justify-content: flex-start !important;
-  }
-
-  /* Divider between logo and search bar */
-  #header-component .header__columns .search-action {
-    border-left: 1px solid var(--color-border, #e5e5e5) !important;
-    padding-left: 0.5rem !important;
   }
 
   /* Replace "Search" text with "SEARCH..." via pseudo-element */
@@ -479,6 +481,28 @@
   }
 }
 </style>
+
+<script>
+  (function() {
+    function insertDivider() {
+      var cols = document.querySelector('#header-component .header__columns');
+      if (!cols || cols.querySelector('.header-col-divider')) return;
+      var logo = cols.querySelector('.header-logo');
+      var div = document.createElement('div');
+      div.className = 'header-col-divider';
+      if (logo && logo.nextSibling) {
+        cols.insertBefore(div, logo.nextSibling);
+      } else {
+        cols.appendChild(div);
+      }
+    }
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', insertDivider);
+    } else {
+      insertDivider();
+    }
+  })();
+</script>
 
 <script
   src="{{ 'header.js' | asset_url }}"
