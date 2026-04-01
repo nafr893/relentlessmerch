@@ -277,6 +277,16 @@
     height: .9rem;
   }
 
+  /* Make account icon inherit header color for correct contrast */
+  .account-button__icon {
+    color: var(--color-account-icon);
+  }
+  .account-button__icon svg,
+  .account-button__icon svg * {
+    fill: currentColor !important;
+    stroke: currentColor !important;
+  }
+
   shopify-account {
     --shopify-account-font-heading: var(--font-heading--family);
     --shopify-account-font-heading-weight: var(--font-heading--weight);
