@@ -41,7 +41,7 @@
 {% capture account_icon %}
   <span slot="signed-out-avatar" class="svg-wrapper account-button__icon" aria-hidden="true" style="display:flex;width:0.9rem;height:0.9rem; color: var(--color-account-icon);">
     <!-- use asset as mask so icon can be styled by CSS -->
-    <span class="svg-icon svg-icon--account" role="img" style="--icon-src: url('{{ 'icon-account.svg' | asset_url }}');"></span>
+    <span class="svg-icon svg-icon--account" role="img" style="color: white; fill: white; --icon-src: url('{{ 'icon-account.svg' | asset_url }}');"></span>
   </span>
 {% endcapture %}
 
