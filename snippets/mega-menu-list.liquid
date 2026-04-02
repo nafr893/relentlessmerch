@@ -74,18 +74,26 @@
 
 {% liquid
   assign has_promo = false
-  if submenu_index != blank and block_settings != blank
-    assign promo_image_key = 'mega_promo_' | append: submenu_index | append: '_image'
-    assign promo_heading_key = 'mega_promo_' | append: submenu_index | append: '_heading'
-    assign promo_button_label_key = 'mega_promo_' | append: submenu_index | append: '_button_label'
-    assign promo_button_url_key = 'mega_promo_' | append: submenu_index | append: '_button_url'
-    assign promo_image = block_settings[promo_image_key]
-    if promo_image != blank
-      assign has_promo = true
-      assign promo_heading = block_settings[promo_heading_key]
-      assign promo_button_label = block_settings[promo_button_label_key]
-      assign promo_button_url = block_settings[promo_button_url_key]
-    endif
+  assign parent_title_lower = parent_link.title | downcase | strip
+  if block_settings != blank
+    for i in (1..6)
+      assign promo_title_key = 'mega_promo_' | append: i | append: '_menu_title'
+      assign promo_title_val = block_settings[promo_title_key] | downcase | strip
+      if promo_title_val != blank and promo_title_val == parent_title_lower
+        assign promo_image_key = 'mega_promo_' | append: i | append: '_image'
+        assign promo_heading_key = 'mega_promo_' | append: i | append: '_heading'
+        assign promo_button_label_key = 'mega_promo_' | append: i | append: '_button_label'
+        assign promo_button_url_key = 'mega_promo_' | append: i | append: '_button_url'
+        assign promo_image = block_settings[promo_image_key]
+        if promo_image != blank
+          assign has_promo = true
+          assign promo_heading = block_settings[promo_heading_key]
+          assign promo_button_label = block_settings[promo_button_label_key]
+          assign promo_button_url = block_settings[promo_button_url_key]
+        endif
+        break
+      endif
+    endfor
   endif
 %}
 <ul
