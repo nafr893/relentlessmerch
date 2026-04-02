@@ -515,9 +515,20 @@
     margin-inline-start: 0rem;
   }
   .header-desktop-divider--search {
-    margin-inline-end: 1rem;   
+    margin-inline-end: 1rem;
      margin-inline-start: 1.125rem;
+  }
 
+  /* Let the logo size dictate the header height — remove fixed height, set padding */
+  #header-component .header__row--top .header__columns {
+    height: auto !important;
+    min-height: 0 !important;
+    padding-block: 0.75rem !important;
+  }
+
+  /* Logo padding on desktop */
+  #header-component .header__column--left .header-logo {
+    padding-block: 0.5rem;
   }
 }
 </style>
