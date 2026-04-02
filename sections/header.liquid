@@ -505,56 +505,72 @@
 }
 
 @media screen and (min-width: 750px) {
-  /* Divider: right of logo */
-  #header-component .header__column--left {
-    display: flex;
-    align-items: stretch;
-  }
-  #header-component .header__column--left::after {
-    content: '';
-    display: block;
+  .header-desktop-divider {
     width: 1px;
-    align-self: stretch;
     background-color: #ffffff;
-    margin-inline-start: 1.25rem;
+    align-self: stretch;
     flex-shrink: 0;
+    margin-inline: 1.25rem;
   }
 
-  /* Divider: left of search icon */
-  #header-component .header__column--right search-button {
-    display: flex;
-    align-items: stretch;
+  /* Logo divider is a direct grid child — stretches full row height */
+  .header-desktop-divider--logo {
+    margin-inline: 0 1.25rem;
   }
-  #header-component .header__column--right search-button::before {
-    content: '';
-    display: block;
-    width: 1px;
-    align-self: stretch;
-    background-color: #ffffff;
-    margin-inline-end: 1.25rem;
-    flex-shrink: 0;
+
+  /* Search divider lives inside header-actions (flex row) — escape column padding with negative margins */
+  .header-desktop-divider--search {
+    margin-block: -2rem;
+    margin-inline: 1.25rem 0;
   }
 }
 </style>
 
 <script>
   (function() {
-    function insertDivider() {
+    function insertDividers() {
       var cols = document.querySelector('#header-component .header__columns');
-      if (!cols || cols.querySelector('.header-col-divider')) return;
-      var logo = cols.querySelector('.header-logo');
-      var div = document.createElement('div');
-      div.className = 'header-col-divider';
-      if (logo && logo.nextSibling) {
-        cols.insertBefore(div, logo.nextSibling);
-      } else {
-        cols.appendChild(div);
+
+      // ── Mobile: logo | divider ──
+      if (cols && !cols.querySelector('.header-col-divider')) {
+        var logo = cols.querySelector('.header-logo');
+        var mobileDiv = document.createElement('div');
+        mobileDiv.className = 'header-col-divider';
+        if (logo && logo.nextSibling) {
+          cols.insertBefore(mobileDiv, logo.nextSibling);
+        } else if (cols) {
+          cols.appendChild(mobileDiv);
+        }
+      }
+
+      // ── Desktop: divider after logo column ──
+      if (cols && !cols.querySelector('.header-desktop-divider--logo')) {
+        var leftCol = cols.querySelector('.header__column--left');
+        var logoDiv = document.createElement('div');
+        logoDiv.className = 'header-desktop-divider header-desktop-divider--logo';
+        if (leftCol && leftCol.nextSibling) {
+          cols.insertBefore(logoDiv, leftCol.nextSibling);
+        } else if (leftCol) {
+          leftCol.insertAdjacentElement('afterend', logoDiv);
+        }
+      }
+
+      // ── Desktop: divider before search button inside header-actions ──
+      var headerActions = document.querySelector('#header-component header-actions');
+      if (headerActions && !headerActions.querySelector('.header-desktop-divider--search')) {
+        var searchBtn = headerActions.querySelector('search-button');
+        var searchDiv = document.createElement('div');
+        searchDiv.className = 'header-desktop-divider header-desktop-divider--search';
+        if (searchBtn) {
+          headerActions.insertBefore(searchDiv, searchBtn);
+        }
       }
     }
+
     if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', insertDivider);
+      document.addEventListener('DOMContentLoaded', insertDividers);
     } else {
-      insertDivider();
+      insertDividers();
     }
   })();
 </script>
