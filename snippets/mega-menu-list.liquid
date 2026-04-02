@@ -71,6 +71,20 @@
     endif
   endif
 %}
+
+{% liquid
+  assign has_promo = false
+  if submenu_index != blank and block_settings != blank
+    assign promo_image_key = 'mega_promo_' | append: submenu_index | append: '_image'
+    assign promo_image = block_settings[promo_image_key]
+    if promo_image != blank
+      assign has_promo = true
+      assign promo_heading = block_settings['mega_promo_' | append: submenu_index | append: '_heading']
+      assign promo_button_label = block_settings['mega_promo_' | append: submenu_index | append: '_button_label']
+      assign promo_button_url = block_settings['mega_promo_' | append: submenu_index | append: '_button_url']
+    endif
+  endif
+%}
 <ul
   data-menu-list-id="{{ id }}"
   class="mega-menu__list list-unstyled"
@@ -266,6 +280,17 @@
       --menu-columns-tablet: {{ max_menu_columns_tablet }};
     {% endif %}
   }
+
+  {% if has_promo %}
+    @media screen and (min-width: 990px) {
+      [data-menu-grid-id="{{ id }}"] {
+        --menu-columns-desktop: {{ grid_columns_count | plus: 2 }};
+      }
+      [data-menu-list-id="{{ id }}"] {
+        --menu-columns-desktop: {{ max_menu_columns }};
+      }
+    }
+  {% endif %}
 {% endstyle %}
 
 {% case menu_content_type %}
@@ -343,3 +368,31 @@
       </ul>
     </span>
 {% endcase %}
+
+{% if has_promo %}
+  <div class="mega-menu__promo-panel">
+    {% if promo_button_url != blank %}
+      <a href="{{ promo_button_url }}" class="mega-menu__promo-link">
+    {% else %}
+      <div class="mega-menu__promo-link">
+    {% endif %}
+      <div class="mega-menu__promo-image-wrapper">
+        {{- promo_image | image_url: width: 600 | image_tag: class: 'mega-menu__promo-image', loading: 'lazy', alt: promo_heading -}}
+      </div>
+      {% if promo_heading != blank or promo_button_label != blank %}
+        <div class="mega-menu__promo-overlay">
+          {% if promo_heading != blank %}
+            <span class="mega-menu__promo-heading">{{ promo_heading }}</span>
+          {% endif %}
+          {% if promo_button_label != blank %}
+            <span class="mega-menu__promo-button">{{ promo_button_label }}</span>
+          {% endif %}
+        </div>
+      {% endif %}
+    {% if promo_button_url != blank %}
+      </a>
+    {% else %}
+      </div>
+    {% endif %}
+  </div>
+{% endif %}

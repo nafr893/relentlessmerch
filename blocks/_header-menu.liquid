@@ -169,7 +169,8 @@
                      content_aspect_ratio: ratio,
                      image_border_radius: image_border_radius,
                      block_settings: block_settings,
-                     active_card_set: active_card_set
+                     active_card_set: active_card_set,
+                     submenu_index: forloop.index
                    %}
                  </div>
                </div>
@@ -788,6 +789,81 @@
    /* preserves the inherited grid layout when this submenu wrapper is used */
    display: contents;
  }
+
+ /* Mega menu promo panel */
+ @media screen and (min-width: 990px) {
+   .mega-menu__promo-panel {
+     grid-column: span 2 / -1;
+     align-self: stretch;
+   }
+
+   .mega-menu__promo-link {
+     display: block;
+     text-decoration: none;
+     color: inherit;
+     position: relative;
+     height: 100%;
+   }
+
+   .mega-menu__promo-image-wrapper {
+     position: relative;
+     width: 100%;
+     height: 100%;
+     overflow: hidden;
+   }
+
+   .mega-menu__promo-image {
+     width: 100%;
+     height: 100%;
+     object-fit: cover;
+     display: block;
+     transition: transform 0.3s ease;
+   }
+
+   .mega-menu__promo-link:hover .mega-menu__promo-image {
+     transform: scale(1.03);
+   }
+
+   .mega-menu__promo-overlay {
+     position: absolute;
+     bottom: 0;
+     left: 0;
+     right: 0;
+     padding: 1.25rem;
+     display: flex;
+     flex-direction: column;
+     gap: 0.75rem;
+     background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 100%);
+   }
+
+   .mega-menu__promo-heading {
+     color: #fff;
+     font-family: var(--font-heading-family);
+     font-size: 1rem;
+     font-weight: 700;
+     text-transform: uppercase;
+     letter-spacing: 0.06em;
+   }
+
+   .mega-menu__promo-button {
+     display: inline-block;
+     background: #fff;
+     color: #000;
+     font-family: var(--font-heading-family);
+     font-size: 0.75rem;
+     font-weight: 700;
+     text-transform: uppercase;
+     letter-spacing: 0.08em;
+     padding: 0.5rem 1rem;
+     align-self: flex-start;
+   }
+ }
+
+ @media screen and (max-width: 989px) {
+   .mega-menu__promo-panel {
+     display: none;
+   }
+ }
 {% endstylesheet %}
 
 {% schema %}
@@ -1152,6 +1228,158 @@
      "unit": "px",
      "default": 0,
      "visible_if": "{{ block.settings.menu_style != 'text' }}"
+   },
+   {
+     "type": "header",
+     "content": "Submenu Promo Panels (Desktop)"
+   },
+   {
+     "type": "paragraph",
+     "content": "Add an image, heading, and button to the right side of each submenu. Slot 1 = first top-level menu item, slot 2 = second, etc."
+   },
+   {
+     "type": "header",
+     "content": "Promo — Submenu 1"
+   },
+   {
+     "type": "image_picker",
+     "id": "mega_promo_1_image",
+     "label": "Image"
+   },
+   {
+     "type": "text",
+     "id": "mega_promo_1_heading",
+     "label": "Heading"
+   },
+   {
+     "type": "text",
+     "id": "mega_promo_1_button_label",
+     "label": "Button label"
+   },
+   {
+     "type": "url",
+     "id": "mega_promo_1_button_url",
+     "label": "Button link"
+   },
+   {
+     "type": "header",
+     "content": "Promo — Submenu 2"
+   },
+   {
+     "type": "image_picker",
+     "id": "mega_promo_2_image",
+     "label": "Image"
+   },
+   {
+     "type": "text",
+     "id": "mega_promo_2_heading",
+     "label": "Heading"
+   },
+   {
+     "type": "text",
+     "id": "mega_promo_2_button_label",
+     "label": "Button label"
+   },
+   {
+     "type": "url",
+     "id": "mega_promo_2_button_url",
+     "label": "Button link"
+   },
+   {
+     "type": "header",
+     "content": "Promo — Submenu 3"
+   },
+   {
+     "type": "image_picker",
+     "id": "mega_promo_3_image",
+     "label": "Image"
+   },
+   {
+     "type": "text",
+     "id": "mega_promo_3_heading",
+     "label": "Heading"
+   },
+   {
+     "type": "text",
+     "id": "mega_promo_3_button_label",
+     "label": "Button label"
+   },
+   {
+     "type": "url",
+     "id": "mega_promo_3_button_url",
+     "label": "Button link"
+   },
+   {
+     "type": "header",
+     "content": "Promo — Submenu 4"
+   },
+   {
+     "type": "image_picker",
+     "id": "mega_promo_4_image",
+     "label": "Image"
+   },
+   {
+     "type": "text",
+     "id": "mega_promo_4_heading",
+     "label": "Heading"
+   },
+   {
+     "type": "text",
+     "id": "mega_promo_4_button_label",
+     "label": "Button label"
+   },
+   {
+     "type": "url",
+     "id": "mega_promo_4_button_url",
+     "label": "Button link"
+   },
+   {
+     "type": "header",
+     "content": "Promo — Submenu 5"
+   },
+   {
+     "type": "image_picker",
+     "id": "mega_promo_5_image",
+     "label": "Image"
+   },
+   {
+     "type": "text",
+     "id": "mega_promo_5_heading",
+     "label": "Heading"
+   },
+   {
+     "type": "text",
+     "id": "mega_promo_5_button_label",
+     "label": "Button label"
+   },
+   {
+     "type": "url",
+     "id": "mega_promo_5_button_url",
+     "label": "Button link"
+   },
+   {
+     "type": "header",
+     "content": "Promo — Submenu 6"
+   },
+   {
+     "type": "image_picker",
+     "id": "mega_promo_6_image",
+     "label": "Image"
+   },
+   {
+     "type": "text",
+     "id": "mega_promo_6_heading",
+     "label": "Heading"
+   },
+   {
+     "type": "text",
+     "id": "mega_promo_6_button_label",
+     "label": "Button label"
+   },
+   {
+     "type": "url",
+     "id": "mega_promo_6_button_url",
+     "label": "Button link"
    },
    {
      "type": "header",
