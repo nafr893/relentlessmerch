@@ -76,12 +76,15 @@
   assign has_promo = false
   if submenu_index != blank and block_settings != blank
     assign promo_image_key = 'mega_promo_' | append: submenu_index | append: '_image'
+    assign promo_heading_key = 'mega_promo_' | append: submenu_index | append: '_heading'
+    assign promo_button_label_key = 'mega_promo_' | append: submenu_index | append: '_button_label'
+    assign promo_button_url_key = 'mega_promo_' | append: submenu_index | append: '_button_url'
     assign promo_image = block_settings[promo_image_key]
     if promo_image != blank
       assign has_promo = true
-      assign promo_heading = block_settings['mega_promo_' | append: submenu_index | append: '_heading']
-      assign promo_button_label = block_settings['mega_promo_' | append: submenu_index | append: '_button_label']
-      assign promo_button_url = block_settings['mega_promo_' | append: submenu_index | append: '_button_url']
+      assign promo_heading = block_settings[promo_heading_key]
+      assign promo_button_label = block_settings[promo_button_label_key]
+      assign promo_button_url = block_settings[promo_button_url_key]
     endif
   endif
 %}
