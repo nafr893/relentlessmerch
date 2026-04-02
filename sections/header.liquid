@@ -515,22 +515,22 @@
     display: block;
     width: 1px;
     align-self: stretch;
-    background-color: rgba(var(--color-foreground-rgb), 0.2);
+    background-color: #ffffff;
     margin-inline-start: 1.25rem;
     flex-shrink: 0;
   }
 
-  /* Divider: left of header-actions (cart/account/search), after localization */
-  #header-component header-actions {
+  /* Divider: left of search icon */
+  #header-component .header__column--right search-button {
     display: flex;
     align-items: stretch;
   }
-  #header-component header-actions::before {
+  #header-component .header__column--right search-button::before {
     content: '';
     display: block;
     width: 1px;
     align-self: stretch;
-    background-color: rgba(var(--color-foreground-rgb), 0.2);
+    background-color: #ffffff;
     margin-inline-end: 1.25rem;
     flex-shrink: 0;
   }
