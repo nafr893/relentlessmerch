@@ -23,6 +23,8 @@
         {{ 'content.search' | t }}
       </span>
 
+      <span class="search-action__mobile-placeholder desktop:hidden">search...</span>
+
       <span class="svg-wrapper {% if display_style != 'icon' %}desktop:hidden{% endif %}">
         <!-- use the SVG asset as a mask so the icon can be colored by CSS -->
         <span class="svg-icon svg-icon--search" aria-hidden="true" role="img" style="--icon-src: url('{{ 'icon-search.svg' | asset_url }}');"></span>

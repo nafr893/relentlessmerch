@@ -465,21 +465,16 @@
     justify-content: flex-start !important;
   }
 
-  /* Replace label with "SEARCH..." placeholder */
-  #header-component .header__columns .search-action .mobile\:hidden {
-    display: inline-block !important;
-    font-size: 0 !important;
+  /* Mobile search placeholder text */
+  .search-action__mobile-placeholder {
     flex: 1 !important;
-    white-space: nowrap !important;
-    overflow: hidden !important;
-  }
-  #header-component .header__columns .search-action .mobile\:hidden::after {
-    content: 'SEARCH...' !important;
     font-size: 0.75rem !important;
     letter-spacing: 0.06em !important;
     font-family: var(--font-heading-family) !important;
     text-transform: uppercase !important;
     opacity: 0.45 !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
   }
 
   /* Search icon inside the bar */
