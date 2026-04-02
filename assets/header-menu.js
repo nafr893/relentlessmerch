@@ -32,6 +32,7 @@ class HeaderMenu extends Component {
 
   disconnectedCallback() {
     super.disconnectedCallback();
+    clearTimeout(this.#closeTimer);
     window.removeEventListener('resize', this.#resizeListener);
     document.body.removeEventListener('pointermove', this.#onPointerMove);
     if (this.#state.activeItem) {
@@ -63,6 +64,11 @@ class HeaderMenu extends Component {
    * @type {ReturnType<typeof setTimeout> | undefined}
    */
   #pointerIdleTimer;
+
+  /**
+   * @type {ReturnType<typeof setTimeout> | undefined}
+   */
+  #closeTimer;
 
   /**
    * Last known pointer position for Safari hit-test reconciliation.
@@ -166,6 +172,9 @@ class HeaderMenu extends Component {
    * @param {PointerEvent | FocusEvent} event
    */
   activate = (event) => {
+    clearTimeout(this.#closeTimer);
+    this.#closeTimer = undefined;
+
     this.dispatchEvent(new MegaMenuHoverEvent());
 
     if (!(event.target instanceof Element) || !this.headerComponent) return;
@@ -269,7 +278,10 @@ class HeaderMenu extends Component {
       return;
     }
 
-    this.#deactivate();
+    clearTimeout(this.#closeTimer);
+    this.#closeTimer = setTimeout(() => {
+      this.#deactivate();
+    }, 150);
   }
 
   /**
