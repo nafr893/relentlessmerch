@@ -505,20 +505,41 @@
 }
 
 @media screen and (min-width: 750px) {
-  .header-desktop-divider {
-    position: absolute;
-    top: 0;
-    bottom: 0;
+  /* Divider: right of logo */
+  #header-component .header__column--left {
+    display: flex;
+    align-items: center;
+  }
+  #header-component .header__column--left::after {
+    content: '';
+    display: block;
     width: 1px;
+    align-self: stretch;
     background-color: #ffffff;
-    pointer-events: none;
+    margin-inline-start: 1.25rem;
+    flex-shrink: 0;
+  }
+
+  /* Divider: left of search icon */
+  #header-component .header__column--right search-button {
+    display: flex;
+    align-items: center;
+  }
+  #header-component .header__column--right search-button::before {
+    content: '';
+    display: block;
+    width: 1px;
+    align-self: stretch;
+    background-color: #ffffff;
+    margin-inline-end: 1.25rem;
+    flex-shrink: 0;
   }
 }
 </style>
 
 <script>
   (function() {
-    function insertMobileDivider() {
+    function insertDivider() {
       var cols = document.querySelector('#header-component .header__columns');
       if (!cols || cols.querySelector('.header-col-divider')) return;
       var logo = cols.querySelector('.header-logo');
@@ -530,59 +551,11 @@
         cols.appendChild(div);
       }
     }
-
-    function insertDesktopDividers() {
-      if (window.innerWidth < 750) return;
-
-      var cols = document.querySelector('#header-component .header__columns');
-      if (!cols) return;
-
-      // Use header__columns as the positioning parent
-      cols.style.position = 'relative';
-      var colsRect = cols.getBoundingClientRect();
-
-      // Divider 1: immediately right of the logo element
-      if (!cols.querySelector('.header-desktop-divider--logo')) {
-        var logo = cols.querySelector('.header-logo');
-        if (logo) {
-          var logoRect = logo.getBoundingClientRect();
-          var logoDiv = document.createElement('div');
-          logoDiv.className = 'header-desktop-divider header-desktop-divider--logo';
-          logoDiv.style.left = Math.round(logoRect.right - colsRect.left) + 'px';
-          cols.appendChild(logoDiv);
-        }
-      }
-
-      // Divider 2: immediately left of the search button
-      if (!cols.querySelector('.header-desktop-divider--search')) {
-        var searchBtn = cols.querySelector('search-button');
-        if (searchBtn) {
-          var searchRect = searchBtn.getBoundingClientRect();
-          var searchDiv = document.createElement('div');
-          searchDiv.className = 'header-desktop-divider header-desktop-divider--search';
-          searchDiv.style.left = Math.round(searchRect.left - colsRect.left) + 'px';
-          cols.appendChild(searchDiv);
-        }
-      }
-    }
-
-    function init() {
-      insertMobileDivider();
-      insertDesktopDividers();
-    }
-
     if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', init);
+      document.addEventListener('DOMContentLoaded', insertDivider);
     } else {
-      init();
+      insertDivider();
     }
-
-    // Re-measure on resize in case layout shifts
-    window.addEventListener('resize', function() {
-      var existing = document.querySelectorAll('.header-desktop-divider');
-      existing.forEach(function(el) { el.remove(); });
-      insertDesktopDividers();
-    });
   })();
 </script>
 
