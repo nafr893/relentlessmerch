@@ -534,33 +534,34 @@
     function insertDesktopDividers() {
       if (window.innerWidth < 750) return;
 
-      var row = document.querySelector('#header-component .header__row--top');
-      if (!row) return;
-      var rowRect = row.getBoundingClientRect();
+      var cols = document.querySelector('#header-component .header__columns');
+      if (!cols) return;
 
-      // Divider 1: right edge of logo column
-      if (!row.querySelector('.header-desktop-divider--logo')) {
-        var leftCol = row.querySelector('.header__column--left');
-        if (leftCol) {
-          var leftRect = leftCol.getBoundingClientRect();
+      // Use header__columns as the positioning parent
+      cols.style.position = 'relative';
+      var colsRect = cols.getBoundingClientRect();
+
+      // Divider 1: immediately right of the logo element
+      if (!cols.querySelector('.header-desktop-divider--logo')) {
+        var logo = cols.querySelector('.header-logo');
+        if (logo) {
+          var logoRect = logo.getBoundingClientRect();
           var logoDiv = document.createElement('div');
           logoDiv.className = 'header-desktop-divider header-desktop-divider--logo';
-          logoDiv.style.left = (leftRect.right - rowRect.left) + 'px';
-          row.style.position = 'relative';
-          row.appendChild(logoDiv);
+          logoDiv.style.left = Math.round(logoRect.right - colsRect.left) + 'px';
+          cols.appendChild(logoDiv);
         }
       }
 
-      // Divider 2: left edge of search button
-      if (!row.querySelector('.header-desktop-divider--search')) {
-        var searchBtn = row.querySelector('search-button');
+      // Divider 2: immediately left of the search button
+      if (!cols.querySelector('.header-desktop-divider--search')) {
+        var searchBtn = cols.querySelector('search-button');
         if (searchBtn) {
           var searchRect = searchBtn.getBoundingClientRect();
           var searchDiv = document.createElement('div');
           searchDiv.className = 'header-desktop-divider header-desktop-divider--search';
-          searchDiv.style.left = (searchRect.left - rowRect.left) + 'px';
-          row.style.position = 'relative';
-          row.appendChild(searchDiv);
+          searchDiv.style.left = Math.round(searchRect.left - colsRect.left) + 'px';
+          cols.appendChild(searchDiv);
         }
       }
     }
