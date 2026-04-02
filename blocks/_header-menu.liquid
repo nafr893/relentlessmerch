@@ -631,6 +631,7 @@
    grid-template-columns: repeat(var(--menu-columns-tablet), minmax(0, 1fr));
    gap: var(--menu-vertical-gap) var(--menu-horizontal-gap);
    width: 100%;
+   align-items: start;
 
    @media screen and (min-width: 990px) {
      grid-template-columns: repeat(var(--menu-columns-desktop), minmax(0, 1fr));
@@ -822,7 +823,7 @@
  @media screen and (min-width: 990px) {
    .mega-menu__promo-panel {
      grid-column: span 2 / -1;
-     align-self: stretch;
+     align-self: start;
    }
 
    .mega-menu__promo-link {
@@ -830,7 +831,6 @@
      text-decoration: none;
      color: inherit;
      position: relative;
-     height: 100%;
    }
 
    .mega-menu__promo-image-wrapper {
