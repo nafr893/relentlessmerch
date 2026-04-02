@@ -790,6 +790,33 @@
    display: contents;
  }
 
+ /* Desktop mega menu: black background, white text */
+ @media screen and (min-width: 750px) {
+   .menu-list__list-item:where(:not([slot='overflow'])) > .menu-list__submenu,
+   .overflow-menu::part(overflow) {
+     background-color: #000;
+   }
+
+   .overflow-menu::after {
+     background-color: #000;
+   }
+
+   .menu-list__submenu-inner,
+   .overflow-menu::part(overflow-list) {
+     color: #fff;
+   }
+
+   .mega-menu__link,
+   .mega-menu__link--parent {
+     color: #fff;
+   }
+
+   .mega-menu__link:hover,
+   .mega-menu__link--parent:hover {
+     color: rgba(255, 255, 255, 0.65);
+   }
+ }
+
  /* Mega menu promo panel */
  @media screen and (min-width: 990px) {
    .mega-menu__promo-panel {
