@@ -27,7 +27,6 @@
         <!-- use the SVG asset as a mask so the icon can be colored by CSS -->
         <span class="svg-icon svg-icon--search" aria-hidden="true" role="img" style="--icon-src: url('{{ 'icon-search.svg' | asset_url }}');"></span>
       </span>
-      <p class="placeholder">Search...</p>
     </button>
   </search-button>
 {% endunless %}
@@ -77,12 +76,6 @@
     }
   }
 
-  .placeholder {
-    font-size: 10px; 
-    margin: 0px;
-    padding: 0px; 
-    color: #888888;
-  }
 
 /* replace previous .svg-wrapper fill rules with mask-based icon styling */
   .svg-wrapper { color: inherit; } /* keep wrapper color inheritance */
