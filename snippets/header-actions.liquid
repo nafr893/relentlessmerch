@@ -126,15 +126,64 @@
         class="cart-drawer__content"
         aria-label="{{ 'accessibility.cart' | t }}"
       >
-        <h2
-          class="cart-drawer__heading h4 cart-drawer__heading--empty"
-          id="cart-drawer-heading-empty"
-        >
-          {{ 'content.your_cart_is_empty' | t }}
-        </h2>
+        <div class="cart-drawer__empty-state">
+          <h2
+            class="cart-drawer__heading h4 cart-drawer__heading--empty"
+            id="cart-drawer-heading-empty"
+          >
+            {{ 'content.your_cart_is_empty' | t }}
+          </h2>
 
-        <div class="cart-drawer__items">
-          {% render 'cart-products', force_empty: true %}
+          {% if settings.empty_cart_heading != blank %}
+            <p class="cart-drawer__empty-subheading">{{ settings.empty_cart_heading }}</p>
+          {% endif %}
+
+          <div class="cart-drawer__empty-banners">
+            {% for i in (1..4) %}
+              {% liquid
+                case i
+                  when 1
+                    assign banner_image = settings.empty_cart_banner_1_image
+                    assign banner_text = settings.empty_cart_banner_1_text
+                    assign banner_link = settings.empty_cart_banner_1_link
+                  when 2
+                    assign banner_image = settings.empty_cart_banner_2_image
+                    assign banner_text = settings.empty_cart_banner_2_text
+                    assign banner_link = settings.empty_cart_banner_2_link
+                  when 3
+                    assign banner_image = settings.empty_cart_banner_3_image
+                    assign banner_text = settings.empty_cart_banner_3_text
+                    assign banner_link = settings.empty_cart_banner_3_link
+                  when 4
+                    assign banner_image = settings.empty_cart_banner_4_image
+                    assign banner_text = settings.empty_cart_banner_4_text
+                    assign banner_link = settings.empty_cart_banner_4_link
+                endcase
+              %}
+              {% if banner_image != blank or banner_text != blank %}
+                <a
+                  class="cart-drawer__empty-banner"
+                  {% if banner_link != blank %}href="{{ banner_link }}"{% endif %}
+                >
+                  {% if banner_image != blank %}
+                    {{
+                      banner_image
+                      | image_url: width: 800
+                      | image_tag:
+                        class: 'cart-drawer__empty-banner-image',
+                        loading: 'lazy',
+                        widths: '400, 600, 800'
+                    }}
+                  {% else %}
+                    <div class="cart-drawer__empty-banner-placeholder"></div>
+                  {% endif %}
+                  {% if banner_text != blank %}
+                    <span class="cart-drawer__empty-banner-text">{{ banner_text }}</span>
+                  {% endif %}
+                </a>
+              {% endif %}
+            {% endfor %}
+          </div>
         </div>
       </div>
     {% endcapture %}
@@ -484,6 +533,66 @@
   .cart-drawer__heading--empty {
     display: flex;
     justify-content: center;
+  }
+
+  .cart-drawer__empty-state {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: var(--cart-drawer-padding);
+  }
+
+  .cart-drawer__empty-subheading {
+    font-family: var(--font-heading--family);
+    font-weight: var(--font-heading--weight);
+    font-size: 2rem;
+    text-transform: uppercase;
+    margin: 0 0 1rem 0;
+    line-height: 1;
+  }
+
+  .cart-drawer__empty-banners {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+  }
+
+  .cart-drawer__empty-banner {
+    position: relative;
+    display: block;
+    text-decoration: none;
+    overflow: hidden;
+    border-radius: 0;
+  }
+
+  .cart-drawer__empty-banner-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    aspect-ratio: 16 / 7;
+  }
+
+  .cart-drawer__empty-banner-placeholder {
+    width: 100%;
+    aspect-ratio: 16 / 7;
+    background-color: var(--color-border);
+  }
+
+  .cart-drawer__empty-banner-text {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 0.75rem 1rem;
+    color: #ffffff;
+    font-family: var(--font-heading--family);
+    font-weight: var(--font-heading--weight);
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    background: linear-gradient(to top, rgba(0,0,0,0.55) 0%, transparent 100%);
+    width: 100%;
   }
 
   .cart-drawer__items {
