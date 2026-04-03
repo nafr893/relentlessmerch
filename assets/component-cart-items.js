@@ -38,6 +38,7 @@ class CartItemsComponent extends Component {
     document.addEventListener(ThemeEvents.cartUpdate, this.#handleCartUpdate);
     document.addEventListener(ThemeEvents.discountUpdate, this.handleDiscountUpdate);
     document.addEventListener(ThemeEvents.quantitySelectorUpdate, this.#debouncedOnChange);
+    window.addEventListener('pageshow', this.#handlePageShow);
   }
 
   disconnectedCallback() {
@@ -46,7 +47,19 @@ class CartItemsComponent extends Component {
     document.removeEventListener(ThemeEvents.cartUpdate, this.#handleCartUpdate);
     document.removeEventListener(ThemeEvents.discountUpdate, this.handleDiscountUpdate);
     document.removeEventListener(ThemeEvents.quantitySelectorUpdate, this.#debouncedOnChange);
+    window.removeEventListener('pageshow', this.#handlePageShow);
   }
+
+  /**
+   * Handles the pageshow event — re-renders the section when restored from BFCache
+   * so a stale empty cart state is replaced with current cart contents.
+   * @param {PageTransitionEvent} event
+   */
+  #handlePageShow = (event) => {
+    if (event.persisted) {
+      sectionRenderer.renderSection(this.sectionId, { cache: false });
+    }
+  };
 
   /**
    * Handles QuantitySelectorUpdateEvent change event.
