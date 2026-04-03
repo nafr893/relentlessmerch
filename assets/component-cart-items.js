@@ -39,6 +39,10 @@ class CartItemsComponent extends Component {
     document.addEventListener(ThemeEvents.discountUpdate, this.handleDiscountUpdate);
     document.addEventListener(ThemeEvents.quantitySelectorUpdate, this.#debouncedOnChange);
     window.addEventListener('pageshow', this.#handlePageShow);
+
+    if (!this.isDrawer) {
+      this.#syncCartPageState();
+    }
   }
 
   disconnectedCallback() {
@@ -58,6 +62,25 @@ class CartItemsComponent extends Component {
   #handlePageShow = (event) => {
     if (event.persisted) {
       sectionRenderer.renderSection(this.sectionId, { cache: false });
+    }
+  };
+
+  /**
+   * On initial connect, if the cart page is showing the empty state, verify against
+   * the live Shopify cart. If items exist, the displayed state is stale (e.g. from
+   * BFCache or a prior navigation) and the section is re-rendered to show them.
+   */
+  #syncCartPageState = async () => {
+    if (this.querySelector('.cart-form')) return;
+
+    try {
+      const response = await fetch(`${Theme.routes.cart_url}.js`);
+      const cart = await response.json();
+      if (cart.item_count > 0) {
+        sectionRenderer.renderSection(this.sectionId, { cache: false });
+      }
+    } catch (_) {
+      // Non-fatal — cart page will still work, just may need a manual refresh.
     }
   };
 
