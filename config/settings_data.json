@@ -57,6 +57,7 @@
     "button_border_radius_secondary": 14,
     "cart_type": "drawer",
     "cart_price_font": "secondary",
+    "auto_open_cart_drawer": true,
     "show_cart_note": false,
     "show_add_discount_code": true,
     "empty_cart_banner_1_image": "shopify://shop_images/defeater_jpg.webp",
