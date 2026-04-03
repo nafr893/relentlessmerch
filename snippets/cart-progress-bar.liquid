@@ -14,7 +14,7 @@
    <p class="cart-progress__message">You’ve unlocked an entry!</p>
  {% else %}
    <p class="cart-progress__message">
-     You're <span class="highlight" >{{ remaining_amount | money_without_trailing_zeros }} </span> away from <span class="highlight">GIVEAWAY ENTRY</span>
+     You're <span class="highlight" >{{ remaining_amount | money_without_trailing_zeros }} </span> away from <span class="highlight">FREE SHIPPING</span>
    </p>
  {% endif %}
 
@@ -70,7 +70,7 @@
 
 .cart-progress__fill {
  height: 100%;
- background: #2f5cac;
+ background: #000000;
  width: 0%;
  transition: width 0.1s ease;
 }
