@@ -1,12 +1,5 @@
 import { Component } from '@theme/component';
-import {
-  fetchConfig,
-  debounce,
-  onAnimationEnd,
-  prefersReducedMotion,
-  resetShimmer,
-  startViewTransition,
-} from '@theme/utilities';
+import { fetchConfig, debounce, onAnimationEnd, prefersReducedMotion, resetShimmer } from '@theme/utilities';
 import { morphSection, sectionRenderer } from '@theme/section-renderer';
 import {
   ThemeEvents,
@@ -38,51 +31,14 @@ class CartItemsComponent extends Component {
     document.addEventListener(ThemeEvents.cartUpdate, this.#handleCartUpdate);
     document.addEventListener(ThemeEvents.discountUpdate, this.handleDiscountUpdate);
     document.addEventListener(ThemeEvents.quantitySelectorUpdate, this.#debouncedOnChange);
-    window.addEventListener('pageshow', this.#handlePageShow);
-
-    if (!this.isDrawer) {
-      this.#syncCartPageState();
-    }
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
 
     document.removeEventListener(ThemeEvents.cartUpdate, this.#handleCartUpdate);
-    document.removeEventListener(ThemeEvents.discountUpdate, this.handleDiscountUpdate);
     document.removeEventListener(ThemeEvents.quantitySelectorUpdate, this.#debouncedOnChange);
-    window.removeEventListener('pageshow', this.#handlePageShow);
   }
-
-  /**
-   * Handles the pageshow event — re-renders the section when restored from BFCache
-   * so a stale empty cart state is replaced with current cart contents.
-   * @param {PageTransitionEvent} event
-   */
-  #handlePageShow = (event) => {
-    if (event.persisted) {
-      sectionRenderer.renderSection(this.sectionId, { cache: false });
-    }
-  };
-
-  /**
-   * On initial connect, if the cart page is showing the empty state, verify against
-   * the live Shopify cart. If items exist, the displayed state is stale (e.g. from
-   * BFCache or a prior navigation) and the section is re-rendered to show them.
-   */
-  #syncCartPageState = async () => {
-    if (this.querySelector('.cart-form')) return;
-
-    try {
-      const response = await fetch(`${Theme.routes.cart_url}.js`);
-      const cart = await response.json();
-      if (cart.item_count > 0) {
-        sectionRenderer.renderSection(this.sectionId, { cache: false });
-      }
-    } catch (_) {
-      // Non-fatal — cart page will still work, just may need a manual refresh.
-    }
-  };
 
   /**
    * Handles QuantitySelectorUpdateEvent change event.
@@ -133,20 +89,6 @@ class CartItemsComponent extends Component {
       // Get all nested lines of the row to remove
       ...this.refs.cartItemRows.filter((row) => row.dataset.parentKey === cartItemRowToRemove.dataset.key),
     ];
-
-    // If the cart item row is the last row, optimistically trigger the cart empty state
-    const isEmptyCart = rowsToRemove.length == this.refs.cartItemRows.length;
-
-    const template = document.getElementById('empty-cart-template');
-    if (isEmptyCart && template instanceof HTMLTemplateElement) {
-      const clone = document.importNode(template.content, true);
-
-      startViewTransition(() => {
-        this.replaceChildren(clone);
-      }, [this.isDrawer ? 'empty-cart-drawer' : 'empty-cart-page']);
-
-      return;
-    }
 
     // Add class to the row to trigger the animation
     rowsToRemove.forEach((row) => {
@@ -228,7 +170,7 @@ class CartItemsComponent extends Component {
           })
         );
 
-        morphSection(this.sectionId, parsedResponseText.sections[this.sectionId], this.isDrawer ? 'hydration' : 'full', { injectStylesheet: true });
+        morphSection(this.sectionId, parsedResponseText.sections[this.sectionId]);
 
         this.#updateCartQuantitySelectorButtonStates();
       })
@@ -287,7 +229,7 @@ class CartItemsComponent extends Component {
 
     const cartItemsHtml = event.detail.data.sections?.[this.sectionId];
     if (cartItemsHtml) {
-      morphSection(this.sectionId, cartItemsHtml, 'full', { injectStylesheet: true });
+      morphSection(this.sectionId, cartItemsHtml);
 
       // Update button states for all cart quantity selectors after morph
       this.#updateCartQuantitySelectorButtonStates();
@@ -355,13 +297,6 @@ class CartItemsComponent extends Component {
     if (!sectionId) throw new Error('Section id missing');
 
     return sectionId;
-  }
-
-  /**
-   * @returns {boolean} Whether the component is a drawer.
-   */
-  get isDrawer() {
-    return this.dataset.drawer !== undefined;
   }
 }
 
