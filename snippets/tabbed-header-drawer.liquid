@@ -229,19 +229,19 @@
  /* Main Drawer Container */
  .tabbed-drawer {
    position: fixed;
-   transform: translateX(-100%);
+   transform: translateX(100%);
    visibility: hidden;
    opacity: 0;
    height: 100dvh;
    width: 100vw;
    max-width: 400px;
    z-index: var(--layer-menu-drawer, 100);
-   left: 0;
+   right: 0;
    top: 0;
    background-color: var(--color-background);
    display: flex;
    flex-direction: column;
-   border-right: 1px solid var(--color-border);
+   border-left: 1px solid var(--color-border);
    box-shadow: var(--shadow-drawer);
    transition: transform 0.3s ease, opacity 0.3s ease, visibility 0.3s ease;
 
