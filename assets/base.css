@@ -3164,7 +3164,9 @@ label:has(input[type='checkbox']:disabled) {
   }
 }
 
+
 /* Fly to cart animation */
+/* remove fly to cart animation
 fly-to-cart {
   --offset-y: 10px;
 
@@ -3211,7 +3213,7 @@ fly-to-cart.fly-to-cart--sticky {
   --scale-timing: cubic-bezier(0.86, 0.08, 0.98, 0.98);
   --radius: var(--style-border-radius-buttons-primary);
 
-  @media screen and (max-width: 749px) {
+  @media (max-width: 749px) {
     --x-timing: cubic-bezier(0.98, -0.1, 0.92, 0.5);
   }
 
@@ -3245,6 +3247,15 @@ fly-to-cart.fly-to-cart--sticky {
     translate: 0 var(--travel-y, 0);
   }
 }
+
+*/
+
+/* ------------------------------------------------------------------------------ */
+
+/* ------------------------------------------------------------------------------ */
+
+/* ------------------------------------------------------------------------------ */
+
 
 /* ------------------------------------------------------------------------------ */
 
