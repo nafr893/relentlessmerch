@@ -371,9 +371,9 @@
             "horizontal_alignment_flex_direction_column": "center",
             "vertical_alignment_flex_direction_column": "center",
             "gap": 12,
-            "width": "fill",
+            "width": "fit-content",
             "custom_width": 100,
-            "width_mobile": "fill",
+            "width_mobile": "fit-content",
             "custom_width_mobile": 100,
             "height": "fill",
             "custom_height": 100,
@@ -393,10 +393,10 @@
             "link": "",
             "open_in_new_tab": false,
             "placeholder": "",
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
+            "padding-block-start": 60,
+            "padding-block-end": 60,
+            "padding-inline-start": 60,
+            "padding-inline-end": 60
           },
           "blocks": {
             "text_cBbMez": {
@@ -430,7 +430,7 @@
             "text_cBbMez"
           ]
         },
-        "group_jCWUpn": {
+        "group_c6Gzcr": {
           "type": "group",
           "name": "t:names.group",
           "settings": {
@@ -442,9 +442,9 @@
             "horizontal_alignment_flex_direction_column": "center",
             "vertical_alignment_flex_direction_column": "center",
             "gap": 12,
-            "width": "fill",
+            "width": "fit-content",
             "custom_width": 100,
-            "width_mobile": "fill",
+            "width_mobile": "fit-content",
             "custom_width_mobile": 100,
             "height": "fill",
             "custom_height": 100,
@@ -464,17 +464,17 @@
             "link": "",
             "open_in_new_tab": false,
             "placeholder": "",
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
+            "padding-block-start": 60,
+            "padding-block-end": 60,
+            "padding-inline-start": 60,
+            "padding-inline-end": 60
           },
           "blocks": {
-            "text_aL4wLB": {
+            "text_KUbdDf": {
               "type": "text",
               "name": "t:names.heading",
               "settings": {
-                "text": "<h2>OUTERWEAR</h2>",
+                "text": "<h2>T SHIRTS</h2>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -498,14 +498,86 @@
             }
           },
           "block_order": [
-            "text_aL4wLB"
+            "text_KUbdDf"
+          ]
+        },
+        "group_jP9jAQ": {
+          "type": "group",
+          "name": "t:names.group",
+          "settings": {
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "center",
+            "align_baseline": false,
+            "horizontal_alignment_flex_direction_column": "center",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 12,
+            "width": "fit-content",
+            "custom_width": 100,
+            "width_mobile": "fit-content",
+            "custom_width_mobile": 100,
+            "height": "fill",
+            "custom_height": 100,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "background_media": "image",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "toggle_overlay": false,
+            "overlay_color": "#00000026",
+            "overlay_style": "solid",
+            "gradient_direction": "to top",
+            "link": "",
+            "open_in_new_tab": false,
+            "placeholder": "",
+            "padding-block-start": 60,
+            "padding-block-end": 60,
+            "padding-inline-start": 60,
+            "padding-inline-end": 60
+          },
+          "blocks": {
+            "text_GE8key": {
+              "type": "text",
+              "name": "t:names.heading",
+              "settings": {
+                "text": "<h2>T SHIRTS</h2>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "text_GE8key"
           ]
         }
       },
       "block_order": [
         "group_XixPqA",
         "group_rYnYhg",
-        "group_jCWUpn"
+        "group_c6Gzcr",
+        "group_jP9jAQ"
       ],
       "name": "Image Grid",
       "settings": {
