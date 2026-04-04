@@ -62,6 +62,8 @@
     "auto_open_cart_drawer": true,
     "show_cart_note": false,
     "show_add_discount_code": true,
+    "show_installments": false,
+    "show_accelerated_checkout_buttons": false,
     "empty_cart_banner_1_image": "shopify://shop_images/defeater_jpg.webp",
     "empty_cart_banner_1_text": "SHOP ARTISTS",
     "empty_cart_banner_1_link": "shopify://pages/artists",
