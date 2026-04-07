@@ -506,9 +506,9 @@
         "icons_style": "arrow",
         "icons_shape": "none",
         "content_position": "left",
-        "content_width": 40,
+        "content_width": 30,
         "section_width": "page-width",
-        "gap": 12,
+        "gap": 60,
         "color_scheme": "",
         "padding-block-start": 48,
         "padding-block-end": 48
