@@ -13,6 +13,11 @@
   elsif section.settings.layout_type == 'grid'
     assign max_items = section.settings.columns
   endif
+
+  assign inner_class = 'section-resource-list__inner'
+  if section.settings.content_position == 'left'
+    assign inner_class = inner_class | append: ' section-resource-list__inner--horizontal'
+  endif
 %}
 
 <div class="section-background color-{{ section.settings.color_scheme }}"></div>
@@ -32,44 +37,77 @@
   "
   data-testid="collection-list"
 >
-  <div class="section-resource-list__content">
-    {%- content_for 'blocks' -%}
+  <div
+    class="{{ inner_class }}"
+    {% if section.settings.content_position == 'left' %}
+      style="--content-width: {{ section.settings.content_width }}%;"
+    {% endif %}
+  >
+    <div class="section-resource-list__content">
+      {%- content_for 'blocks' -%}
+    </div>
+
+    {% if section_collections == null %}
+      {% for i in (1..max_items) %}
+        {% assign section_collections = section_collections | append: ', ' %}
+      {% endfor %}
+
+      {% assign section_collections = section_collections | split: ',' %}
+    {% endif %}
+
+    {% capture list_items %}
+      {% for collection in section_collections limit: max_items %}
+        <div class="resource-list__item">
+          {% content_for 'block', type: '_collection-card', id: 'static-collection-card', closest.collection: collection %}
+        </div>
+        {% unless forloop.last %}
+          <!--@list/split-->
+        {% endunless %}
+      {% endfor %}
+    {% endcapture %}
+
+    {% liquid
+      # Create an array from the list items to be used for different layout types
+      assign list_items_array = list_items | strip | split: '<!--@list/split-->'
+    %}
+
+    {% render 'resource-list',
+      list_items: list_items,
+      list_items_array: list_items_array,
+      settings: section.settings,
+      carousel_ref: 'collectionList',
+      slide_count: max_items,
+      content_type: 'collections',
+      test_id: 'collections-list-grid'
+    %}
   </div>
-
-  {% if section_collections == null %}
-    {% for i in (1..max_items) %}
-      {% assign section_collections = section_collections | append: ', ' %}
-    {% endfor %}
-
-    {% assign section_collections = section_collections | split: ',' %}
-  {% endif %}
-
-  {% capture list_items %}
-    {% for collection in section_collections limit: max_items %}
-      <div class="resource-list__item">
-        {% content_for 'block', type: '_collection-card', id: 'static-collection-card', closest.collection: collection %}
-      </div>
-      {% unless forloop.last %}
-        <!--@list/split-->
-      {% endunless %}
-    {% endfor %}
-  {% endcapture %}
-
-  {% liquid
-    # Create an array from the list items to be used for different layout types
-    assign list_items_array = list_items | strip | split: '<!--@list/split-->'
-  %}
-
-  {% render 'resource-list',
-    list_items: list_items,
-    list_items_array: list_items_array,
-    settings: section.settings,
-    carousel_ref: 'collectionList',
-    slide_count: max_items,
-    content_type: 'collections',
-    test_id: 'collections-list-grid'
-  %}
 </div>
+
+{% stylesheet %}
+  .section-resource-list__inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap);
+    width: 100%;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-resource-list__inner--horizontal {
+      flex-direction: row;
+      align-items: flex-start;
+    }
+
+    .section-resource-list__inner--horizontal .section-resource-list__content {
+      width: var(--content-width, 30%);
+      flex-shrink: 0;
+    }
+
+    .section-resource-list__inner--horizontal .resource-list {
+      flex: 1;
+      min-width: 0;
+    }
+  }
+{% endstylesheet %}
 
 {% schema %}
 {
@@ -296,6 +334,33 @@
     {
       "type": "header",
       "content": "t:content.section_layout"
+    },
+    {
+      "type": "select",
+      "id": "content_position",
+      "label": "Content position",
+      "options": [
+        {
+          "value": "top",
+          "label": "Top"
+        },
+        {
+          "value": "left",
+          "label": "Left"
+        }
+      ],
+      "default": "top"
+    },
+    {
+      "type": "range",
+      "id": "content_width",
+      "label": "Content width",
+      "min": 15,
+      "max": 50,
+      "step": 1,
+      "unit": "%",
+      "default": 30,
+      "visible_if": "{{ section.settings.content_position == 'left' }}"
     },
     {
       "type": "select",
