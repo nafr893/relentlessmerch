@@ -1,12 +1,32 @@
 
 
-{% render 'divider', id: block.id, settings: block.settings, attributes: true %}
+{% liquid
+  assign visibility_class = ''
+  if block.settings.visibility == 'mobile'
+    assign visibility_class = 'divider--hide-desktop'
+  elsif block.settings.visibility == 'desktop'
+    assign visibility_class = 'divider--hide-mobile'
+  endif
+%}
+
+{% render 'divider', id: block.id, settings: block.settings, attributes: true, visibility_class: visibility_class %}
 
 {% schema %}
 {
   "name": "t:names.divider",
   "tag": null,
   "settings": [
+    {
+      "type": "select",
+      "id": "visibility",
+      "label": "Visibility",
+      "options": [
+        { "value": "both", "label": "Show on both" },
+        { "value": "mobile", "label": "Mobile only" },
+        { "value": "desktop", "label": "Desktop only" }
+      ],
+      "default": "both"
+    },
     {
       "type": "range",
       "id": "thickness",

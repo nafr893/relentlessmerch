@@ -13,10 +13,11 @@
   @param {boolean} [full_width] - When `true`, the divider spans the full width of its container.
   @param {boolean} [attributes] - When `true`, render block.shopify_attributes on the divider container.
   @param {block} [block] - The block object, used for Shopify editor attributes when attributes are enabled.
+  @param {string} [visibility_class] - Optional class to control visibility: 'divider--hide-mobile' or 'divider--hide-desktop'.
 {%- enddoc -%}
 
 <div
-  class="divider divider-{{ id }} spacing-style"
+  class="divider divider-{{ id }} spacing-style{{ visibility_class | prepend: ' ' }}"
   style="
     --divider-justify-content: {{ settings.alignment_horizontal | default: 'center' }};
     {% render 'spacing-style', settings: settings %}
@@ -43,6 +44,18 @@
     display: flex;
     align-items: center;
     justify-content: var(--divider-justify-content);
+  }
+
+  @media screen and (max-width: 749px) {
+    .divider--hide-mobile {
+      display: none;
+    }
+  }
+
+  @media screen and (min-width: 750px) {
+    .divider--hide-desktop {
+      display: none;
+    }
   }
 
   .divider__line {
