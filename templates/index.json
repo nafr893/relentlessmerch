@@ -813,6 +813,52 @@
         "padding-block-end": 48
       }
     },
+    "featured_artist_slideshow_KDXQMh": {
+      "type": "featured-artist-slideshow",
+      "blocks": {
+        "slide_GTXVwy": {
+          "type": "slide",
+          "settings": {
+            "background_image": "shopify://shop_images/Nolan_Taylor_Banner_Pic_v1.webp",
+            "artist_image": "shopify://shop_images/OG-NolanTaylor-2.webp",
+            "artist_name": "Artist Name",
+            "link_label": "View Bio",
+            "link": ""
+          }
+        },
+        "slide_xLQ7e7": {
+          "type": "slide",
+          "settings": {
+            "artist_name": "Artist Name",
+            "link_label": "View Bio",
+            "link": ""
+          }
+        },
+        "slide_fEaArp": {
+          "type": "slide",
+          "settings": {
+            "artist_name": "Artist Name",
+            "link_label": "View Bio",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "slide_GTXVwy",
+        "slide_xLQ7e7",
+        "slide_fEaArp"
+      ],
+      "name": "Featured Artist Slideshow",
+      "settings": {
+        "label": "FEATURED ARTIST",
+        "height": 75,
+        "autoplay_speed": 0,
+        "section_width": "full-width",
+        "color_scheme": "",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
     "section_PamNQV": {
       "type": "section",
       "blocks": {
@@ -1053,6 +1099,7 @@
     "collection_list_xwmBFc",
     "collection_list_8QVLGd",
     "product_list_fa6P9H",
+    "featured_artist_slideshow_KDXQMh",
     "section_PamNQV"
   ]
 }
