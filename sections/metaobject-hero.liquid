@@ -31,6 +31,14 @@
   {% content_for 'blocks' %}
 {% endcapture %}
 
+{%- if hero_image == blank -%}
+  {%- if request.design_mode -%}
+    <div style="padding: 2rem; background: #f4f4f4; border: 2px dashed #ccc; text-align: center; color: #888; font-size: 0.85rem;">
+      Artist Hero: no image found. Assign a <strong>custom.hero</strong> image to this product's collection.
+    </div>
+  {%- endif -%}
+{%- else -%}
+
 <div class="section-background color-{{ section.settings.color_scheme }}"></div>
 <div
   class="section section--{{ section.settings.section_width }} color-{{ section.settings.color_scheme }}"
@@ -82,6 +90,8 @@
     </div>
   </div>
 </div>
+
+{%- endif -%}
 
 {% schema %}
 {
