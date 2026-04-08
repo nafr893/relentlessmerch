@@ -1,5 +1,25 @@
 {%- liquid
-  assign hero = section.settings.hero_entry
+  assign hero = nil
+
+  # Auto-mode: find the first collection on this product that has a hero metafield
+  if section.settings.use_collection_metafield
+    if product != blank
+      for col in product.collections
+        if col.metafields.custom.hero != blank
+          assign hero = col.metafields.custom.hero
+          break
+        endif
+      endfor
+    elsif collection != blank and collection.metafields.custom.hero != blank
+      assign hero = collection.metafields.custom.hero
+    endif
+  endif
+
+  # Manual fallback (or manual-only mode)
+  if hero == blank and section.settings.hero_entry != blank
+    assign hero = section.settings.hero_entry
+  endif
+
   assign has_content = false
   if hero != blank
     assign has_content = true
@@ -9,7 +29,13 @@
 {%- unless has_content -%}
   {%- if request.design_mode -%}
     <div class="metaobject-hero metaobject-hero--placeholder">
-      <p class="metaobject-hero__placeholder-text">Select a hero entry in section settings.</p>
+      <p class="metaobject-hero__placeholder-text">
+        {%- if section.settings.use_collection_metafield -%}
+          No hero metafield set on this collection — assign one under Content → Collections → [collection] → Metafields.
+        {%- else -%}
+          Select a hero entry in section settings.
+        {%- endif -%}
+      </p>
     </div>
   {%- endif -%}
 {%- else -%}
@@ -170,9 +196,16 @@
   "class": "metaobject-hero-section",
   "settings": [
     {
+      "type": "checkbox",
+      "id": "use_collection_metafield",
+      "label": "Auto-load from collection metafield",
+      "default": false,
+      "info": "When enabled, reads the hero from the current collection's 'custom.hero' metafield. Falls back to the manual entry below if not set."
+    },
+    {
       "type": "metaobject",
       "id": "hero_entry",
-      "label": "Hero entry",
+      "label": "Hero entry (manual)",
       "metaobject_type": "hero"
     },
     {
