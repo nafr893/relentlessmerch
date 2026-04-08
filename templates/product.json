@@ -488,6 +488,19 @@
         "padding-block-end": 0
       }
     },
+    "metaobject_hero_g7qJDd": {
+      "type": "metaobject-hero",
+      "name": "Metaobject Hero",
+      "settings": {
+        "hero_entry": "",
+        "height": 80,
+        "height_mobile": 70,
+        "overlay_opacity": 30,
+        "color_scheme": "",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
     "product_recommendations_qggXJq": {
       "type": "product-recommendations",
       "blocks": {
@@ -659,6 +672,7 @@
   },
   "order": [
     "main",
+    "metaobject_hero_g7qJDd",
     "product_recommendations_qggXJq"
   ]
 }
