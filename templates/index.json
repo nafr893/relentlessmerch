@@ -25,9 +25,10 @@
         "column_AKT6kA": {
           "type": "column",
           "settings": {
-            "heading": "Collection",
-            "text": "Short description of this collection.",
-            "button_label": "Shop Now",
+            "image": "shopify://shop_images/Emma_Harner_Hero_Pic_v2.webp",
+            "heading": "EMMA HARNER",
+            "text": "Emma Harner is a Nebraska “math folk” artist known for viral guitar-driven videos and her debut “When You Mean It,” who’s toured with Orla Gartland and Leith Ross.",
+            "button_label": "View Artist",
             "button_link": ""
           }
         },
@@ -114,6 +115,7 @@
         "text_YLPk4p",
         "button_H9gpTf"
       ],
+      "disabled": true,
       "name": "t:names.hero",
       "settings": {
         "media_type_1": "image",
