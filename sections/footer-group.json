@@ -314,11 +314,32 @@
                     "case": "none"
                   },
                   "blocks": {}
+                },
+                "social_links_a9Gr7U": {
+                  "type": "social-links",
+                  "name": "t:names.social_media_links",
+                  "settings": {
+                    "facebook_url": "https://www.facebook.com/relentlessmerch",
+                    "instagram_url": "https://www.instagram.com/relentlessmerch/",
+                    "youtube_url": "",
+                    "tiktok_url": "",
+                    "twitter_url": "",
+                    "threads_url": "",
+                    "linkedin_url": "https://www.linkedin.com/company/relentlessmerchandise/posts/?feedView=all",
+                    "bluesky_url": "",
+                    "snapchat_url": "",
+                    "pinterest_url": "",
+                    "tumblr_url": "",
+                    "vimeo_url": "",
+                    "custom_url": ""
+                  },
+                  "blocks": {}
                 }
               },
               "block_order": [
                 "payment_icons_agLprY",
-                "footer_copyright_xdMib6"
+                "footer_copyright_xdMib6",
+                "social_links_a9Gr7U"
               ]
             }
           },
