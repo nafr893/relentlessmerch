@@ -844,7 +844,7 @@
       "name": "Featured Artist Slideshow",
       "settings": {
         "label": "FEATURED ARTIST",
-        "height": 80,
+        "height": 90,
         "autoplay_speed": 0,
         "section_width": "full-width",
         "color_scheme": "",
