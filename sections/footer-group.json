@@ -354,6 +354,7 @@
           "type": "_divider",
           "name": "t:names.divider",
           "settings": {
+            "visibility": "both",
             "thickness": 1,
             "corner_radius": "square",
             "width_percent": 100,
@@ -446,6 +447,7 @@
                   "type": "_divider",
                   "name": "t:names.divider",
                   "settings": {
+                    "visibility": "mobile",
                     "thickness": 1,
                     "corner_radius": "square",
                     "width_percent": 100,
@@ -1041,6 +1043,7 @@
           "type": "_divider",
           "name": "t:names.divider",
           "settings": {
+            "visibility": "both",
             "thickness": 1,
             "corner_radius": "square",
             "width_percent": 100,
