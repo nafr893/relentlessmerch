@@ -12,6 +12,15 @@ class FeaturedArtistSlideshow extends HTMLElement {
   connectedCallback() {
     this.#goTo(0);
 
+    // Dot clicks
+    this.querySelectorAll('.fas__dot').forEach((dot) => {
+      dot.addEventListener('click', () => {
+        const idx = parseInt(/** @type {HTMLElement} */ (dot).dataset.dot ?? '0', 10);
+        this.#goTo(idx);
+        this.#stopAutoplay();
+      });
+    });
+
     const prev = this.querySelector('[data-action="previous"]');
     const next = this.querySelector('[data-action="next"]');
 
@@ -56,6 +65,12 @@ class FeaturedArtistSlideshow extends HTMLElement {
     });
 
     bgs.forEach((bg, i) => bg.classList.toggle('is-active', i === index));
+
+    const dots = this.querySelectorAll('.fas__dot');
+    dots.forEach((dot, i) => {
+      dot.classList.toggle('is-active', i === index);
+      dot.setAttribute('aria-selected', i === index ? 'true' : 'false');
+    });
 
     this.#current = index;
   }

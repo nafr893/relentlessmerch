@@ -75,7 +75,7 @@
     {%- endfor -%}
   </div>
 
-  {%- comment -%} Arrow controls — bottom right {%- endcomment -%}
+  {%- comment -%} Arrow controls — bottom right (desktop only) {%- endcomment -%}
   {%- if section.blocks.size > 1 -%}
     <div class="fas__controls">
       <button
@@ -92,6 +92,19 @@
       >
         <span class="svg-wrapper">{{- 'icon-arrow.svg' | inline_asset_content -}}</span>
       </button>
+    </div>
+
+    {%- comment -%} Dot pagination — mobile only {%- endcomment -%}
+    <div class="fas__dots" role="tablist" aria-label="Slideshow navigation">
+      {%- for block in section.blocks -%}
+        <button
+          class="fas__dot{% if forloop.first %} is-active{% endif %}"
+          data-dot="{{ forloop.index0 }}"
+          role="tab"
+          aria-label="Slide {{ forloop.index }}"
+          aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+        ></button>
+      {%- endfor -%}
     </div>
   {%- endif -%}
 </featured-artist-slideshow>
@@ -257,6 +270,47 @@
     width: 18px;
     height: 18px;
     display: block;
+  }
+
+  /* --- Mobile: hide arrows, show dots ----------------------- */
+  @media screen and (max-width: 749px) {
+    .fas__controls {
+      display: none;
+    }
+  }
+
+  /* --- Desktop: hide dots ----------------------------------- */
+  @media screen and (min-width: 750px) {
+    .fas__dots {
+      display: none;
+    }
+  }
+
+  /* --- Square dot pagination -------------------------------- */
+  .fas__dots {
+    position: absolute;
+    bottom: 1.25rem;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    gap: 0.4rem;
+    z-index: 10;
+  }
+
+  .fas__dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 0;
+    background-color: rgb(255 255 255 / 0.4);
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+
+  .fas__dot.is-active {
+    background-color: #fff;
   }
 {% endstylesheet %}
 
