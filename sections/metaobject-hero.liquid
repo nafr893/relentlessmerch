@@ -57,6 +57,7 @@
   </div>
 
   {%- if section.settings.heading != blank or section.settings.subtext != blank or section.settings.link_label != blank -%}
+    {%- assign drawer_id = 'hero-drawer-' | append: section.id -%}
     <div class="metaobject-hero__content">
       {%- if section.settings.heading != blank -%}
         <h2 class="metaobject-hero__heading">{{ section.settings.heading | escape }}</h2>
@@ -66,12 +67,41 @@
         <p class="metaobject-hero__subtext">{{ section.settings.subtext | escape }}</p>
       {%- endif -%}
 
-      {%- if section.settings.link_label != blank and section.settings.link_url != blank -%}
-        <a href="{{ section.settings.link_url }}" class="metaobject-hero__link button">
+      {%- if section.settings.link_label != blank -%}
+        <button
+          class="metaobject-hero__link"
+          aria-controls="{{ drawer_id }}"
+          aria-expanded="false"
+          type="button"
+        >
           {{ section.settings.link_label | escape }}
-        </a>
+        </button>
       {%- endif -%}
     </div>
+
+    {%- if section.settings.drawer_heading != blank or section.settings.drawer_content != blank -%}
+      <div
+        id="{{ drawer_id }}"
+        class="moh-drawer"
+        role="dialog"
+        aria-modal="true"
+        aria-label="{{ section.settings.drawer_heading | escape }}"
+        hidden
+      >
+        <div class="moh-drawer__backdrop"></div>
+        <div class="moh-drawer__panel">
+          <button class="moh-drawer__close" aria-label="Close" type="button">
+            <span class="svg-wrapper">{{- 'icon-close.svg' | inline_asset_content -}}</span>
+          </button>
+          {%- if section.settings.drawer_heading != blank -%}
+            <p class="moh-drawer__heading">{{ section.settings.drawer_heading | escape }}</p>
+          {%- endif -%}
+          {%- if section.settings.drawer_content != blank -%}
+            <div class="moh-drawer__body">{{ section.settings.drawer_content }}</div>
+          {%- endif -%}
+        </div>
+      </div>
+    {%- endif -%}
   {%- endif -%}
 </div>
 
@@ -148,11 +178,83 @@
     letter-spacing: 0.08em;
     text-transform: uppercase;
     text-decoration: none;
-    transition: background-color 0.2s ease, color 0.2s ease;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
   }
 
   .metaobject-hero__link:hover {
     background-color: rgb(255 255 255 / 0.85);
+  }
+
+  /* --- Drawer ------------------------------------------------ */
+  .moh-drawer {
+    position: fixed;
+    inset: 0;
+    z-index: var(--layer-overlay, 400);
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .moh-drawer[hidden] {
+    display: none;
+  }
+
+  .moh-drawer__backdrop {
+    position: absolute;
+    inset: 0;
+    background-color: rgb(0 0 0 / 0.5);
+    cursor: pointer;
+  }
+
+  .moh-drawer__panel {
+    position: relative;
+    z-index: 1;
+    width: min(420px, 90vw);
+    height: 100%;
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    overflow-y: auto;
+    padding: 2rem var(--page-margin, 1.5rem);
+    transform: translateX(100%);
+    transition: transform 0.35s var(--ease-out-cubic, cubic-bezier(0.22, 1, 0.36, 1));
+  }
+
+  .moh-drawer.is-open .moh-drawer__panel {
+    transform: translateX(0);
+  }
+
+  .moh-drawer__close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-left: auto;
+    margin-bottom: 1rem;
+    color: var(--color-foreground);
+  }
+
+  .moh-drawer__close svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .moh-drawer__heading {
+    margin: 0 0 1.25rem;
+    font-family: var(--font-heading-family);
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .moh-drawer__body {
+    font-size: 0.95rem;
+    line-height: 1.6;
   }
 
   .metaobject-hero--placeholder {
@@ -171,6 +273,39 @@
     text-align: center;
   }
 {% endstylesheet %}
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('[aria-controls^="hero-drawer-"]').forEach((trigger) => {
+      const drawer = document.getElementById(trigger.getAttribute('aria-controls'));
+      if (!drawer) return;
+
+      const open = () => {
+        drawer.hidden = false;
+        requestAnimationFrame(() => drawer.classList.add('is-open'));
+        trigger.setAttribute('aria-expanded', 'true');
+        drawer.querySelector('.moh-drawer__close')?.focus();
+        document.body.style.overflow = 'hidden';
+      };
+
+      const close = () => {
+        drawer.classList.remove('is-open');
+        trigger.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+        drawer.addEventListener('transitionend', () => { drawer.hidden = true; }, { once: true });
+        trigger.focus();
+      };
+
+      trigger.addEventListener('click', open);
+      drawer.querySelector('.moh-drawer__close')?.addEventListener('click', close);
+      drawer.querySelector('.moh-drawer__backdrop')?.addEventListener('click', close);
+
+      drawer.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') close();
+      });
+    });
+  });
+</script>
 
 {% schema %}
 {
@@ -200,12 +335,21 @@
     {
       "type": "text",
       "id": "link_label",
-      "label": "Button label"
+      "label": "Popup button label"
     },
     {
-      "type": "url",
-      "id": "link_url",
-      "label": "Button link"
+      "type": "header",
+      "content": "Popup drawer"
+    },
+    {
+      "type": "text",
+      "id": "drawer_heading",
+      "label": "Drawer heading"
+    },
+    {
+      "type": "richtext",
+      "id": "drawer_content",
+      "label": "Drawer content"
     },
     {
       "type": "range",
