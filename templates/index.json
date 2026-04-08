@@ -986,7 +986,7 @@
               "settings": {
                 "text": "<p>I confirm I wish to receive emails from Relentless Merch, <br/>and may opt out of these emails at any time.</p>",
                 "width": "fit-content",
-                "max_width": "normal",
+                "max_width": "none",
                 "alignment": "left",
                 "type_preset": "custom",
                 "font": "var(--font-body--family)",
