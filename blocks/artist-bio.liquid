@@ -1,0 +1,91 @@
+{%- liquid
+  assign bio = nil
+
+  # On a product page: find the first collection with an artist_bio metafield
+  if product != blank
+    for col in product.collections
+      if col.metafields.custom.artist_bio != blank
+        assign bio = col.metafields.custom.artist_bio
+        break
+      endif
+    endfor
+  endif
+
+  # On a collection page: read directly
+  if bio == blank and collection != blank and collection.metafields.custom.artist_bio != blank
+    assign bio = collection.metafields.custom.artist_bio
+  endif
+-%}
+
+{%- if bio != blank -%}
+  <div class="artist-bio spacing-style" style="{% render 'spacing-style', settings: block.settings %}" {{ block.shopify_attributes }}>
+    {{- bio -}}
+  </div>
+{%- elsif request.design_mode -%}
+  <div class="artist-bio artist-bio--placeholder" {{ block.shopify_attributes }}>
+    <p>No artist bio found. Add a <strong>custom.artist_bio</strong> metafield to this product's collection.</p>
+  </div>
+{%- endif -%}
+
+{% stylesheet %}
+  .artist-bio {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--color-foreground);
+  }
+
+  .artist-bio p {
+    margin: 0 0 1em;
+  }
+
+  .artist-bio p:last-child {
+    margin-bottom: 0;
+  }
+
+  .artist-bio--placeholder {
+    padding: 1rem;
+    background: #f4f4f4;
+    border: 2px dashed #ccc;
+    font-size: 0.85rem;
+    color: #888;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Artist Bio",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "Top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "Artist Bio",
+      "category": "Text"
+    }
+  ]
+}
+{% endschema %}
