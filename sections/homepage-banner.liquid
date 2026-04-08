@@ -31,7 +31,7 @@
   <div class="homepage-banner__columns">
     {%- for block in section.blocks -%}
       <div
-        class="homepage-banner__column"
+        class="homepage-banner__column{% if forloop.first %} is-default-active{% endif %}"
         data-index="{{ forloop.index0 }}"
         {{ block.shopify_attributes }}
       >
@@ -194,6 +194,11 @@
     background-color: rgb(0 0 0 / 0.22);
   }
 
+  /* On load, dim all columns except the default-active one */
+  .homepage-banner__columns:not(:has(.homepage-banner__column:hover)) .homepage-banner__column:not(.is-default-active) {
+    background-color: rgb(0 0 0 / 0.22);
+  }
+
   /* --- Column content --------------------------------------- */
   .homepage-banner__column-content {
     width: 100%;
@@ -229,14 +234,26 @@
   }
 
   .homepage-banner__column:hover .homepage-banner__reveal,
-  .homepage-banner__column:focus-visible .homepage-banner__reveal {
+  .homepage-banner__column:focus-visible .homepage-banner__reveal,
+  .homepage-banner__column.is-default-active .homepage-banner__reveal {
     grid-template-rows: 1fr;
   }
 
   .homepage-banner__column:hover .homepage-banner__reveal-inner,
-  .homepage-banner__column:focus-visible .homepage-banner__reveal-inner {
+  .homepage-banner__column:focus-visible .homepage-banner__reveal-inner,
+  .homepage-banner__column.is-default-active .homepage-banner__reveal-inner {
     transform: translateY(0);
     opacity: 1;
+  }
+
+  /* Once any column is hovered, suppress the default-active state */
+  .homepage-banner__columns:has(.homepage-banner__column:hover) .homepage-banner__column.is-default-active:not(:hover) .homepage-banner__reveal {
+    grid-template-rows: 0fr;
+  }
+
+  .homepage-banner__columns:has(.homepage-banner__column:hover) .homepage-banner__column.is-default-active:not(:hover) .homepage-banner__reveal-inner {
+    transform: translateY(10px);
+    opacity: 0;
   }
 
   .homepage-banner__text {
@@ -357,8 +374,8 @@
   }
 
   .homepage-banner__dot {
-    width: 8px;
-    height: 8px;
+    width: 5px;
+    height: 5px;
     border-radius: 0;
     background-color: rgb(255 255 255 / 0.4);
     border: none;

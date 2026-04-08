@@ -26,7 +26,9 @@ class HomepageBanner extends HTMLElement {
   // ── Desktop keyboard accessibility ──────────────────────────────────────────
 
   #initDesktopA11y() {
-    this.querySelectorAll('.homepage-banner__column').forEach((col) => {
+    const columns = this.querySelectorAll('.homepage-banner__column');
+
+    columns.forEach((col) => {
       const btn = col.querySelector('.homepage-banner__btn');
       if (!btn) return;
 
@@ -42,6 +44,11 @@ class HomepageBanner extends HTMLElement {
           /** @type {HTMLElement} */ (btn).click();
         }
       });
+
+      // Remove the default-active state permanently once the user starts hovering
+      col.addEventListener('mouseenter', () => {
+        columns.forEach((c) => c.classList.remove('is-default-active'));
+      }, { once: false });
     });
   }
 
