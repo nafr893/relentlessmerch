@@ -346,7 +346,7 @@
                   "name": "t:names.button",
                   "settings": {
                     "label": "TRACK MY ORDER",
-                    "link": "shopify://collections/all",
+                    "link": "https://shopify.com/68600398100/account/orders?locale=en&region_country=US",
                     "open_in_new_tab": false,
                     "style_class": "button",
                     "width": "fit-content",
@@ -361,7 +361,7 @@
                   "name": "t:names.button",
                   "settings": {
                     "label": "RetURNS & Exchanges",
-                    "link": "shopify://collections/all",
+                    "link": "shopify://policies/refund-policy",
                     "open_in_new_tab": false,
                     "style_class": "button",
                     "width": "fit-content",
