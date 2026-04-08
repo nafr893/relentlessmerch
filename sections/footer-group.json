@@ -242,7 +242,7 @@
                   "type": "text",
                   "name": "t:names.text",
                   "settings": {
-                    "text": "<p>Refund Policy</p>",
+                    "text": "<p><a href=\"/policies/refund-policy\" title=\"Refund Policy\">Refund Policy</a></p>",
                     "width": "fit-content",
                     "max_width": "normal",
                     "alignment": "left",
@@ -268,7 +268,7 @@
                   "type": "text",
                   "name": "t:names.text",
                   "settings": {
-                    "text": "<p>Privacy Policy</p>",
+                    "text": "<p><a href=\"/policies/privacy-policy\" title=\"Privacy Policy\">Privacy Policy</a></p>",
                     "width": "fit-content",
                     "max_width": "normal",
                     "alignment": "left",
@@ -294,7 +294,7 @@
                   "type": "text",
                   "name": "t:names.text",
                   "settings": {
-                    "text": "<p>Terms of Service</p>",
+                    "text": "<p><a href=\"/policies/terms-of-service\" title=\"Terms of Service\">Terms of Service</a></p>",
                     "width": "fit-content",
                     "max_width": "normal",
                     "alignment": "left",
@@ -481,8 +481,8 @@
             "placeholder": "",
             "padding-block-start": 48,
             "padding-block-end": 0,
-            "padding-inline-start": 24,
-            "padding-inline-end": 24
+            "padding-inline-start": 40,
+            "padding-inline-end": 40
           },
           "blocks": {
             "group_YRdiG4": {
