@@ -1,0 +1,344 @@
+{% liquid
+  assign block_count = section.blocks.size
+%}
+
+<script src="{{ 'homepage-banner.js' | asset_url }}" type="module"></script>
+
+<homepage-banner
+  class="homepage-banner color-{{ section.settings.color_scheme }} spacing-style"
+  style="
+    --banner-height: {{ section.settings.height }}vh;
+    --overlay-opacity: {{ section.settings.overlay_opacity | divided_by: 100.0 }};
+    --column-count: {{ block_count }};
+    {% render 'spacing-style', settings: section.settings %}
+  "
+>
+  {%- comment -%} Full-width crossfading backgrounds — one per column {%- endcomment -%}
+  <div class="homepage-banner__backgrounds" aria-hidden="true">
+    {%- for block in section.blocks -%}
+      <div
+        class="homepage-banner__bg"
+        {% if block.settings.image != blank %}
+          style="background-image: url('{{ block.settings.image | image_url: width: 2400 }}');"
+        {% else %}
+          style="background-color: #111;"
+        {% endif %}
+      ></div>
+    {%- endfor -%}
+  </div>
+
+  {%- comment -%} Global dark overlay sits above backgrounds, below columns {%- endcomment -%}
+  <div class="homepage-banner__overlay" aria-hidden="true"></div>
+
+  {%- comment -%} Columns {%- endcomment -%}
+  <div class="homepage-banner__columns">
+    {%- for block in section.blocks -%}
+      <div
+        class="homepage-banner__column"
+        data-index="{{ forloop.index0 }}"
+        {{ block.shopify_attributes }}
+      >
+        <div class="homepage-banner__column-content">
+          {%- if block.settings.heading != blank -%}
+            <p class="homepage-banner__heading">{{ block.settings.heading | escape }}</p>
+          {%- endif -%}
+
+          {%- comment -%} Slide-up reveal: text + button hidden until hover {%- endcomment -%}
+          <div class="homepage-banner__reveal">
+            <div class="homepage-banner__reveal-inner">
+              {%- if block.settings.text != blank -%}
+                <p class="homepage-banner__text">{{ block.settings.text | escape }}</p>
+              {%- endif -%}
+              {%- if block.settings.button_label != blank -%}
+                <a
+                  href="{{ block.settings.button_link | default: '#' }}"
+                  class="homepage-banner__btn"
+                >
+                  {{ block.settings.button_label | escape }}
+                </a>
+              {%- endif -%}
+            </div>
+          </div>
+        </div>
+      </div>
+    {%- endfor -%}
+  </div>
+</homepage-banner>
+
+{% stylesheet %}
+  /* ============================================================
+     Homepage Banner — desktop hover reveal
+  ============================================================ */
+
+  homepage-banner {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: var(--banner-height, 80vh);
+    overflow: hidden;
+  }
+
+  /* --- Backgrounds ------------------------------------------ */
+  .homepage-banner__backgrounds {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  .homepage-banner__bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 0.55s ease;
+  }
+
+  /* Default: first column's background is always visible */
+  .homepage-banner__bg:nth-child(1) {
+    opacity: 1;
+  }
+
+  /* When hovering columns 2, 3, or 4 — hide the default (first) bg */
+  homepage-banner:has(.homepage-banner__column:nth-child(n+2):hover) .homepage-banner__bg:nth-child(1),
+  homepage-banner:has(.homepage-banner__column.is-focused:nth-child(n+2)) .homepage-banner__bg:nth-child(1) {
+    opacity: 0;
+  }
+
+  /* Show the bg matching whichever column is hovered */
+  homepage-banner:has(.homepage-banner__column:nth-child(1):hover) .homepage-banner__bg:nth-child(1),
+  homepage-banner:has(.homepage-banner__column.is-focused:nth-child(1)) .homepage-banner__bg:nth-child(1) { opacity: 1; }
+
+  homepage-banner:has(.homepage-banner__column:nth-child(2):hover) .homepage-banner__bg:nth-child(2),
+  homepage-banner:has(.homepage-banner__column.is-focused:nth-child(2)) .homepage-banner__bg:nth-child(2) { opacity: 1; }
+
+  homepage-banner:has(.homepage-banner__column:nth-child(3):hover) .homepage-banner__bg:nth-child(3),
+  homepage-banner:has(.homepage-banner__column.is-focused:nth-child(3)) .homepage-banner__bg:nth-child(3) { opacity: 1; }
+
+  homepage-banner:has(.homepage-banner__column:nth-child(4):hover) .homepage-banner__bg:nth-child(4),
+  homepage-banner:has(.homepage-banner__column.is-focused:nth-child(4)) .homepage-banner__bg:nth-child(4) { opacity: 1; }
+
+  /* --- Overlay ---------------------------------------------- */
+  .homepage-banner__overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background-color: rgb(0 0 0 / var(--overlay-opacity, 0.35));
+    pointer-events: none;
+  }
+
+  /* --- Column grid ------------------------------------------ */
+  .homepage-banner__columns {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: repeat(var(--column-count, 4), 1fr);
+    height: 100%;
+  }
+
+  .homepage-banner__column {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    height: 100%;
+    border-right: 1px solid rgb(255 255 255 / 0.18);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    outline: none;
+  }
+
+  .homepage-banner__column:last-child {
+    border-right: none;
+  }
+
+  /* Dim non-hovered columns when any column is active */
+  .homepage-banner__columns:has(.homepage-banner__column:hover) .homepage-banner__column:not(:hover),
+  .homepage-banner__columns:has(.homepage-banner__column.is-focused) .homepage-banner__column:not(.is-focused) {
+    background-color: rgb(0 0 0 / 0.22);
+  }
+
+  /* --- Column content --------------------------------------- */
+  .homepage-banner__column-content {
+    width: 100%;
+    padding: 2rem 1.5rem;
+    color: #fff;
+  }
+
+  .homepage-banner__heading {
+    margin: 0;
+    font-family: var(--font-heading-family, var(--font-body--family));
+    font-size: clamp(1rem, 1.6vw, 1.4rem);
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    line-height: 1.2;
+    color: inherit;
+  }
+
+  /* --- Slide-up reveal -------------------------------------- */
+  .homepage-banner__reveal {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.42s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .homepage-banner__reveal-inner {
+    overflow: hidden;
+    transform: translateY(10px);
+    opacity: 0;
+    transition:
+      transform 0.38s cubic-bezier(0.4, 0, 0.2, 1) 0.04s,
+      opacity 0.32s ease 0.04s;
+  }
+
+  .homepage-banner__column:hover .homepage-banner__reveal,
+  .homepage-banner__column.is-focused .homepage-banner__reveal {
+    grid-template-rows: 1fr;
+  }
+
+  .homepage-banner__column:hover .homepage-banner__reveal-inner,
+  .homepage-banner__column.is-focused .homepage-banner__reveal-inner {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  .homepage-banner__text {
+    margin: 0.75rem 0 1rem;
+    font-size: 0.875rem;
+    line-height: 1.55;
+    opacity: 0.88;
+  }
+
+  /* --- Button ----------------------------------------------- */
+  .homepage-banner__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.6rem 1.4rem;
+    background-color: transparent;
+    border: 1px solid rgb(255 255 255 / 0.75);
+    color: #fff;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+    cursor: pointer;
+  }
+
+  .homepage-banner__btn:hover {
+    background-color: #fff;
+    border-color: #fff;
+    color: #000;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Homepage Banner",
+  "tag": "section",
+  "class": "homepage-banner-section",
+  "max_blocks": 4,
+  "settings": [
+    {
+      "type": "range",
+      "id": "height",
+      "label": "Banner height",
+      "min": 40,
+      "max": 100,
+      "step": 5,
+      "unit": "vh",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Background overlay opacity",
+      "min": 0,
+      "max": 75,
+      "step": 5,
+      "unit": "%",
+      "default": 35
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "Top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "type": "column",
+      "name": "Column",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Background image"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Collection"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Description",
+          "default": "Short description of this collection."
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button label",
+          "default": "Shop Now"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Homepage Banner",
+      "category": "Image",
+      "blocks": [
+        { "type": "column" },
+        { "type": "column" },
+        { "type": "column" },
+        { "type": "column" }
+      ]
+    }
+  ]
+}
+{% endschema %}
