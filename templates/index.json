@@ -9,6 +9,62 @@
  */
 {
   "sections": {
+    "homepage_banner_qVmnLj": {
+      "type": "homepage-banner",
+      "blocks": {
+        "column_emtKkg": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/AranKai_Banner_Pic_v1.webp",
+            "heading": "ARANKAI",
+            "text": "Arankai is a dark electronic producer fusing industrial and trap into aggressive, cyberpunk-driven soundscapes.",
+            "button_label": "View Artist",
+            "button_link": ""
+          }
+        },
+        "column_AKT6kA": {
+          "type": "column",
+          "settings": {
+            "heading": "Collection",
+            "text": "Short description of this collection.",
+            "button_label": "Shop Now",
+            "button_link": ""
+          }
+        },
+        "column_CV6ryk": {
+          "type": "column",
+          "settings": {
+            "heading": "Collection",
+            "text": "Short description of this collection.",
+            "button_label": "Shop Now",
+            "button_link": ""
+          }
+        },
+        "column_8yMdiD": {
+          "type": "column",
+          "settings": {
+            "heading": "Collection",
+            "text": "Short description of this collection.",
+            "button_label": "Shop Now",
+            "button_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "column_emtKkg",
+        "column_AKT6kA",
+        "column_CV6ryk",
+        "column_8yMdiD"
+      ],
+      "name": "Homepage Banner",
+      "settings": {
+        "height": 80,
+        "overlay_opacity": 35,
+        "color_scheme": "",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
     "hero_jVaWmY": {
       "type": "hero",
       "blocks": {
@@ -714,6 +770,7 @@
     }
   },
   "order": [
+    "homepage_banner_qVmnLj",
     "hero_jVaWmY",
     "collection_list_xwmBFc",
     "collection_list_8QVLGd",
