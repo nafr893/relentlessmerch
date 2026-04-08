@@ -830,6 +830,12 @@
 
   /* End Underlays ================ */
 
+  /* Force white text on all top-level nav links in the navigation bar */
+  .header__navigation-bar-row .menu-list__link {
+    --menu-top-level-font-color: #fff;
+    --menu-top-level-font-color-rgb: 255 255 255;
+  }
+
   .header__row {
     /* The account component uses a different color scheme, but we need to override it to inherit the color of the header row */
     --color-account-icon: var(--color-foreground);
