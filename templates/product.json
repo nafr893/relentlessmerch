@@ -707,9 +707,9 @@
         "section_height": "large",
         "section_height_custom": 80,
         "color_scheme": "scheme-5",
-        "toggle_overlay": false,
-        "overlay_color": "#00000066",
-        "overlay_style": "solid",
+        "toggle_overlay": true,
+        "overlay_color": "#000000b0",
+        "overlay_style": "gradient",
         "gradient_direction": "to top",
         "padding-block-start": 0,
         "padding-block-end": 0
