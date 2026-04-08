@@ -826,18 +826,12 @@
             "link": ""
           }
         },
-        "slide_xLQ7e7": {
+        "slide_CFzC7f": {
           "type": "slide",
           "settings": {
-            "artist_name": "Artist Name",
-            "link_label": "View Bio",
-            "link": ""
-          }
-        },
-        "slide_fEaArp": {
-          "type": "slide",
-          "settings": {
-            "artist_name": "Artist Name",
+            "background_image": "shopify://shop_images/Nolan_Taylor_Banner_Pic_v1.webp",
+            "artist_image": "shopify://shop_images/OG-NolanTaylor-2.webp",
+            "artist_name": "Nolan Taylor",
             "link_label": "View Bio",
             "link": ""
           }
@@ -845,13 +839,12 @@
       },
       "block_order": [
         "slide_GTXVwy",
-        "slide_xLQ7e7",
-        "slide_fEaArp"
+        "slide_CFzC7f"
       ],
       "name": "Featured Artist Slideshow",
       "settings": {
         "label": "FEATURED ARTIST",
-        "height": 75,
+        "height": 80,
         "autoplay_speed": 0,
         "section_width": "full-width",
         "color_scheme": "",
