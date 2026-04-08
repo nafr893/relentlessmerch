@@ -64,8 +64,8 @@
             "placeholder": "",
             "padding-block-start": 48,
             "padding-block-end": 0,
-            "padding-inline-start": 24,
-            "padding-inline-end": 24
+            "padding-inline-start": 40,
+            "padding-inline-end": 40
           },
           "blocks": {
             "group_CiV7MD": {
@@ -202,14 +202,14 @@
               "type": "group",
               "name": "t:names.group",
               "settings": {
-                "content_direction": "column",
-                "vertical_on_mobile": true,
+                "content_direction": "row",
+                "vertical_on_mobile": false,
                 "horizontal_alignment": "flex-start",
                 "vertical_alignment": "center",
                 "align_baseline": false,
-                "horizontal_alignment_flex_direction_column": "flex-start",
+                "horizontal_alignment_flex_direction_column": "center",
                 "vertical_alignment_flex_direction_column": "center",
-                "gap": 12,
+                "gap": 0,
                 "width": "fill",
                 "custom_width": 100,
                 "width_mobile": "fill",
@@ -238,9 +238,88 @@
                 "padding-inline-end": 0
               },
               "blocks": {
+                "text_VUtEMd": {
+                  "type": "text",
+                  "name": "t:names.text",
+                  "settings": {
+                    "text": "<p><a href=\"/policies/refund-policy\" title=\"Refund Policy\">Refund Policy</a></p>",
+                    "width": "fit-content",
+                    "max_width": "normal",
+                    "alignment": "left",
+                    "type_preset": "custom",
+                    "font": "var(--font-body--family)",
+                    "font_size": "0.75rem",
+                    "line_height": "normal",
+                    "letter_spacing": "normal",
+                    "case": "none",
+                    "wrap": "pretty",
+                    "color": "var(--color-foreground)",
+                    "background": false,
+                    "background_color": "#00000026",
+                    "corner_radius": 0,
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
+                },
+                "text_eVQ3RK": {
+                  "type": "text",
+                  "name": "t:names.text",
+                  "settings": {
+                    "text": "<p><a href=\"/policies/privacy-policy\" title=\"Privacy Policy\">Privacy Policy</a></p>",
+                    "width": "fit-content",
+                    "max_width": "normal",
+                    "alignment": "left",
+                    "type_preset": "custom",
+                    "font": "var(--font-body--family)",
+                    "font_size": "0.75rem",
+                    "line_height": "normal",
+                    "letter_spacing": "normal",
+                    "case": "none",
+                    "wrap": "pretty",
+                    "color": "var(--color-foreground)",
+                    "background": false,
+                    "background_color": "#00000026",
+                    "corner_radius": 0,
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
+                },
+                "text_Mq9Py6": {
+                  "type": "text",
+                  "name": "t:names.text",
+                  "settings": {
+                    "text": "<p><a href=\"/policies/terms-of-service\" title=\"Terms of Service\">Terms of Service</a></p>",
+                    "width": "fit-content",
+                    "max_width": "normal",
+                    "alignment": "left",
+                    "type_preset": "custom",
+                    "font": "var(--font-body--family)",
+                    "font_size": "0.75rem",
+                    "line_height": "normal",
+                    "letter_spacing": "normal",
+                    "case": "none",
+                    "wrap": "pretty",
+                    "color": "var(--color-foreground)",
+                    "background": false,
+                    "background_color": "#00000026",
+                    "corner_radius": 0,
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
+                },
                 "footer_policy_list_rngdYV": {
                   "type": "footer-policy-list",
                   "name": "t:names.policy_list",
+                  "disabled": true,
                   "settings": {
                     "font_size": "0.75rem",
                     "case": "none"
@@ -249,6 +328,9 @@
                 }
               },
               "block_order": [
+                "text_VUtEMd",
+                "text_eVQ3RK",
+                "text_Mq9Py6",
                 "footer_policy_list_rngdYV"
               ]
             },
@@ -354,6 +436,7 @@
           "type": "_divider",
           "name": "t:names.divider",
           "settings": {
+            "visibility": "both",
             "thickness": 1,
             "corner_radius": "square",
             "width_percent": 100,
@@ -398,8 +481,8 @@
             "placeholder": "",
             "padding-block-start": 48,
             "padding-block-end": 0,
-            "padding-inline-start": 24,
-            "padding-inline-end": 24
+            "padding-inline-start": 40,
+            "padding-inline-end": 40
           },
           "blocks": {
             "group_YRdiG4": {
@@ -446,6 +529,7 @@
                   "type": "_divider",
                   "name": "t:names.divider",
                   "settings": {
+                    "visibility": "mobile",
                     "thickness": 1,
                     "corner_radius": "square",
                     "width_percent": 100,
@@ -703,7 +787,7 @@
         "horizontal_alignment_flex_direction_column": "flex-start",
         "vertical_alignment_flex_direction_column": "center",
         "gap": 12,
-        "section_width": "page-width",
+        "section_width": "full-width",
         "section_height": "small",
         "section_height_custom": 50,
         "color_scheme": "scheme-5",
@@ -719,7 +803,7 @@
         "overlay_style": "solid",
         "gradient_direction": "to top",
         "padding-block-start": 0,
-        "padding-block-end": 0
+        "padding-block-end": 60
       }
     },
     "section_hT4E6i": {
@@ -1041,6 +1125,7 @@
           "type": "_divider",
           "name": "t:names.divider",
           "settings": {
+            "visibility": "both",
             "thickness": 1,
             "corner_radius": "square",
             "width_percent": 100,
