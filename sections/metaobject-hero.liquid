@@ -20,11 +20,16 @@
   if section.settings.override_image != blank
     assign hero_image = section.settings.override_image
   endif
+
+  # Fall back to the section's own background_image if set in editor
+  if hero_image == blank and section.settings.background_image != blank
+    assign hero_image = section.settings.background_image
+  endif
 -%}
 
-{%- if hero_image == blank and request.design_mode == false -%}
-  {%- comment -%} Nothing to render — no image found and not in editor {%- endcomment -%}
-{%- else -%}
+{% capture children %}
+  {% content_for 'blocks' %}
+{% endcapture %}
 
 <div class="section-background color-{{ section.settings.color_scheme }}"></div>
 <div
@@ -49,14 +54,13 @@
         background_image: hero_image,
         background_image_position: 'cover'
       %}
-    {%- elsif request.design_mode -%}
-      <div class="moh-placeholder-bg">
-        <p>No hero image found. Assign a hero image to this product's collection metafield (custom.hero), or set a manual override in section settings.</p>
-      </div>
     {%- endif -%}
   </div>
 
-  <div class="border-style custom-section-content" style="{% render 'border-override', settings: section.settings %}">
+  <div
+    class="border-style custom-section-content"
+    style="{% render 'border-override', settings: section.settings %}"
+  >
     {%- if section.settings.toggle_overlay -%}
       {% render 'overlay', settings: section.settings, layer: '0' %}
     {%- endif -%}
@@ -74,28 +78,10 @@
         {% render 'spacing-style', settings: section.settings %}
       "
     >
-      {% content_for 'blocks' %}
+      {{ children }}
     </div>
   </div>
 </div>
-
-{%- endif -%}
-
-{% stylesheet %}
-  .moh-placeholder-bg {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #f4f4f4;
-    border: 2px dashed #ccc;
-    padding: 1rem;
-    text-align: center;
-    color: #888;
-    font-size: 0.9rem;
-  }
-{% endstylesheet %}
 
 {% schema %}
 {
@@ -103,8 +89,7 @@
   "class": "section-wrapper",
   "blocks": [
     { "type": "@theme" },
-    { "type": "@app" },
-    { "type": "_divider", "name": "Divider" }
+    { "type": "@app" }
   ],
   "settings": [
     {
@@ -161,6 +146,13 @@
       ],
       "default": "center",
       "visible_if": "{{ section.settings.content_direction == 'row' }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "align_baseline",
+      "label": "Align baseline",
+      "default": false,
+      "visible_if": "{{ section.settings.vertical_alignment == 'flex-end' }}"
     },
     {
       "type": "select",
