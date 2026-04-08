@@ -493,7 +493,10 @@
       "type": "metaobject-hero",
       "name": "Metaobject Hero",
       "settings": {
-        "hero_entry": "",
+        "heading": "{{ product.vendor }}",
+        "subtext": "",
+        "link_label": "View Bio",
+        "link_url": "",
         "height": 80,
         "height_mobile": 70,
         "overlay_opacity": 30,
