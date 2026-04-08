@@ -369,9 +369,9 @@
                 "open_in_new_tab": false,
                 "placeholder": "",
                 "padding-block-start": 20,
-                "padding-block-end": 0,
+                "padding-block-end": 20,
                 "padding-inline-start": 0,
-                "padding-inline-end": 20
+                "padding-inline-end": 0
               },
               "blocks": {
                 "payment_icons_agLprY": {
