@@ -574,7 +574,7 @@
                 "text_dgiiw9": {
                   "type": "text",
                   "settings": {
-                    "text": "<h2>{{ closest.product.vendor }}</h2>",
+                    "text": "<h5>{{ closest.product.vendor }}</h5>",
                     "width": "fit-content",
                     "max_width": "normal",
                     "alignment": "left",
