@@ -22,101 +22,72 @@
   endif
 -%}
 
-{%- if hero_image == blank -%}
-  {%- if request.design_mode -%}
-    <div class="moh-placeholder">
-      <p>No hero image found. Assign a hero image to this product's collection metafield (custom.hero), or set a manual override in section settings.</p>
-    </div>
-  {%- endif -%}
+{%- if hero_image == blank and request.design_mode == false -%}
+  {%- comment -%} Nothing to render — no image found and not in editor {%- endcomment -%}
 {%- else -%}
 
 <div class="section-background color-{{ section.settings.color_scheme }}"></div>
-
 <div
-  class="moh color-{{ section.settings.color_scheme }} spacing-style"
+  class="section section--{{ section.settings.section_width }} color-{{ section.settings.color_scheme }}"
   style="
-    --moh-height: {{ section.settings.height }}vh;
-    --moh-height-mobile: {{ section.settings.height_mobile }}vh;
-    --moh-overlay: {{ section.settings.overlay_opacity | divided_by: 100.0 }};
-    {% render 'spacing-style', settings: section.settings %}
+    {% if section.settings.section_height == 'custom' %}
+      --section-min-height: {{ section.settings.section_height_custom }}svh;
+    {% elsif section.settings.section_height == 'full-screen' %}
+      --section-min-height: 100svh;
+    {% elsif section.settings.section_height != '' %}
+      --section-min-height: var(--section-height-{{ section.settings.section_height }});
+    {% endif %}
+    {% if section.settings.section_height != '' %}
+      --section-preview-height: 600px;
+    {% endif %}
   "
 >
-  <div class="moh__media">
-    {{
-      hero_image
-      | image_url: width: 2400
-      | image_tag:
-        class: 'moh__img',
-        loading: 'eager',
-        fetchpriority: 'high',
-        widths: '750, 1100, 1500, 2000, 2400',
-        sizes: '100vw',
-        alt: ''
-    }}
-    <div class="moh__overlay"></div>
+  <div class="custom-section-background">
+    {%- if hero_image != blank -%}
+      {% render 'background-media',
+        background_media: 'image',
+        background_image: hero_image,
+        background_image_position: 'cover'
+      %}
+    {%- elsif request.design_mode -%}
+      <div class="moh-placeholder-bg">
+        <p>No hero image found. Assign a hero image to this product's collection metafield (custom.hero), or set a manual override in section settings.</p>
+      </div>
+    {%- endif -%}
   </div>
 
-  <div class="moh__content">
-    {% content_for 'blocks' %}
+  <div class="border-style custom-section-content" style="{% render 'border-override', settings: section.settings %}">
+    {%- if section.settings.toggle_overlay -%}
+      {% render 'overlay', settings: section.settings, layer: '0' %}
+    {%- endif -%}
+
+    <div
+      class="
+        spacing-style
+        layout-panel-flex
+        layout-panel-flex--{{ section.settings.content_direction }}
+        section-content-wrapper
+        {% if section.settings.vertical_on_mobile %} mobile-column{% endif %}
+      "
+      style="
+        {% render 'layout-panel-style', settings: section.settings %}
+        {% render 'spacing-style', settings: section.settings %}
+      "
+    >
+      {% content_for 'blocks' %}
+    </div>
   </div>
 </div>
 
 {%- endif -%}
 
 {% stylesheet %}
-  .moh {
-    position: relative;
-    width: 100%;
-    height: var(--moh-height-mobile, 70vh);
-    overflow: hidden;
-    display: flex;
-    align-items: flex-end;
-  }
-
-  @media screen and (min-width: 750px) {
-    .moh {
-      height: var(--moh-height, 80vh);
-    }
-  }
-
-  .moh__media {
+  .moh-placeholder-bg {
     position: absolute;
     inset: 0;
-  }
-
-  .moh__img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    display: block;
-  }
-
-  .moh__overlay {
-    position: absolute;
-    inset: 0;
-    background-color: #000;
-    opacity: var(--moh-overlay, 0.3);
-  }
-
-  .moh__content {
-    position: relative;
-    z-index: 2;
-    width: 100%;
-    padding: 2rem var(--page-margin, 1rem);
-    padding-bottom: 3rem;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.75rem;
-    color: #fff;
-  }
-
-  .moh-placeholder {
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 200px;
     background-color: #f4f4f4;
     border: 2px dashed #ccc;
     padding: 1rem;
@@ -129,20 +100,16 @@
 {% schema %}
 {
   "name": "Artist Hero",
-  "tag": "section",
-  "class": "moh-section",
+  "class": "section-wrapper",
   "blocks": [
-    { "type": "text", "name": "Text" },
-    { "type": "button", "name": "Button" },
-    { "type": "popup-link", "name": "Popup link" },
-    { "type": "spacer", "name": "Spacer" },
-    { "type": "_heading", "name": "Heading" },
-    { "type": "_inline-text", "name": "Inline text" }
+    { "type": "@theme" },
+    { "type": "@app" },
+    { "type": "_divider", "name": "Divider" }
   ],
   "settings": [
     {
       "type": "paragraph",
-      "content": "Image is pulled automatically from the product's collection metafield (custom.hero). Use the override below only if you need a specific image on this page."
+      "content": "Background image is pulled automatically from the product's collection metafield (custom.hero). Use the override below only if you need a specific image on this page."
     },
     {
       "type": "image_picker",
@@ -150,40 +117,169 @@
       "label": "Image override (optional)"
     },
     {
-      "type": "range",
-      "id": "height",
-      "label": "Height (desktop)",
-      "min": 30,
-      "max": 100,
-      "step": 5,
-      "unit": "vh",
-      "default": 80
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "content_direction",
+      "label": "Direction",
+      "options": [
+        { "value": "column", "label": "Vertical" },
+        { "value": "row", "label": "Horizontal" }
+      ],
+      "default": "column"
+    },
+    {
+      "type": "checkbox",
+      "id": "vertical_on_mobile",
+      "label": "Vertical on mobile",
+      "default": true,
+      "visible_if": "{{ section.settings.content_direction == 'row' }}"
+    },
+    {
+      "type": "select",
+      "id": "horizontal_alignment",
+      "label": "Alignment",
+      "options": [
+        { "value": "flex-start", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "flex-end", "label": "Right" },
+        { "value": "space-between", "label": "Space between" }
+      ],
+      "default": "flex-start",
+      "visible_if": "{{ section.settings.content_direction == 'row' }}"
+    },
+    {
+      "type": "select",
+      "id": "vertical_alignment",
+      "label": "Position",
+      "options": [
+        { "value": "flex-start", "label": "Top" },
+        { "value": "center", "label": "Center" },
+        { "value": "flex-end", "label": "Bottom" }
+      ],
+      "default": "center",
+      "visible_if": "{{ section.settings.content_direction == 'row' }}"
+    },
+    {
+      "type": "select",
+      "id": "horizontal_alignment_flex_direction_column",
+      "label": "Alignment",
+      "options": [
+        { "value": "flex-start", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "flex-end", "label": "Right" }
+      ],
+      "default": "flex-start",
+      "visible_if": "{{ section.settings.content_direction != 'row' }}"
+    },
+    {
+      "type": "select",
+      "id": "vertical_alignment_flex_direction_column",
+      "label": "Position",
+      "options": [
+        { "value": "flex-start", "label": "Top" },
+        { "value": "center", "label": "Center" },
+        { "value": "flex-end", "label": "Bottom" },
+        { "value": "space-between", "label": "Space between" }
+      ],
+      "default": "flex-end",
+      "visible_if": "{{ section.settings.content_direction == 'column' }}"
     },
     {
       "type": "range",
-      "id": "height_mobile",
-      "label": "Height (mobile)",
-      "min": 30,
-      "max": 100,
-      "step": 5,
-      "unit": "vh",
-      "default": 70
-    },
-    {
-      "type": "range",
-      "id": "overlay_opacity",
-      "label": "Image overlay opacity",
+      "id": "gap",
+      "label": "Gap",
       "min": 0,
-      "max": 80,
-      "step": 5,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "header",
+      "content": "Size"
+    },
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "Width",
+      "options": [
+        { "value": "page-width", "label": "Page" },
+        { "value": "full-width", "label": "Full" }
+      ],
+      "default": "full-width"
+    },
+    {
+      "type": "select",
+      "id": "section_height",
+      "label": "Height",
+      "options": [
+        { "value": "", "label": "Auto" },
+        { "value": "small", "label": "Small" },
+        { "value": "medium", "label": "Medium" },
+        { "value": "large", "label": "Large" },
+        { "value": "full-screen", "label": "Full screen" },
+        { "value": "custom", "label": "Custom" }
+      ],
+      "default": "large"
+    },
+    {
+      "type": "range",
+      "id": "section_height_custom",
+      "label": "Custom height",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 80,
       "unit": "%",
-      "default": 30
+      "visible_if": "{{ section.settings.section_height == 'custom' }}"
+    },
+    {
+      "type": "header",
+      "content": "Appearance"
     },
     {
       "type": "color_scheme",
       "id": "color_scheme",
       "label": "Color scheme",
       "default": "scheme-1"
+    },
+    {
+      "type": "checkbox",
+      "id": "toggle_overlay",
+      "label": "Background overlay"
+    },
+    {
+      "type": "color",
+      "id": "overlay_color",
+      "label": "Overlay color",
+      "alpha": true,
+      "default": "#00000066",
+      "visible_if": "{{ section.settings.toggle_overlay }}"
+    },
+    {
+      "type": "select",
+      "id": "overlay_style",
+      "label": "Overlay style",
+      "options": [
+        { "value": "solid", "label": "Solid" },
+        { "value": "gradient", "label": "Gradient" }
+      ],
+      "default": "solid",
+      "visible_if": "{{ section.settings.toggle_overlay }}"
+    },
+    {
+      "type": "select",
+      "id": "gradient_direction",
+      "label": "Gradient direction",
+      "options": [
+        { "value": "to top", "label": "Up" },
+        { "value": "to bottom", "label": "Down" }
+      ],
+      "default": "to top",
+      "visible_if": "{{ section.settings.toggle_overlay and section.settings.overlay_style == 'gradient' }}"
     },
     {
       "type": "header",
@@ -213,7 +309,13 @@
   "presets": [
     {
       "name": "Artist Hero",
-      "category": "Image"
+      "category": "Image",
+      "settings": {
+        "section_height": "large",
+        "section_width": "full-width",
+        "toggle_overlay": true,
+        "vertical_alignment_flex_direction_column": "flex-end"
+      }
     }
   ]
 }
