@@ -223,7 +223,7 @@
                   "type": "text",
                   "name": "t:names.text",
                   "settings": {
-                    "text": "",
+                    "text": "<p>{{ product.metafields.custom.product_overview.value }}</p>",
                     "width": "fit-content",
                     "max_width": "normal",
                     "alignment": "left",
