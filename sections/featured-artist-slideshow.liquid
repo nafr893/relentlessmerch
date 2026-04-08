@@ -7,6 +7,7 @@
   data-autoplay="{{ section.settings.autoplay_speed }}"
   style="
     --fas-height: {{ section.settings.height }}vh;
+    --fas-height-mobile: {{ section.settings.height_mobile }}vh;
     {% render 'spacing-style', settings: section.settings %}
   "
 >
@@ -118,8 +119,14 @@
     display: block;
     position: relative;
     width: 100%;
-    height: var(--fas-height, 75vh);
+    height: var(--fas-height-mobile, 70vh);
     overflow: hidden;
+  }
+
+  @media screen and (min-width: 750px) {
+    featured-artist-slideshow {
+      height: var(--fas-height, 75vh);
+    }
   }
 
   /* --- Backgrounds ------------------------------------------ */
@@ -330,12 +337,22 @@
     {
       "type": "range",
       "id": "height",
-      "label": "Section height",
+      "label": "Height (desktop)",
       "min": 30,
       "max": 100,
       "step": 5,
       "unit": "vh",
       "default": 75
+    },
+    {
+      "type": "range",
+      "id": "height_mobile",
+      "label": "Height (mobile)",
+      "min": 30,
+      "max": 100,
+      "step": 5,
+      "unit": "vh",
+      "default": 70
     },
     {
       "type": "range",

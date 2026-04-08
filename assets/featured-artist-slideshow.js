@@ -1,6 +1,6 @@
 /**
  * FeaturedArtistSlideshow custom element.
- * Handles previous/next navigation and optional auto-advance.
+ * Handles previous/next navigation, touch swipe, and optional auto-advance.
  */
 class FeaturedArtistSlideshow extends HTMLElement {
   /** @type {number} */
@@ -8,6 +8,12 @@ class FeaturedArtistSlideshow extends HTMLElement {
 
   /** @type {ReturnType<typeof setInterval> | null} */
   #timer = null;
+
+  /** @type {number} */
+  #touchStartX = 0;
+
+  /** @type {number} */
+  #touchStartY = 0;
 
   connectedCallback() {
     this.#goTo(0);
@@ -31,6 +37,8 @@ class FeaturedArtistSlideshow extends HTMLElement {
     if (autoplay > 0) {
       this.#timer = setInterval(() => this.#step(1), autoplay * 1000);
     }
+
+    this.#bindSwipe();
 
     // Pause autoplay on hover
     this.addEventListener('mouseenter', () => this.#stopAutoplay());
@@ -80,6 +88,33 @@ class FeaturedArtistSlideshow extends HTMLElement {
       clearInterval(this.#timer);
       this.#timer = null;
     }
+  }
+
+  #bindSwipe() {
+    this.addEventListener('touchstart', (e) => {
+      const touch = /** @type {TouchEvent} */ (e).touches[0];
+      if (touch) {
+        this.#touchStartX = touch.clientX;
+        this.#touchStartY = touch.clientY;
+      }
+    }, { passive: true });
+
+    this.addEventListener('touchend', (e) => {
+      const touch = /** @type {TouchEvent} */ (e).changedTouches[0];
+      if (!touch) return;
+      const dx = touch.clientX - this.#touchStartX;
+      const dy = touch.clientY - this.#touchStartY;
+      if (Math.abs(dx) < 40 || Math.abs(dy) > Math.abs(dx)) return;
+
+      const slides = this.querySelectorAll('.fas__slide');
+      const total = slides.length;
+      if (dx < 0) {
+        this.#goTo((this.#current + 1) % total);
+      } else {
+        this.#goTo((this.#current - 1 + total) % total);
+      }
+      this.#stopAutoplay();
+    }, { passive: true });
   }
 }
 
