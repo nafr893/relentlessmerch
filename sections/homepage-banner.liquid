@@ -97,22 +97,22 @@
 
   /* When hovering columns 2, 3, or 4 — hide the default (first) bg */
   homepage-banner:has(.homepage-banner__column:nth-child(n+2):hover) .homepage-banner__bg:nth-child(1),
-  homepage-banner:has(.homepage-banner__column.is-focused:nth-child(n+2)) .homepage-banner__bg:nth-child(1) {
+  homepage-banner:has(.homepage-banner__column:nth-child(n+2):focus-visible) .homepage-banner__bg:nth-child(1) {
     opacity: 0;
   }
 
   /* Show the bg matching whichever column is hovered */
   homepage-banner:has(.homepage-banner__column:nth-child(1):hover) .homepage-banner__bg:nth-child(1),
-  homepage-banner:has(.homepage-banner__column.is-focused:nth-child(1)) .homepage-banner__bg:nth-child(1) { opacity: 1; }
+  homepage-banner:has(.homepage-banner__column:nth-child(1):focus-visible) .homepage-banner__bg:nth-child(1) { opacity: 1; }
 
   homepage-banner:has(.homepage-banner__column:nth-child(2):hover) .homepage-banner__bg:nth-child(2),
-  homepage-banner:has(.homepage-banner__column.is-focused:nth-child(2)) .homepage-banner__bg:nth-child(2) { opacity: 1; }
+  homepage-banner:has(.homepage-banner__column:nth-child(2):focus-visible) .homepage-banner__bg:nth-child(2) { opacity: 1; }
 
   homepage-banner:has(.homepage-banner__column:nth-child(3):hover) .homepage-banner__bg:nth-child(3),
-  homepage-banner:has(.homepage-banner__column.is-focused:nth-child(3)) .homepage-banner__bg:nth-child(3) { opacity: 1; }
+  homepage-banner:has(.homepage-banner__column:nth-child(3):focus-visible) .homepage-banner__bg:nth-child(3) { opacity: 1; }
 
   homepage-banner:has(.homepage-banner__column:nth-child(4):hover) .homepage-banner__bg:nth-child(4),
-  homepage-banner:has(.homepage-banner__column.is-focused:nth-child(4)) .homepage-banner__bg:nth-child(4) { opacity: 1; }
+  homepage-banner:has(.homepage-banner__column:nth-child(4):focus-visible) .homepage-banner__bg:nth-child(4) { opacity: 1; }
 
   /* --- Column grid ------------------------------------------ */
   .homepage-banner__columns {
@@ -140,7 +140,7 @@
 
   /* Dim non-hovered columns when any column is active */
   .homepage-banner__columns:has(.homepage-banner__column:hover) .homepage-banner__column:not(:hover),
-  .homepage-banner__columns:has(.homepage-banner__column.is-focused) .homepage-banner__column:not(.is-focused) {
+  .homepage-banner__columns:has(.homepage-banner__column:focus-visible) .homepage-banner__column:not(:focus-visible) {
     background-color: rgb(0 0 0 / 0.22);
   }
 
@@ -179,12 +179,12 @@
   }
 
   .homepage-banner__column:hover .homepage-banner__reveal,
-  .homepage-banner__column.is-focused .homepage-banner__reveal {
+  .homepage-banner__column:focus-visible .homepage-banner__reveal {
     grid-template-rows: 1fr;
   }
 
   .homepage-banner__column:hover .homepage-banner__reveal-inner,
-  .homepage-banner__column.is-focused .homepage-banner__reveal-inner {
+  .homepage-banner__column:focus-visible .homepage-banner__reveal-inner {
     transform: translateY(0);
     opacity: 1;
   }

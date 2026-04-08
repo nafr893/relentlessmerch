@@ -1,8 +1,9 @@
 /**
  * HomepageBanner custom element.
  *
- * Background crossfade and column reveal are handled entirely by CSS :has().
- * This file handles keyboard accessibility only.
+ * Background crossfade and column reveal are handled entirely by CSS :hover and :focus-visible.
+ * :focus-visible only activates on keyboard navigation — never on mouse clicks — which
+ * prevents columns from getting "stuck" in the active state after a click.
  */
 class HomepageBanner extends HTMLElement {
   connectedCallback() {
@@ -15,12 +16,8 @@ class HomepageBanner extends HTMLElement {
       col.setAttribute('aria-label', col.querySelector('.homepage-banner__heading')?.textContent?.trim() ?? '');
 
       col.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') btn.click();
+        if (/** @type {KeyboardEvent} */ (e).key === 'Enter') /** @type {HTMLElement} */ (btn).click();
       });
-
-      // Mirror focus so CSS :hover rules also apply on keyboard focus
-      col.addEventListener('focus', () => col.classList.add('is-focused'));
-      col.addEventListener('blur', () => col.classList.remove('is-focused'));
     });
   }
 }
