@@ -64,8 +64,8 @@
             "placeholder": "",
             "padding-block-start": 48,
             "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
+            "padding-inline-start": 24,
+            "padding-inline-end": 24
           },
           "blocks": {
             "group_CiV7MD": {
@@ -378,7 +378,7 @@
             "padding-block-start": 48,
             "padding-block-end": 0,
             "padding-inline-start": 24,
-            "padding-inline-end": 0
+            "padding-inline-end": 24
           },
           "blocks": {
             "group_YRdiG4": {
