@@ -35,18 +35,20 @@
         "column_CV6ryk": {
           "type": "column",
           "settings": {
-            "heading": "Collection",
-            "text": "Short description of this collection.",
-            "button_label": "Shop Now",
+            "image": "shopify://shop_images/End_it_Banner_Pic_v1.webp",
+            "heading": "END IT",
+            "text": "End It is a Baltimore hardcore band known for their explosive EP Unpleasant Living, blending ‘90s hardcore with thrashy energy and intense live shows.",
+            "button_label": "View Artist",
             "button_link": ""
           }
         },
         "column_8yMdiD": {
           "type": "column",
           "settings": {
-            "heading": "Collection",
-            "text": "Short description of this collection.",
-            "button_label": "Shop Now",
+            "image": "shopify://shop_images/Have_Mercy_Band_Pic_v1.webp",
+            "heading": "HAVE MERCY",
+            "text": "Have Mercy is a Baltimore indie rock band blending emo and post-hardcore influences, known for albums like The Earth Pushed Back and Make the Best of It and their strong DIY-driven rise.",
+            "button_label": "View Artist",
             "button_link": ""
           }
         }
