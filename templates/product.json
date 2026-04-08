@@ -339,6 +339,7 @@
             "text_aEtTtq": {
               "type": "text",
               "name": "Product description",
+              "disabled": true,
               "settings": {
                 "text": "{{ closest.product.description }}",
                 "width": "100%",
@@ -483,6 +484,19 @@
         "limit_details_width": false,
         "gap": 48,
         "enable_sticky_add_to_cart": false,
+        "color_scheme": "",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
+    "metaobject_hero_g7qJDd": {
+      "type": "metaobject-hero",
+      "name": "Metaobject Hero",
+      "settings": {
+        "hero_entry": "",
+        "height": 80,
+        "height_mobile": 70,
+        "overlay_opacity": 30,
         "color_scheme": "",
         "padding-block-start": 0,
         "padding-block-end": 0
@@ -659,6 +673,7 @@
   },
   "order": [
     "main",
+    "metaobject_hero_g7qJDd",
     "product_recommendations_qggXJq"
   ]
 }
