@@ -491,16 +491,125 @@
     },
     "metaobject_hero_g7qJDd": {
       "type": "metaobject-hero",
+      "blocks": {
+        "text_rGdD4n": {
+          "type": "text",
+          "name": "t:names.heading",
+          "settings": {
+            "text": "<p>{{ closest.product.vendor }}</p>",
+            "width": "fit-content",
+            "max_width": "normal",
+            "alignment": "left",
+            "type_preset": "rte",
+            "font": "var(--font-body--family)",
+            "font_size": "1rem",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "color": "var(--color-foreground)",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "popup_link_BELPJj": {
+          "type": "popup-link",
+          "name": "t:names.popup_link",
+          "settings": {
+            "behavior": "drawer",
+            "heading": "View Bio",
+            "type_preset": "",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "text_QJVEDP": {
+              "type": "text",
+              "settings": {
+                "text": "<h2>{{ closest.product.vendor }}</h2>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 16,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "text_6n4BER": {
+              "type": "text",
+              "settings": {
+                "text": "<p>Our goal is for every customer to be totally satisfied with their purchase. If this isn't the case, let us know and we'll do our best to work with you to make it right.</p>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "text_QJVEDP",
+            "text_6n4BER"
+          ]
+        }
+      },
+      "block_order": [
+        "text_rGdD4n",
+        "popup_link_BELPJj"
+      ],
       "name": "Metaobject Hero",
       "settings": {
-        "heading": "{{ product.vendor }}",
-        "subtext": "",
-        "link_label": "View Bio",
-        "link_url": "",
-        "height": 80,
-        "height_mobile": 70,
-        "overlay_opacity": 30,
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "flex-end",
+        "gap": 12,
+        "section_width": "full-width",
+        "section_height": "large",
+        "section_height_custom": 80,
         "color_scheme": "",
+        "toggle_overlay": false,
+        "overlay_color": "#00000066",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
         "padding-block-start": 0,
         "padding-block-end": 0
       }
