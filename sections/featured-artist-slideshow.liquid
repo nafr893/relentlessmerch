@@ -1,0 +1,385 @@
+<script src="{{ 'featured-artist-slideshow.js' | asset_url }}" type="module"></script>
+
+<div class="section-background color-{{ section.settings.color_scheme }}"></div>
+
+<featured-artist-slideshow
+  class="fas section section--{{ section.settings.section_width }} color-{{ section.settings.color_scheme }} spacing-style"
+  data-autoplay="{{ section.settings.autoplay_speed }}"
+  style="
+    --fas-height: {{ section.settings.height }}vh;
+    {% render 'spacing-style', settings: section.settings %}
+  "
+>
+  {%- comment -%} Background images — one per slide, crossfading {%- endcomment -%}
+  <div class="fas__backgrounds" aria-hidden="true">
+    {%- for block in section.blocks -%}
+      <div
+        class="fas__bg"
+        {% if block.settings.background_image != blank %}
+          style="background-image: url('{{ block.settings.background_image | image_url: width: 2400 }}');"
+        {% else %}
+          style="background-color: #111;"
+        {% endif %}
+        data-bg="{{ forloop.index0 }}"
+      ></div>
+    {%- endfor -%}
+  </div>
+
+  {%- comment -%} Slides {%- endcomment -%}
+  <div class="fas__slides" aria-live="polite">
+    {%- for block in section.blocks -%}
+      <div
+        class="fas__slide"
+        data-slide="{{ forloop.index0 }}"
+        aria-hidden="true"
+        {{ block.shopify_attributes }}
+      >
+        <div class="fas__slide-inner">
+          {%- comment -%} Label above card {%- endcomment -%}
+          {%- if section.settings.label != blank -%}
+            <p class="fas__label">{{ section.settings.label | escape }}</p>
+          {%- endif -%}
+
+          {%- comment -%} Artist card {%- endcomment -%}
+          <div class="fas__card">
+            {%- if block.settings.artist_image != blank -%}
+              <div class="fas__card-image">
+                {{
+                  block.settings.artist_image
+                  | image_url: width: 120
+                  | image_tag:
+                    class: 'fas__artist-img',
+                    loading: 'lazy',
+                    widths: '80, 120',
+                    alt: block.settings.artist_name | escape
+                }}
+              </div>
+            {%- endif -%}
+
+            <div class="fas__card-body">
+              {%- if block.settings.artist_name != blank -%}
+                <p class="fas__artist-name">{{ block.settings.artist_name | escape }}</p>
+              {%- endif -%}
+              {%- if block.settings.link_label != blank -%}
+                <a
+                  href="{{ block.settings.link | default: '#' }}"
+                  class="fas__link"
+                >
+                  {{ block.settings.link_label | escape }}
+                </a>
+              {%- endif -%}
+            </div>
+          </div>
+        </div>
+      </div>
+    {%- endfor -%}
+  </div>
+
+  {%- comment -%} Arrow controls — bottom right {%- endcomment -%}
+  {%- if section.blocks.size > 1 -%}
+    <div class="fas__controls">
+      <button
+        class="fas__arrow fas__arrow--prev"
+        data-action="previous"
+        aria-label="{{ 'accessibility.slideshow_previous' | t }}"
+      >
+        <span class="svg-wrapper">{{- 'icon-arrow.svg' | inline_asset_content -}}</span>
+      </button>
+      <button
+        class="fas__arrow fas__arrow--next"
+        data-action="next"
+        aria-label="{{ 'accessibility.slideshow_next' | t }}"
+      >
+        <span class="svg-wrapper">{{- 'icon-arrow.svg' | inline_asset_content -}}</span>
+      </button>
+    </div>
+  {%- endif -%}
+</featured-artist-slideshow>
+
+{% stylesheet %}
+  /* ============================================================
+     Featured Artist Slideshow
+  ============================================================ */
+
+  featured-artist-slideshow {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: var(--fas-height, 75vh);
+    overflow: hidden;
+  }
+
+  /* --- Backgrounds ------------------------------------------ */
+  .fas__backgrounds {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  .fas__bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 0.6s ease;
+  }
+
+  .fas__bg.is-active {
+    opacity: 1;
+  }
+
+  /* --- Slides ----------------------------------------------- */
+  .fas__slides {
+    position: relative;
+    z-index: 2;
+    height: 100%;
+  }
+
+  .fas__slide {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: flex-end;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+  }
+
+  .fas__slide.is-active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* --- Slide inner content ---------------------------------- */
+  .fas__slide-inner {
+    padding: 2rem 2.5rem;
+    color: #fff;
+    max-width: 380px;
+  }
+
+  /* --- Label above card ------------------------------------- */
+  .fas__label {
+    margin: 0 0 0.75rem;
+    font-family: var(--font-heading-family, var(--font-body--family));
+    font-size: clamp(0.75rem, 1.2vw, 0.9rem);
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #fff;
+  }
+
+  /* --- Artist card ------------------------------------------ */
+  .fas__card {
+    display: flex;
+    align-items: center;
+    gap: 0.875rem;
+    background-color: #fff;
+    padding: 0.75rem 1rem;
+    width: fit-content;
+    min-width: 220px;
+  }
+
+  .fas__card-image {
+    flex-shrink: 0;
+    width: 52px;
+    height: 52px;
+    overflow: hidden;
+    border-radius: 50%;
+    background-color: #ddd;
+  }
+
+  .fas__artist-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .fas__card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .fas__artist-name {
+    margin: 0;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #000;
+    text-transform: none;
+  }
+
+  .fas__link {
+    font-size: 0.75rem;
+    color: #000;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .fas__link:hover {
+    color: #555;
+  }
+
+  /* --- Arrow controls --------------------------------------- */
+  .fas__controls {
+    position: absolute;
+    bottom: 2rem;
+    right: 2.5rem;
+    z-index: 10;
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .fas__arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    background-color: rgb(255 255 255 / 0.15);
+    border: 1px solid rgb(255 255 255 / 0.4);
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+
+  .fas__arrow:hover {
+    background-color: rgb(255 255 255 / 0.3);
+  }
+
+  .fas__arrow--prev .svg-wrapper {
+    transform: scaleX(-1);
+  }
+
+  .fas__arrow .svg-wrapper,
+  .fas__arrow svg {
+    width: 18px;
+    height: 18px;
+    display: block;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Featured Artist Slideshow",
+  "tag": "section",
+  "class": "featured-artist-slideshow-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Label",
+      "default": "FEATURED ARTIST",
+      "info": "Displayed above the artist card on every slide."
+    },
+    {
+      "type": "range",
+      "id": "height",
+      "label": "Section height",
+      "min": 30,
+      "max": 100,
+      "step": 5,
+      "unit": "vh",
+      "default": 75
+    },
+    {
+      "type": "range",
+      "id": "autoplay_speed",
+      "label": "Auto-advance interval",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "unit": "s",
+      "default": 0,
+      "info": "Set to 0 to disable auto-advance. Pauses on hover."
+    },
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "Width",
+      "options": [
+        { "value": "page-width", "label": "Page" },
+        { "value": "full-width", "label": "Full" }
+      ],
+      "default": "full-width"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "Top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Artist slide",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "background_image",
+          "label": "Background image"
+        },
+        {
+          "type": "image_picker",
+          "id": "artist_image",
+          "label": "Artist image"
+        },
+        {
+          "type": "text",
+          "id": "artist_name",
+          "label": "Artist name",
+          "default": "Artist Name"
+        },
+        {
+          "type": "text",
+          "id": "link_label",
+          "label": "Link label",
+          "default": "View Bio"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured Artist Slideshow",
+      "category": "Image",
+      "blocks": [
+        { "type": "slide" },
+        { "type": "slide" },
+        { "type": "slide" }
+      ]
+    }
+  ]
+}
+{% endschema %}
