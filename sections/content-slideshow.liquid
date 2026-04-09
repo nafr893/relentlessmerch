@@ -18,6 +18,7 @@
         {{ block.shopify_attributes }}
       >
       
+        <div class="cs__slide-inner">
         {%- comment -%} Image + label {%- endcomment -%}
         <div class="cs__image-wrap">
           {%- if block.settings.image != blank -%}
@@ -60,6 +61,7 @@
             </a>
           {%- endif -%}
         </div>
+        </div>{%- comment -%} /cs__slide-inner {%- endcomment -%}
       </div>
     {%- endfor -%}
   </div>
@@ -105,6 +107,19 @@
     pointer-events: auto;
   }
 
+  /* --- Slide inner layout: stacked mobile, side-by-side desktop --- */
+  .cs__slide-inner {
+    display: flex;
+    flex-direction: column;
+  }
+
+  @media screen and (min-width: 750px) {
+    .cs__slide-inner {
+      flex-direction: row;
+      align-items: stretch;
+    }
+  }
+
   /* --- Image --- */
   .cs__image-wrap {
     position: relative;
@@ -112,6 +127,14 @@
     aspect-ratio: 4 / 3;
     overflow: hidden;
     background: #111;
+    flex-shrink: 0;
+  }
+
+  @media screen and (min-width: 750px) {
+    .cs__image-wrap {
+      width: 50%;
+      aspect-ratio: unset;
+    }
   }
 
   .cs__image {
@@ -149,12 +172,20 @@
     white-space: nowrap;
   }
 
-  /* --- Content below image --- */
+  /* --- Content beside/below image --- */
   .cs__content {
     padding: 1.5rem var(--page-margin, 1.5rem) 0.5rem;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     gap: 0.75rem;
+  }
+
+  @media screen and (min-width: 750px) {
+    .cs__content {
+      width: 50%;
+      padding: 2.5rem 3rem;
+    }
   }
 
   .cs__heading {
