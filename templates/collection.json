@@ -95,7 +95,7 @@
         "color_scheme": "scheme-1",
         "background_media": "image",
         "video_position": "cover",
-        "background_image": "{{ collection.image }}",
+        "background_image": "{{ collection.metafields.custom.collection_image.value }}",
         "background_image_position": "cover",
         "border": "none",
         "border_width": 1,
