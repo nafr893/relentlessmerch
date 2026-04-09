@@ -5,7 +5,10 @@
 <content-slideshow
   class="cs section section--{{ section.settings.section_width }} color-{{ section.settings.color_scheme }} spacing-style"
   data-autoplay="{{ section.settings.autoplay_speed }}"
-  style="{% render 'spacing-style', settings: section.settings %}"
+  style="
+    {% render 'spacing-style', settings: section.settings %}
+    --cs-image-ratio: {{ section.settings.image_ratio }};
+  "
 >
 
   {%- comment -%} Slides {%- endcomment -%}
@@ -124,7 +127,7 @@
   .cs__image-wrap {
     position: relative;
     width: 100%;
-    aspect-ratio: 4 / 3;
+    aspect-ratio: var(--cs-image-ratio, 4 / 3);
     overflow: hidden;
     background: #111;
     flex-shrink: 0;
@@ -324,6 +327,20 @@
     }
   ],
   "settings": [
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "label": "Image ratio",
+      "options": [
+        { "value": "1 / 1", "label": "Square (1:1)" },
+        { "value": "4 / 3", "label": "Landscape (4:3)" },
+        { "value": "16 / 9", "label": "Wide (16:9)" },
+        { "value": "4 / 5", "label": "Portrait (4:5)" },
+        { "value": "3 / 4", "label": "Tall (3:4)" }
+      ],
+      "default": "4 / 3",
+      "info": "Applies on mobile. Desktop image fills the full slide height."
+    },
     {
       "type": "range",
       "id": "autoplay_speed",
