@@ -42,7 +42,7 @@
           "type": "popup-link",
           "name": "t:names.popup_link",
           "settings": {
-            "behavior": "default",
+            "behavior": "drawer",
             "heading": "View Bio",
             "type_preset": "",
             "padding-block-start": 0,
