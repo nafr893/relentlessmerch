@@ -52,7 +52,8 @@
     {%- for link in menu.links -%}
       {%- assign first_char = link.title | upcase | slice: 0 -%}
       {%- assign is_digit = false -%}
-      {%- for d in '0,1,2,3,4,5,6,7,8,9' | split: ',' -%}
+      {%- assign digit_chars = '0,1,2,3,4,5,6,7,8,9' | split: ',' -%}
+      {%- for d in digit_chars -%}
         {%- if first_char == d -%}
           {%- assign is_digit = true -%}
           {%- break -%}
