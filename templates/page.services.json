@@ -281,11 +281,50 @@
         "padding-block-start": 40,
         "padding-block-end": 80
       }
+    },
+    "content_slideshow_fBF76Q": {
+      "type": "content-slideshow",
+      "blocks": {
+        "slide_WhWhVL": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/A7406142.webp",
+            "label": "SCREEN PRINTING",
+            "heading": "Merchandise",
+            "text": "We have capabilities to create custom merch for your fans. We offer screen printing, embroidery and many other merchandise services.",
+            "link_label": "Learn More",
+            "link": "shopify://pages/screen-printing"
+          }
+        },
+        "slide_c8xWPg": {
+          "type": "slide",
+          "settings": {
+            "label": "",
+            "heading": "Slide Two",
+            "text": "Describe this slide in a sentence or two.",
+            "link_label": "Learn More",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "slide_WhWhVL",
+        "slide_c8xWPg"
+      ],
+      "name": "Content Slideshow",
+      "settings": {
+        "autoplay_speed": 0,
+        "color_scheme": "",
+        "section_width": "page-width",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
     }
   },
   "order": [
     "hero_FQzEV4",
     "section_qhdaTf",
-    "main"
+    "main",
+    "content_slideshow_fBF76Q"
   ]
 }
