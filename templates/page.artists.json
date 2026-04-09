@@ -141,7 +141,7 @@
             "background_color": "#00000026",
             "corner_radius": 0,
             "padding-block-start": 0,
-            "padding-block-end": 0,
+            "padding-block-end": 18,
             "padding-inline-start": 0,
             "padding-inline-end": 0
           },
@@ -162,7 +162,7 @@
           "name": "Alpha List",
           "settings": {
             "menu": "shop-artists",
-            "padding-block-start": 48,
+            "padding-block-start": 24,
             "padding-block-end": 0
           },
           "blocks": {}
