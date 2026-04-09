@@ -33,6 +33,14 @@
       endif
     endfor
   endif
+
+  # Determine if the header background is dark so we know whether to invert the artist logo.
+  # We use the top row color scheme's background brightness as a proxy.
+  assign header_bg = section.settings.color_scheme_top.settings.background
+  assign artist_logo_invert = 0
+  if header_bg.red < 128 and header_bg.green < 128 and header_bg.blue < 128
+    assign artist_logo_invert = 1
+  endif
 %}
 
 {% comment %}
@@ -51,6 +59,7 @@
     --font-family: var(--font-body--family);
     --font-style: var(--font-body--style);
     --font-weight: 600;
+    --artist-logo-invert: {{ artist_logo_invert }};
   "
   {{ block.shopify_attributes }}
 >
@@ -70,7 +79,7 @@
     {%- if artist_logo != nil -%}
       {% render 'image',
         image: artist_logo,
-        class: 'header-logo__image',
+        class: 'header-logo__image header-logo__image--artist',
         height: settings.logo_height,
         alt_text_fallback: alt_text_fallback,
         text_fallback: shop.name,
@@ -143,6 +152,13 @@
     &:hover {
       text-decoration: none;
     }
+  }
+
+  /* Artist logo: brightness(0) strips it to pure black, then
+     invert() driven by --color-foreground-rgb flips it to match
+     the header's foreground (white on dark schemes, black on light). */
+  .header-logo__image--artist {
+    filter: brightness(0) invert(var(--artist-logo-invert));
   }
 
   .header-logo__image {
