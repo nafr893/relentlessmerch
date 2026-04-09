@@ -121,6 +121,16 @@
     "section_KL7W8n": {
       "type": "section",
       "blocks": {
+        "alpha_list_DiRpAx": {
+          "type": "alpha-list",
+          "name": "Alpha List",
+          "settings": {
+            "menu": "main-menu",
+            "padding-block-start": 0,
+            "padding-block-end": 0
+          },
+          "blocks": {}
+        },
         "text_LfiX7i": {
           "type": "text",
           "name": "t:names.heading",
@@ -159,6 +169,7 @@
         }
       },
       "block_order": [
+        "alpha_list_DiRpAx",
         "text_LfiX7i",
         "artist_search_pLwVja"
       ],
