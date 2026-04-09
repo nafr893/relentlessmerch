@@ -15,6 +15,8 @@ class ContentSlideshow extends HTMLElement {
   /** @type {number} */
   #touchStartY = 0;
 
+
+
   
 
   connectedCallback() {
