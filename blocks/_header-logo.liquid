@@ -19,6 +19,20 @@
   endif
 
   assign alt_text_fallback = shop.name | escape | append: ' ' | append: 'accessibility.home' | t
+
+  # Artist logo — check collection metafield
+  assign artist_logo = nil
+  if collection != blank and collection.metafields.custom.artist_logo != blank
+    assign artist_logo = collection.metafields.custom.artist_logo
+  endif
+  if artist_logo == nil and product != blank
+    for col in product.collections
+      if col.metafields.custom.artist_logo != blank
+        assign artist_logo = col.metafields.custom.artist_logo
+        break
+      endif
+    endfor
+  endif
 %}
 
 {% comment %}
@@ -53,14 +67,25 @@
     class="header-logo__image-container header-logo__image-container--original"
     data-testid="header-logo"
   >
-    {% render 'image',
-      image: settings.logo,
-      class: 'header-logo__image',
-      height: settings.logo_height,
-      alt_text_fallback: alt_text_fallback,
-      text_fallback: shop.name,
-      style: logo_style
-    %}
+    {%- if artist_logo != nil -%}
+      {% render 'image',
+        image: artist_logo,
+        class: 'header-logo__image',
+        height: settings.logo_height,
+        alt_text_fallback: alt_text_fallback,
+        text_fallback: shop.name,
+        style: logo_style
+      %}
+    {%- else -%}
+      {% render 'image',
+        image: settings.logo,
+        class: 'header-logo__image',
+        height: settings.logo_height,
+        alt_text_fallback: alt_text_fallback,
+        text_fallback: shop.name,
+        style: logo_style
+      %}
+    {%- endif -%}
   </span>
 
   {% if use_inverse_logo %}
