@@ -1,0 +1,204 @@
+{%- liquid
+  assign similar = collection.metafields.custom.similar_collections.value
+  assign has_collections = false
+  if similar != blank and similar.size > 0
+    assign has_collections = true
+  endif
+
+  assign max_items = section.settings.columns | plus: 2
+-%}
+
+{%- unless has_collections -%}
+  {%- if request.design_mode -%}
+    <div style="padding: 2rem; background: #f4f4f4; border: 2px dashed #ccc; text-align: center; color: #888; font-size: 0.85rem;">
+      Similar Collections: no similar collections found. Assign a <strong>custom.similar_collections</strong> metafield list to this collection.
+    </div>
+  {%- endif -%}
+{%- else -%}
+
+<div class="section-background color-{{ section.settings.color_scheme }}"></div>
+<div
+  class="
+    section
+    section--{{ section.settings.section_width }}
+    color-{{ section.settings.color_scheme }}
+    section-resource-list
+    spacing-style
+    gap-style
+  "
+  style="
+    {% render 'spacing-style', settings: section.settings %}
+    {% render 'gap-style', value: section.settings.gap %}
+    --resource-list-columns: repeat({{ section.settings.columns }}, 1fr);
+    --resource-list-columns-mobile: repeat({{ section.settings.mobile_columns }}, 1fr);
+    --resource-list-column-gap-desktop: {{ section.settings.columns_gap }}px;
+    --resource-list-row-gap-desktop: {{ section.settings.columns_gap }}px;
+    --column-count: {{ section.settings.columns }};
+    --column-count-mobile: {{ section.settings.mobile_columns }};
+  "
+>
+  <div class="section-resource-list__content">
+    {% content_for 'blocks' %}
+  </div>
+
+  {%- capture list_items -%}
+    {%- for col in similar limit: max_items -%}
+      <div class="resource-list__item">
+        {%- content_for 'block', type: '_collection-card', id: 'static-collection-card', closest.collection: col -%}
+      </div>
+      {%- unless forloop.last -%}<!--@list/split-->{%- endunless -%}
+    {%- endfor -%}
+  {%- endcapture -%}
+
+  {%- assign list_items_array = list_items | strip | split: '<!--@list/split-->' -%}
+
+  {% render 'resource-list',
+    list_items: list_items,
+    list_items_array: list_items_array,
+    settings: section.settings,
+    carousel_ref: 'similarCollections',
+    slide_count: similar.size,
+    content_type: 'collections',
+    test_id: 'similar-collections-list'
+  %}
+</div>
+
+{%- endunless -%}
+
+{% schema %}
+{
+  "name": "Similar Collections",
+  "class": "similar-collections-section",
+  "blocks": [
+    { "type": "@theme" },
+    { "type": "@app" }
+  ],
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Reads from the collection's 'custom.similar_collections' metafield. Set it to a list of collection references in Shopify admin."
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "layout_type",
+      "label": "Layout",
+      "options": [
+        { "value": "grid", "label": "Grid" },
+        { "value": "carousel", "label": "Carousel" }
+      ],
+      "default": "carousel"
+    },
+    {
+      "type": "range",
+      "id": "columns",
+      "label": "Columns",
+      "min": 1,
+      "max": 6,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "select",
+      "id": "mobile_columns",
+      "label": "Mobile columns",
+      "options": [
+        { "value": "1", "label": "1" },
+        { "value": "2", "label": "2" }
+      ],
+      "default": "1",
+      "visible_if": "{{ section.settings.layout_type == 'grid' }}"
+    },
+    {
+      "type": "select",
+      "id": "mobile_card_size",
+      "label": "Mobile card size",
+      "options": [
+        { "value": "60cqw", "label": "1 card" },
+        { "value": "44cqw", "label": "2 cards" }
+      ],
+      "default": "60cqw",
+      "visible_if": "{{ section.settings.layout_type == 'carousel' }}"
+    },
+    {
+      "type": "range",
+      "id": "columns_gap",
+      "label": "Gap",
+      "min": 0,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "label": "Section gap",
+      "min": 0,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "header",
+      "content": "Appearance"
+    },
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "Width",
+      "options": [
+        { "value": "page-width", "label": "Page" },
+        { "value": "full-width", "label": "Full" }
+      ],
+      "default": "page-width"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "Top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 36
+    }
+  ],
+  "presets": [
+    {
+      "name": "Similar Collections",
+      "category": "Collections",
+      "settings": {
+        "layout_type": "carousel"
+      }
+    }
+  ]
+}
+{% endschema %}
