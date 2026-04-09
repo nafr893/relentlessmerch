@@ -156,11 +156,22 @@
             "padding-block-end": 0
           },
           "blocks": {}
+        },
+        "alpha_list_DiRpAx": {
+          "type": "alpha-list",
+          "name": "Alpha List",
+          "settings": {
+            "menu": "shop-artists",
+            "padding-block-start": 0,
+            "padding-block-end": 0
+          },
+          "blocks": {}
         }
       },
       "block_order": [
         "text_LfiX7i",
-        "artist_search_pLwVja"
+        "artist_search_pLwVja",
+        "alpha_list_DiRpAx"
       ],
       "name": "t:names.custom_section",
       "settings": {
