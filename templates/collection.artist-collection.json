@@ -43,7 +43,7 @@
           "name": "t:names.popup_link",
           "settings": {
             "behavior": "drawer",
-            "heading": "View Bio",
+            "heading": "VIEW BIO",
             "type_preset": "",
             "padding-block-start": 0,
             "padding-block-end": 0,
@@ -229,7 +229,7 @@
         "border_opacity": 100,
         "border_radius": 0,
         "toggle_overlay": true,
-        "overlay_color": "#0000005d",
+        "overlay_color": "#0000005c",
         "overlay_style": "gradient",
         "gradient_direction": "to top",
         "padding-block-start": 48,
