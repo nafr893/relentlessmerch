@@ -186,14 +186,18 @@
 {% endstylesheet %}
 
 <script>
-  // Smooth scroll for alphabet nav links
   document.querySelectorAll('.alpha-list__nav-letter--active').forEach((anchor) => {
     anchor.addEventListener('click', (e) => {
       const href = anchor.getAttribute('href');
       const target = document.querySelector(href);
       if (!target) return;
       e.preventDefault();
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+      const headerHeight = document.querySelector('#header-component, header, .header')?.offsetHeight ?? 0;
+      const offset = headerHeight + 24;
+      const top = target.getBoundingClientRect().top + window.scrollY - offset;
+
+      window.scrollTo({ top, behavior: 'smooth' });
     });
   });
 </script>
