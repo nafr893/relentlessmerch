@@ -125,7 +125,7 @@
           "type": "alpha-list",
           "name": "Alpha List",
           "settings": {
-            "menu": "main-menu",
+            "menu": "shop-artists",
             "padding-block-start": 0,
             "padding-block-end": 0
           },
