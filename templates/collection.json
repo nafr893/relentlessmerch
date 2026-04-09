@@ -38,6 +38,88 @@
           },
           "blocks": {}
         },
+        "popup_link_EXW73X": {
+          "type": "popup-link",
+          "name": "t:names.popup_link",
+          "disabled": true,
+          "settings": {
+            "behavior": "default",
+            "heading": "Learn more",
+            "type_preset": "",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "text_XnixiE": {
+              "type": "text",
+              "name": "t:names.heading",
+              "settings": {
+                "text": "<h5>ARTIST BIO</h5>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "text_UBcbgY": {
+              "type": "text",
+              "name": "t:names.heading",
+              "settings": {
+                "text": "<h4>{{ closest.collection.title }}</h4>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "artist_bio_pMDKnq": {
+              "type": "artist-bio",
+              "name": "Artist Bio",
+              "settings": {
+                "padding-block-start": 0,
+                "padding-block-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "text_XnixiE",
+            "text_UBcbgY",
+            "artist_bio_pMDKnq"
+          ]
+        },
         "quick_filter_RUhcTT": {
           "type": "quick-filter",
           "name": "Quick Filter",
@@ -76,6 +158,7 @@
       },
       "block_order": [
         "text_tqQTNE",
+        "popup_link_EXW73X",
         "quick_filter_RUhcTT",
         "text_twGGkJ"
       ],

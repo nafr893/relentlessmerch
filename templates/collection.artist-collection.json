@@ -9,10 +9,10 @@
  */
 {
   "sections": {
-    "section": {
+    "section_cerDPJ": {
       "type": "section",
       "blocks": {
-        "text_tqQTNE": {
+        "text_Mf4mDQ": {
           "type": "text",
           "name": "Title",
           "settings": {
@@ -38,10 +38,9 @@
           },
           "blocks": {}
         },
-        "popup_link_EXW73X": {
+        "popup_link_fKcqDW": {
           "type": "popup-link",
           "name": "t:names.popup_link",
-          "disabled": true,
           "settings": {
             "behavior": "default",
             "heading": "Learn more",
@@ -52,7 +51,7 @@
             "padding-inline-end": 0
           },
           "blocks": {
-            "text_XnixiE": {
+            "text_HKY8Dc": {
               "type": "text",
               "name": "t:names.heading",
               "settings": {
@@ -78,7 +77,7 @@
               },
               "blocks": {}
             },
-            "text_UBcbgY": {
+            "text_gzYerk": {
               "type": "text",
               "name": "t:names.heading",
               "settings": {
@@ -104,7 +103,7 @@
               },
               "blocks": {}
             },
-            "artist_bio_pMDKnq": {
+            "artist_bio_Uxic6L": {
               "type": "artist-bio",
               "name": "Artist Bio",
               "settings": {
@@ -115,12 +114,12 @@
             }
           },
           "block_order": [
-            "text_XnixiE",
-            "text_UBcbgY",
-            "artist_bio_pMDKnq"
+            "text_HKY8Dc",
+            "text_gzYerk",
+            "artist_bio_Uxic6L"
           ]
         },
-        "quick_filter_RUhcTT": {
+        "quick_filter_nYTnYK": {
           "type": "quick-filter",
           "name": "Quick Filter",
           "settings": {
@@ -129,9 +128,10 @@
           },
           "blocks": {}
         },
-        "text_twGGkJ": {
+        "text_dUeHWC": {
           "type": "text",
           "name": "Description",
+          "disabled": true,
           "settings": {
             "text": "{{ closest.collection.description }}",
             "width": "fit-content",
@@ -157,10 +157,10 @@
         }
       },
       "block_order": [
-        "text_tqQTNE",
-        "popup_link_EXW73X",
-        "quick_filter_RUhcTT",
-        "text_twGGkJ"
+        "text_Mf4mDQ",
+        "popup_link_fKcqDW",
+        "quick_filter_nYTnYK",
+        "text_dUeHWC"
       ],
       "name": "Collection heading",
       "settings": {
@@ -324,7 +324,7 @@
     }
   },
   "order": [
-    "section",
+    "section_cerDPJ",
     "main"
   ]
 }
