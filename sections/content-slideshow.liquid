@@ -1,0 +1,347 @@
+<script src="{{ 'content-slideshow.js' | asset_url }}" type="module"></script>
+
+<div class="section-background color-{{ section.settings.color_scheme }}"></div>
+
+<content-slideshow
+  class="cs section section--{{ section.settings.section_width }} color-{{ section.settings.color_scheme }} spacing-style"
+  data-autoplay="{{ section.settings.autoplay_speed }}"
+  style="{% render 'spacing-style', settings: section.settings %}"
+>
+
+  {%- comment -%} Slides {%- endcomment -%}
+  <div class="cs__track">
+    {%- for block in section.blocks -%}
+      <div
+        class="cs__slide"
+        data-slide="{{ forloop.index0 }}"
+        aria-hidden="true"
+        {{ block.shopify_attributes }}
+      >
+        {%- comment -%} Image + label {%- endcomment -%}
+        <div class="cs__image-wrap">
+          {%- if block.settings.image != blank -%}
+            {{
+              block.settings.image
+              | image_url: width: 1200
+              | image_tag:
+                class: 'cs__image',
+                loading: 'lazy',
+                widths: '600, 900, 1200',
+                alt: block.settings.heading | escape
+            }}
+          {%- else -%}
+            <div class="cs__image-placeholder">
+              {{ 'image' | placeholder_svg_tag: 'cs__placeholder-svg' }}
+            </div>
+          {%- endif -%}
+
+          {%- if block.settings.label != blank -%}
+            <span class="cs__label">{{ block.settings.label | escape }}</span>
+          {%- endif -%}
+        </div>
+
+        {%- comment -%} Text content {%- endcomment -%}
+        <div class="cs__content">
+          {%- if block.settings.heading != blank -%}
+            <h2 class="cs__heading">{{ block.settings.heading | escape }}</h2>
+          {%- endif -%}
+
+          {%- if block.settings.text != blank -%}
+            <p class="cs__text">{{ block.settings.text | escape }}</p>
+          {%- endif -%}
+
+          {%- if block.settings.link_label != blank -%}
+            <a
+              href="{{ block.settings.link | default: '#' }}"
+              class="cs__link"
+            >
+              {{ block.settings.link_label | escape }}
+            </a>
+          {%- endif -%}
+        </div>
+      </div>
+    {%- endfor -%}
+  </div>
+
+  {%- comment -%} Dot pagination {%- endcomment -%}
+  {%- if section.blocks.size > 1 -%}
+    <div class="cs__dots" role="tablist" aria-label="Slideshow navigation">
+      {%- for block in section.blocks -%}
+        <button
+          class="cs__dot{% if forloop.first %} is-active{% endif %}"
+          data-dot="{{ forloop.index0 }}"
+          role="tab"
+          aria-label="Slide {{ forloop.index }}"
+          aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+        ></button>
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+
+</content-slideshow>
+
+{% stylesheet %}
+  content-slideshow {
+    display: block;
+    width: 100%;
+  }
+
+  /* --- Track: CSS grid stacking so height follows active slide --- */
+  .cs__track {
+    display: grid;
+    width: 100%;
+  }
+
+  .cs__slide {
+    grid-area: 1 / 1;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+  }
+
+  .cs__slide.is-active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* --- Image --- */
+  .cs__image-wrap {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background: #111;
+  }
+
+  .cs__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .cs__image-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+  }
+
+  .cs__placeholder-svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  /* --- Label overlay (top-left of image) --- */
+  .cs__label {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    font-family: var(--font-heading-family);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #fff;
+    border: 1.5px solid #fff;
+    padding: 0.35rem 0.65rem;
+    line-height: 1;
+  }
+
+  /* --- Content below image --- */
+  .cs__content {
+    padding: 1.5rem var(--page-margin, 1.5rem) 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .cs__heading {
+    font-family: var(--font-heading-family);
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    line-height: 1.05;
+    margin: 0;
+    color: var(--color-foreground);
+  }
+
+  .cs__text {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin: 0;
+    color: var(--color-foreground);
+  }
+
+  .cs__link {
+    display: inline-block;
+    font-family: var(--font-heading-family);
+    font-weight: 700;
+    font-size: 1rem;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    color: var(--color-foreground);
+  }
+
+  .cs__link:hover {
+    opacity: 0.65;
+  }
+
+  /* --- Dot pagination --- */
+  .cs__dots {
+    display: flex;
+    justify-content: center;
+    gap: 0.4rem;
+    padding: 1.5rem 0 0.25rem;
+  }
+
+  .cs__dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 0;
+    background-color: rgb(0 0 0 / 0.2);
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+
+  .cs__dot.is-active {
+    background-color: rgb(0 0 0 / 0.75);
+  }
+
+  /* On dark color schemes, flip dot colors */
+  .color-scheme-inverse .cs__dot,
+  [class*="color-"] .cs__dot {
+    background-color: rgb(255 255 255 / 0.35);
+  }
+
+  [class*="color-"] .cs__dot.is-active {
+    background-color: rgb(255 255 255 / 0.9);
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Content Slideshow",
+  "tag": null,
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "info": "Small tag overlaid on the image (e.g. SCREEN PRINTING)"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Slide heading"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "Describe this slide in a sentence or two."
+        },
+        {
+          "type": "text",
+          "id": "link_label",
+          "label": "Link label",
+          "default": "Learn More"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link URL"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Content Slideshow",
+      "category": "Content",
+      "blocks": [
+        {
+          "type": "slide",
+          "settings": {
+            "label": "SCREEN PRINTING",
+            "heading": "Merchandise",
+            "text": "We have capabilities to create custom merch for your fans.",
+            "link_label": "Learn More"
+          }
+        },
+        {
+          "type": "slide",
+          "settings": {
+            "heading": "Slide Two",
+            "link_label": "Learn More"
+          }
+        }
+      ]
+    }
+  ],
+  "settings": [
+    {
+      "type": "range",
+      "id": "autoplay_speed",
+      "label": "Autoplay (seconds)",
+      "info": "Set to 0 to disable autoplay",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "default": 0
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "Width",
+      "options": [
+        { "value": "page-width", "label": "Page" },
+        { "value": "full-width", "label": "Full" }
+      ],
+      "default": "page-width"
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "Top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    }
+  ]
+}
+{% endschema %}
