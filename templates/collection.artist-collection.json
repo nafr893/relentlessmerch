@@ -420,6 +420,7 @@
           "settings": {
             "source": "uploaded",
             "video": "{{ closest.collection.metafields.custom.music_video.value }}",
+            "video_url": "",
             "video_autoplay": false,
             "video_loop": true,
             "alt": "",
@@ -559,11 +560,65 @@
         "padding-block-start": 32,
         "padding-block-end": 32
       }
+    },
+    "similar_collections_wiLgjd": {
+      "type": "similar-collections",
+      "blocks": {
+        "static-collection-card": {
+          "type": "_collection-card",
+          "static": true,
+          "settings": {
+            "placement": "on_image",
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "center",
+            "collection_card_gap": 8,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0
+          },
+          "blocks": {
+            "collection-card-image": {
+              "type": "_collection-card-image",
+              "static": true,
+              "settings": {
+                "image_ratio": "square",
+                "toggle_overlay": false,
+                "overlay_color": "#00000026",
+                "overlay_style": "solid",
+                "gradient_direction": "to top",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": []
+        }
+      },
+      "name": "Similar Collections",
+      "settings": {
+        "layout_type": "carousel",
+        "columns": 3,
+        "mobile_columns": "1",
+        "mobile_card_size": "60cqw",
+        "columns_gap": 8,
+        "gap": 12,
+        "section_width": "page-width",
+        "color_scheme": "",
+        "padding-block-start": 36,
+        "padding-block-end": 36
+      }
     }
   },
   "order": [
     "section_cerDPJ",
     "main",
-    "section_ww37Cf"
+    "section_ww37Cf",
+    "similar_collections_wiLgjd"
   ]
 }
