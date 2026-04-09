@@ -823,7 +823,7 @@
             "artist_image": "shopify://shop_images/OG-NolanTaylor-2.webp",
             "artist_name": "Nolan Taylor",
             "link_label": "View Bio",
-            "link": ""
+            "link": "shopify://collections/nolan-taylor"
           }
         },
         "slide_CFzC7f": {
@@ -833,7 +833,7 @@
             "artist_image": "shopify://shop_images/1900x1900-000000-80-0-0-2.webp",
             "artist_name": "Emma Harner",
             "link_label": "View Bio",
-            "link": ""
+            "link": "shopify://collections/emma-harner"
           }
         }
       },
@@ -845,6 +845,7 @@
       "settings": {
         "label": "FEATURED ARTIST",
         "height": 90,
+        "height_mobile": 70,
         "autoplay_speed": 0,
         "section_width": "full-width",
         "color_scheme": "",
