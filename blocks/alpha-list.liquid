@@ -1,0 +1,244 @@
+{%- liquid
+  assign menu = linklists[block.settings.menu]
+  assign letters_with_items = ''
+
+  # Build a list of which letters actually have entries
+  for link in menu.links
+    assign first_char = link.title | upcase | slice: 0
+    assign is_digit = false
+    assign digits = '0123456789'
+    for d in digits
+      if first_char == d
+        assign is_digit = true
+        break
+      endif
+    endfor
+    if is_digit
+      assign first_char = '#'
+    endif
+    unless letters_with_items contains first_char
+      assign letters_with_items = letters_with_items | append: first_char | append: '|'
+    endunless
+  endfor
+-%}
+
+{%- if menu == blank or menu.links.size == 0 -%}
+  {%- if request.design_mode -%}
+    <div class="alpha-list-placeholder" {{ block.shopify_attributes }}>Select a menu in block settings.</div>
+  {%- endif -%}
+{%- else -%}
+
+<div
+  class="alpha-list spacing-style"
+  style="{% render 'spacing-style', settings: block.settings %}"
+  {{ block.shopify_attributes }}
+>
+
+  {%- comment -%} Alphabet nav bar {%- endcomment -%}
+  <nav class="alpha-list__nav" aria-label="Alphabet navigation">
+    {%- assign all_letters = '#|A|B|C|D|E|F|G|H|I|J|K|L|M|N|O|P|Q|R|S|T|U|V|W|X|Y|Z' | split: '|' -%}
+    {%- for letter in all_letters -%}
+      {%- if letters_with_items contains letter -%}
+        <a href="#alpha-{{ block.id }}-{{ letter }}" class="alpha-list__nav-letter alpha-list__nav-letter--active">{{ letter }}</a>
+      {%- else -%}
+        <span class="alpha-list__nav-letter alpha-list__nav-letter--inactive">{{ letter }}</span>
+      {%- endif -%}
+    {%- endfor -%}
+  </nav>
+
+  {%- comment -%} Grouped list {%- endcomment -%}
+  <div class="alpha-list__groups">
+    {%- assign current_letter = '' -%}
+    {%- for link in menu.links -%}
+      {%- assign first_char = link.title | upcase | slice: 0 -%}
+      {%- assign is_digit = false -%}
+      {%- for d in '0,1,2,3,4,5,6,7,8,9' | split: ',' -%}
+        {%- if first_char == d -%}
+          {%- assign is_digit = true -%}
+          {%- break -%}
+        {%- endif -%}
+      {%- endfor -%}
+      {%- if is_digit -%}{%- assign first_char = '#' -%}{%- endif -%}
+
+      {%- if first_char != current_letter -%}
+        {%- unless current_letter == '' -%}</ul></div>{%- endunless -%}
+        {%- assign current_letter = first_char -%}
+        <div class="alpha-list__group" id="alpha-{{ block.id }}-{{ current_letter }}">
+          <div class="alpha-list__letter-heading">
+            <span class="alpha-list__letter">{{ current_letter }}</span>
+            <span class="alpha-list__divider"></span>
+          </div>
+          <ul class="alpha-list__items" role="list">
+      {%- endif -%}
+
+      <li class="alpha-list__item">
+        <a href="{{ link.url }}" class="alpha-list__link">{{ link.title }}</a>
+      </li>
+
+      {%- if forloop.last -%}</ul></div>{%- endif -%}
+    {%- endfor -%}
+  </div>
+
+</div>
+
+{%- endif -%}
+
+{% stylesheet %}
+  .alpha-list-placeholder {
+    padding: 1rem;
+    background: #f4f4f4;
+    border: 2px dashed #ccc;
+    color: #888;
+    font-size: 0.85rem;
+    text-align: center;
+  }
+
+  /* Alphabet nav */
+  .alpha-list__nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.1rem 0;
+    margin-bottom: 2.5rem;
+    justify-content: center;
+  }
+
+  .alpha-list__nav-letter {
+    font-family: var(--font-heading-family);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-decoration: none;
+    color: var(--color-foreground);
+    padding: 0.2rem 0.4rem;
+    line-height: 1;
+  }
+
+  .alpha-list__nav-letter + .alpha-list__nav-letter::before {
+    content: '|';
+    margin-right: 0.4rem;
+    opacity: 0.3;
+  }
+
+  .alpha-list__nav-letter--inactive {
+    opacity: 0.25;
+    pointer-events: none;
+    cursor: default;
+  }
+
+  .alpha-list__nav-letter--active:hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  /* Groups */
+  .alpha-list__groups {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .alpha-list__letter-heading {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .alpha-list__letter {
+    font-family: var(--font-heading-family);
+    font-size: 1.25rem;
+    font-weight: 700;
+    flex-shrink: 0;
+    line-height: 1;
+  }
+
+  .alpha-list__divider {
+    flex: 1;
+    height: 1px;
+    background-color: var(--color-border);
+  }
+
+  /* Items */
+  .alpha-list__items {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .alpha-list__link {
+    font-family: var(--font-heading-family);
+    font-size: var(--font-size--sm, 0.875rem);
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--color-foreground);
+  }
+
+  .alpha-list__link:hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+{% endstylesheet %}
+
+<script>
+  // Smooth scroll for alphabet nav links
+  document.querySelectorAll('.alpha-list__nav-letter--active').forEach((anchor) => {
+    anchor.addEventListener('click', (e) => {
+      const href = anchor.getAttribute('href');
+      const target = document.querySelector(href);
+      if (!target) return;
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Alpha List",
+  "tag": null,
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menu",
+      "default": "main-menu",
+      "info": "Each menu item becomes a list entry, sorted and grouped by first letter."
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "Top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "Alpha List",
+      "category": "Navigation"
+    }
+  ]
+}
+{% endschema %}
