@@ -278,7 +278,7 @@
         "overlay_style": "gradient",
         "gradient_direction": "to top",
         "padding-block-start": 48,
-        "padding-block-end": 48
+        "padding-block-end": 24
       }
     },
     "main": {
