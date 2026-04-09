@@ -15,7 +15,7 @@
         "text_i3wWkP": {
           "type": "text",
           "settings": {
-            "text": "<h2>New arrivals</h2>",
+            "text": "<h2>ARTIST SERVICES</h2>",
             "width": "fit-content",
             "max_width": "narrow",
             "alignment": "left",
@@ -100,11 +100,11 @@
         "horizontal_alignment": "flex-start",
         "vertical_alignment": "center",
         "align_baseline": false,
-        "horizontal_alignment_flex_direction_column": "center",
-        "vertical_alignment_flex_direction_column": "center",
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "flex-end",
         "gap": 16,
         "section_width": "page-width",
-        "section_height": "small",
+        "section_height": "custom",
         "section_height_custom": 50,
         "color_scheme": "scheme-5",
         "toggle_overlay": true,
