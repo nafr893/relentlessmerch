@@ -151,7 +151,7 @@
           "type": "artist-search",
           "name": "Artist Search",
           "settings": {
-            "placeholder": "SEARCH...",
+            "placeholder": "SEARCH ARTISTS...",
             "padding-block-start": 0,
             "padding-block-end": 0
           },
