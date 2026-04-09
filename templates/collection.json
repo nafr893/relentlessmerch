@@ -92,7 +92,7 @@
         "section_width": "page-width",
         "section_height": "custom",
         "section_height_custom": 40,
-        "color_scheme": "scheme-1",
+        "color_scheme": "scheme-5",
         "background_media": "image",
         "video_position": "cover",
         "background_image": "{{ collection.metafields.custom.collection_image.value }}",
