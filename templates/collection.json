@@ -175,7 +175,7 @@
         "gap": 12,
         "section_width": "page-width",
         "section_height": "custom",
-        "section_height_custom": 40,
+        "section_height_custom": 60,
         "color_scheme": "scheme-5",
         "background_media": "image",
         "video_position": "cover",
