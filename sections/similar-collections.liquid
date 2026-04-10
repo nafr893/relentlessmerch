@@ -65,6 +65,41 @@
 
 {%- endunless -%}
 
+{% stylesheet %}
+  /* Show collection title at bottom-left of card within similar collections */
+  .similar-collections-section .collection-card {
+    position: relative;
+  }
+
+  .similar-collections-section .collection-card__link {
+    z-index: 1;
+  }
+
+  .similar-collections-section .collection-card__link .visually-hidden:not(:focus, :active) {
+    position: absolute !important;
+    overflow: visible;
+    width: auto;
+    height: auto;
+    margin: 0;
+    padding: 0.35rem 0.6rem;
+    border: 0;
+    clip: unset;
+    clip-path: none;
+    white-space: nowrap;
+    bottom: 0.75rem;
+    left: 0.75rem;
+    top: auto;
+    right: auto;
+    font-family: var(--font-heading-family);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.45);
+  }
+{% endstylesheet %}
+
 {% schema %}
 {
   "name": "Similar Collections",
