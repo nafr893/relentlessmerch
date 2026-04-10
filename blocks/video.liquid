@@ -3,7 +3,7 @@
 {% assign block_settings = block.settings %}
 
 {%- comment -%} Check collection metafield for YouTube/Vimeo URL {%- endcomment -%}
-{%- assign meta_video_url = collection.metafields.custom.music_video | default: '' -%}
+{%- assign meta_video_url = collection.metafields.custom.artist_video | default: '' -%}
 
 {%- comment -%} Extract embed ID from metafield URL {%- endcomment -%}
 {%- if meta_video_url != blank -%}
