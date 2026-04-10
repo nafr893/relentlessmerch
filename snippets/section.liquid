@@ -29,11 +29,15 @@
   "
 >
   <div class="custom-section-background">
+    {%- assign resolved_background_image = section.settings.background_image -%}
+    {%- if resolved_background_image == blank and section.settings.fallback_image != blank -%}
+      {%- assign resolved_background_image = section.settings.fallback_image -%}
+    {%- endif -%}
     {% render 'background-media',
       background_media: section.settings.background_media,
       background_video: section.settings.video,
       background_video_position: section.settings.video_position,
-      background_image: section.settings.background_image,
+      background_image: resolved_background_image,
       background_image_position: section.settings.background_image_position
     %}
   </div>
