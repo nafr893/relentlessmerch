@@ -906,9 +906,9 @@
             "text_MGMAGB": {
               "type": "text",
               "settings": {
-                "text": "<p>Made with care and unconditionally loved by our customers, this signature bestseller exceeds all expectations.</p>",
+                "text": "<p>We handle every little detail, ensuring a memorable experience for your fans. Our team streamlines operations giving you peace of mind and more time to work on creating music that your fans love.</p>",
                 "width": "fit-content",
-                "max_width": "narrow",
+                "max_width": "normal",
                 "alignment": "left",
                 "type_preset": "rte",
                 "font": "var(--font-body--family)",
