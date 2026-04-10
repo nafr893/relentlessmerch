@@ -43,8 +43,9 @@
 
   {%- capture list_items -%}
     {%- for col in similar limit: max_items -%}
-      <div class="resource-list__item">
+      <div class="resource-list__item similar-col-item">
         {%- content_for 'block', type: '_collection-card', id: 'static-collection-card', closest.collection: col -%}
+        <span class="similar-col__title" aria-hidden="true">{{ col.title }}</span>
       </div>
       {%- unless forloop.last -%}<!--@list/split-->{%- endunless -%}
     {%- endfor -%}
@@ -66,30 +67,15 @@
 {%- endunless -%}
 
 {% stylesheet %}
-  /* Show collection title at bottom-left of card within similar collections */
-  .similar-collections-section .collection-card {
+  .similar-col-item {
     position: relative;
   }
 
-  .similar-collections-section .collection-card__link {
-    z-index: 1;
-  }
-
-  .similar-collections-section .collection-card__link .visually-hidden:not(:focus, :active) {
-    position: absolute !important;
-    overflow: visible;
-    width: auto;
-    height: auto;
-    margin: 0;
-    padding: 0.35rem 0.6rem;
-    border: 0;
-    clip: unset;
-    clip-path: none;
-    white-space: nowrap;
+  .similar-col__title {
+    position: absolute;
     bottom: 0.75rem;
     left: 0.75rem;
-    top: auto;
-    right: auto;
+    z-index: 2;
     font-family: var(--font-heading-family);
     font-size: 0.75rem;
     font-weight: 700;
@@ -97,6 +83,8 @@
     text-transform: uppercase;
     color: #fff;
     background: rgba(0, 0, 0, 0.45);
+    padding: 0.35rem 0.6rem;
+    pointer-events: none;
   }
 {% endstylesheet %}
 
