@@ -418,8 +418,7 @@
           "type": "video",
           "name": "t:names.video",
           "settings": {
-            "source": "uploaded",
-            "video": "{{ closest.collection.metafields.custom.music_video.value }}",
+            "source": "url",
             "video_url": "",
             "video_autoplay": false,
             "video_loop": true,
