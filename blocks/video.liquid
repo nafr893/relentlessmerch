@@ -4,6 +4,7 @@
 
 {%- comment -%} Check collection metafield for YouTube/Vimeo URL {%- endcomment -%}
 {%- assign meta_video_url = collection.metafields.custom.artist_video | default: '' -%}
+<!-- DEBUG: meta_video_url = "{{ meta_video_url }}" | meta_video_id = "{{ meta_video_id }}" | collection = "{{ collection.title }}" -->
 
 {%- comment -%} Extract embed ID from metafield URL {%- endcomment -%}
 {%- if meta_video_url != blank -%}
