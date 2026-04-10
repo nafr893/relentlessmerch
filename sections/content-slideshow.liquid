@@ -246,12 +246,15 @@
   }
 
   /* On dark color schemes, flip dot colors */
-  .color-scheme-inverse .cs__dot,
-  [class*="color-"] .cs__dot {
+  .color-background-2 .cs__dot,
+  .color-background-3 .cs__dot,
+  .color-inverse .cs__dot {
     background-color: rgb(255 255 255 / 0.35);
   }
 
-  [class*="color-"] .cs__dot.is-active {
+  .color-background-2 .cs__dot.is-active,
+  .color-background-3 .cs__dot.is-active,
+  .color-inverse .cs__dot.is-active {
     background-color: rgb(255 255 255 / 0.9);
   }
 {% endstylesheet %}
