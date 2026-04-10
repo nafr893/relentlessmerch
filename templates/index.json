@@ -819,8 +819,9 @@
         "image_yJeYwA": {
           "type": "image",
           "settings": {
+            "image": "shopify://shop_images/A7404068_fb05b48b-6e89-4c27-baf6-3ca1b3b1b2f2.webp",
             "link": "",
-            "image_ratio": "square",
+            "image_ratio": "landscape",
             "width": "fill",
             "custom_width": 100,
             "width_mobile": "fill",
@@ -905,9 +906,9 @@
             "text_MGMAGB": {
               "type": "text",
               "settings": {
-                "text": "<p>Made with care and unconditionally loved by our customers, this signature bestseller exceeds all expectations.</p>",
+                "text": "<p>We handle every little detail, ensuring a memorable experience for your fans. Our team streamlines operations giving you peace of mind and more time to work on creating music that your fans love.</p>",
                 "width": "fit-content",
-                "max_width": "narrow",
+                "max_width": "normal",
                 "alignment": "left",
                 "type_preset": "rte",
                 "font": "var(--font-body--family)",
@@ -930,8 +931,8 @@
             "button_RnW3LG": {
               "type": "button",
               "settings": {
-                "label": "Shop now",
-                "link": "shopify://collections/all",
+                "label": "Explore Services",
+                "link": "shopify://pages/services",
                 "open_in_new_tab": false,
                 "style_class": "button",
                 "width": "fit-content",
