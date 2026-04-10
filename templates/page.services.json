@@ -299,11 +299,12 @@
         "slide_c8xWPg": {
           "type": "slide",
           "settings": {
-            "label": "",
-            "heading": "Slide Two",
-            "text": "Describe this slide in a sentence or two.",
+            "image": "shopify://shop_images/A7406101_d4435be3-77ca-4150-90d0-3c0f69e96363.webp",
+            "label": "APPAREL DESIGN",
+            "heading": "CREATIVE & DESIGN",
+            "text": "Looking to get custom apparel or promo items but you don't have the design quite yet? Whether it's a total Brand Package or a Tee Design. At Relentless we have a team of artists ready to help make your design come to life!",
             "link_label": "Learn More",
-            "link": ""
+            "link": "shopify://pages/design"
           }
         }
       },
