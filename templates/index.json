@@ -932,7 +932,7 @@
               "type": "button",
               "settings": {
                 "label": "Explore Services",
-                "link": "shopify://collections/all",
+                "link": "shopify://pages/services",
                 "open_in_new_tab": false,
                 "style_class": "button",
                 "width": "fit-content",
