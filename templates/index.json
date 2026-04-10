@@ -819,8 +819,9 @@
         "image_yJeYwA": {
           "type": "image",
           "settings": {
+            "image": "shopify://shop_images/A7404068_fb05b48b-6e89-4c27-baf6-3ca1b3b1b2f2.webp",
             "link": "",
-            "image_ratio": "square",
+            "image_ratio": "landscape",
             "width": "fill",
             "custom_width": 100,
             "width_mobile": "fill",
@@ -930,7 +931,7 @@
             "button_RnW3LG": {
               "type": "button",
               "settings": {
-                "label": "Shop now",
+                "label": "Explore Services",
                 "link": "shopify://collections/all",
                 "open_in_new_tab": false,
                 "style_class": "button",
