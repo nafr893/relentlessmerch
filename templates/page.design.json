@@ -172,7 +172,7 @@
         "image_btADQE": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/A7406141.webp",
+            "image": "shopify://shop_images/DSCF2201-2_jpg.webp",
             "link": "",
             "image_ratio": "square",
             "width": "fill",
@@ -234,7 +234,7 @@
               "type": "text",
               "name": "t:names.heading",
               "settings": {
-                "text": "<h2>CUSTOM WEBSTORES</h2>",
+                "text": "<h2>CUSTOM ARTWORK</h2>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -259,7 +259,7 @@
             "text_QTXzbe": {
               "type": "text",
               "settings": {
-                "text": "<p>Looking for a place to sell online? Physical and digital sales capabilities available on our responsive platform or easily embed on any website for a seamless customer experience.</p>",
+                "text": "<p>Looking to get custom apparel or promo items but you don't have the design quite yet? Whether it's a total Brand Package or a Tee Design. At Relentless we have a team of artists ready to help make your design come to life!</p>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -383,7 +383,7 @@
               "type": "text",
               "name": "t:names.heading",
               "settings": {
-                "text": "<h2>CUSTOM WEBSTORES</h2>",
+                "text": "<h2>CREATIVE HELP</h2>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -408,7 +408,7 @@
             "text_VhyHeW": {
               "type": "text",
               "settings": {
-                "text": "<p>Looking for a place to sell online? Physical and digital sales capabilities available on our responsive platform or easily embed on any website for a seamless customer experience.</p>",
+                "text": "<p>Have a design but don't know what garment or item to choose? Our team can walk you through all options for what to put your design on! We work hand and hand with our blank distributors to stay up to date on current fashion trends so you can too. Making your custom apparel and hard goods stand out among the rest!</p>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -455,7 +455,7 @@
         "image_9arxwx": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/A7406141.webp",
+            "image": "shopify://shop_images/A7404174_8004ba87-966d-40d9-bd00-c84bf4b6cffb.webp",
             "link": "",
             "image_ratio": "square",
             "width": "fill",
