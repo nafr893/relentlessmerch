@@ -2,6 +2,23 @@
 
 {% assign block_settings = block.settings %}
 
+{%- comment -%} Check collection metafield for YouTube/Vimeo URL {%- endcomment -%}
+{%- assign meta_video_url = collection.metafields.custom.music_video | default: '' -%}
+
+{%- comment -%} Extract embed ID from metafield URL {%- endcomment -%}
+{%- if meta_video_url != blank -%}
+  {%- if meta_video_url contains 'youtu.be/' -%}
+    {%- assign meta_video_id = meta_video_url | split: 'youtu.be/' | last | split: '?' | first -%}
+    {%- assign meta_video_type = 'youtube' -%}
+  {%- elsif meta_video_url contains 'youtube.com' -%}
+    {%- assign meta_video_id = meta_video_url | split: 'v=' | last | split: '&' | first -%}
+    {%- assign meta_video_type = 'youtube' -%}
+  {%- elsif meta_video_url contains 'vimeo.com' -%}
+    {%- assign meta_video_id = meta_video_url | split: 'vimeo.com/' | last | split: '?' | first -%}
+    {%- assign meta_video_type = 'vimeo' -%}
+  {%- endif -%}
+{%- endif -%}
+
 {% capture video_style %}
   {%  render 'spacing-style', settings: block_settings %}
   {% render 'border-override', settings: block_settings %}
@@ -9,7 +26,17 @@
    --size-style-aspect-ratio: {% if block_settings.source == 'uploaded' %}{{ block_settings.video.aspect_ratio | default: 'auto' }}{% elsif block_settings.cover_image == blank %}{{ block_settings.aspect_ratio }}{% else %}auto{% endif %};
 {% endcapture %}
 
-{%- if block_settings.source == 'uploaded' and block_settings.video != blank -%}
+{%- if meta_video_id != blank -%}
+  {% render 'video',
+    video_from_url: true,
+    video: meta_video_id,
+    video_class: 'spacing-style size-style border-style',
+    video_type: meta_video_type,
+    video_style: video_style,
+    video_alt: collection.title,
+    additional_attributes: block.shopify_attributes
+  %}
+{%- elsif block_settings.source == 'uploaded' and block_settings.video != blank -%}
   {% render 'video',
     video: block_settings.video,
     video_class: 'spacing-style size-style border-style',
