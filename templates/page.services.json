@@ -306,11 +306,23 @@
             "link_label": "Learn More",
             "link": "shopify://pages/design"
           }
+        },
+        "slide_kJACgj": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/A7406096.webp",
+            "label": "ECOMMERCE",
+            "heading": "ECOMMERCE",
+            "text": "From custom online store development to fulfillment, packaging, and bagging and tagging, we handle the logistics so you can stay focused on creating while your brand grows.",
+            "link_label": "Learn More",
+            "link": "shopify://pages/ecommerce"
+          }
         }
       },
       "block_order": [
         "slide_WhWhVL",
-        "slide_c8xWPg"
+        "slide_c8xWPg",
+        "slide_kJACgj"
       ],
       "name": "Content Slideshow",
       "settings": {
