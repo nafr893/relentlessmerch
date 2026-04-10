@@ -418,7 +418,7 @@
           "type": "video",
           "name": "t:names.video",
           "settings": {
-            "source": "uploaded",
+            "source": "url",
             "video_url": "",
             "video_autoplay": false,
             "video_loop": true,
