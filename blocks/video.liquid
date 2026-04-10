@@ -23,7 +23,7 @@
   {%  render 'spacing-style', settings: block_settings %}
   {% render 'border-override', settings: block_settings %}
    --size-style-width: {{ block_settings.custom_width }}%; --size-style-width-mobile: {{ block_settings.custom_width_mobile }}%;
-   --size-style-aspect-ratio: {% if meta_video_id != blank %}{{ block_settings.aspect_ratio | default: '16/9' }}{% elsif block_settings.source == 'uploaded' %}{{ block_settings.video.aspect_ratio | default: 'auto' }}{% elsif block_settings.cover_image == blank %}{{ block_settings.aspect_ratio }}{% else %}auto{% endif %};
+   --size-style-aspect-ratio: {% if meta_video_id != blank %}16/9{% elsif block_settings.source == 'uploaded' %}{{ block_settings.video.aspect_ratio | default: 'auto' }}{% elsif block_settings.cover_image == blank %}{{ block_settings.aspect_ratio }}{% else %}auto{% endif %};
 {% endcapture %}
 
 {%- if meta_video_id != blank -%}
