@@ -69,8 +69,8 @@
     {%- endfor -%}
   </div>
 
-  {%- comment -%} Dot pagination {%- endcomment -%}
   {%- if section.blocks.size > 1 -%}
+    {%- comment -%} Dot pagination — mobile only {%- endcomment -%}
     <div class="cs__dots" role="tablist" aria-label="Slideshow navigation">
       {%- for block in section.blocks -%}
         <button
@@ -81,6 +81,18 @@
           aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
         ></button>
       {%- endfor -%}
+    </div>
+
+    {%- comment -%} Prev/Next buttons — desktop only {%- endcomment -%}
+    <div class="cs__controls">
+      <button type="button" class="cs__control-btn" data-action="previous" aria-label="Previous slide">
+        {{- 'icon-arrow.svg' | inline_asset_content -}}
+        <span>Back</span>
+      </button>
+      <button type="button" class="cs__control-btn" data-action="next" aria-label="Next slide">
+        <span>Next</span>
+        {{- 'icon-arrow.svg' | inline_asset_content -}}
+      </button>
     </div>
   {%- endif -%}
 
@@ -222,7 +234,7 @@
     opacity: 0.65;
   }
 
-  /* --- Dot pagination --- */
+  /* --- Dot pagination — mobile only --- */
   .cs__dots {
     display: flex;
     justify-content: center;
@@ -232,10 +244,54 @@
 
   @media screen and (min-width: 750px) {
     .cs__dots {
-      padding: 1.25rem 0 0.5rem;
-      padding-left: 50%;
-      justify-content: center;
+      display: none;
     }
+  }
+
+  /* --- Prev/Next controls — desktop only --- */
+  .cs__controls {
+    display: none;
+  }
+
+  @media screen and (min-width: 750px) {
+    .cs__controls {
+      display: flex;
+      justify-content: flex-end;
+      gap: 0;
+      padding-left: 50%;
+    }
+  }
+
+  .cs__control-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: none;
+    border: none;
+    border-bottom: 1.5px solid var(--color-foreground);
+    padding: 0.5rem 0;
+    margin: 0.75rem 1.25rem 0.5rem 0;
+    font-family: var(--font-heading-family);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-foreground);
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+  }
+
+  .cs__control-btn:hover {
+    opacity: 0.55;
+  }
+
+  .cs__control-btn svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .cs__control-btn[data-action="previous"] svg {
+    transform: scaleX(-1);
   }
 
   .cs__dot {

@@ -30,6 +30,11 @@ class ContentSlideshow extends HTMLElement {
       });
     });
 
+    const prev = this.querySelector('[data-action="previous"]');
+    const next = this.querySelector('[data-action="next"]');
+    prev?.addEventListener('click', () => { this.#step(-1); this.#stopAutoplay(); });
+    next?.addEventListener('click', () => { this.#step(1); this.#stopAutoplay(); });
+
     const autoplay = parseInt(this.dataset.autoplay ?? '0', 10);
     if (autoplay > 0) {
       this.#timer = setInterval(() => this.#step(1), autoplay * 1000);
