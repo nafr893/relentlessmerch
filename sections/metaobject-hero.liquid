@@ -104,12 +104,19 @@
   "settings": [
     {
       "type": "paragraph",
-      "content": "Background image is pulled automatically from the product's collection metafield (custom.collection_image). Use the override below only if you need a specific image on this page."
+      "content": "Background image is pulled automatically from the collection metafield (custom.collection_image). If the metafield is empty, the fallback image below will be shown instead."
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Fallback image",
+      "info": "Shown when no collection metafield image is found."
     },
     {
       "type": "image_picker",
       "id": "override_image",
-      "label": "Image override (optional)"
+      "label": "Image override (optional)",
+      "info": "Always overrides the metafield and fallback image."
     },
     {
       "type": "header",
