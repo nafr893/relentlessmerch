@@ -92,6 +92,22 @@
 
     <label
       class="visually-hidden"
+      for="ContactForm-company"
+    >
+      Company
+    </label>
+    <input
+      type="text"
+      id="ContactForm-company"
+      class="contact-form__input"
+      autocomplete="organization"
+      name="contact[company]"
+      value="{% if form.company %}{{ form.company }}{% endif %}"
+      placeholder="Company"
+    >
+
+    <label
+      class="visually-hidden"
       for="ContactForm-phone"
     >
       {{- 'blocks.contact_form.phone' | t -}}
