@@ -63,6 +63,19 @@
               {{ block.settings.link_label | escape }}
             </a>
           {%- endif -%}
+
+          {%- if section.blocks.size > 1 -%}
+            <div class="cs__controls">
+              <button type="button" class="cs__control-btn" data-action="previous" aria-label="Previous slide">
+                {{- 'icon-arrow.svg' | inline_asset_content -}}
+                <span>Back</span>
+              </button>
+              <button type="button" class="cs__control-btn" data-action="next" aria-label="Next slide">
+                <span>Next</span>
+                {{- 'icon-arrow.svg' | inline_asset_content -}}
+              </button>
+            </div>
+          {%- endif -%}
         </div>
         </div>{%- comment -%} /cs__slide-inner {%- endcomment -%}
       </div>
@@ -83,17 +96,6 @@
       {%- endfor -%}
     </div>
 
-    {%- comment -%} Prev/Next buttons — desktop only {%- endcomment -%}
-    <div class="cs__controls">
-      <button type="button" class="cs__control-btn" data-action="previous" aria-label="Previous slide">
-        {{- 'icon-arrow.svg' | inline_asset_content -}}
-        <span>Back</span>
-      </button>
-      <button type="button" class="cs__control-btn" data-action="next" aria-label="Next slide">
-        <span>Next</span>
-        {{- 'icon-arrow.svg' | inline_asset_content -}}
-      </button>
-    </div>
   {%- endif -%}
 
 </content-slideshow>
@@ -256,9 +258,7 @@
   @media screen and (min-width: 750px) {
     .cs__controls {
       display: flex;
-      justify-content: flex-end;
       gap: 0;
-      padding-left: 50%;
     }
   }
 
