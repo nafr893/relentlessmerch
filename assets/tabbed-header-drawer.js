@@ -232,14 +232,14 @@ class TabbedHeaderDrawer extends Component {
      const urlParams = new URLSearchParams(window.location.search);
      const tabFromUrl = urlParams.get('drawer');
      const tabFromStorage = localStorage.getItem('lastActiveTab');
-     const initialTab = tabFromUrl || tabFromStorage || 'shop';
+     const initialTab = tabFromUrl || tabFromStorage || 'artists';
 
 
      requestAnimationFrame(() => {
        this.switchTab(initialTab);
      });
    } catch (error) {
-     this.switchTab('shop');
+     this.switchTab('artists');
    }
  }
 
