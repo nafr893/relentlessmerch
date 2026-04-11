@@ -555,8 +555,10 @@
       "settings": {
         "collection_list": [
           "accessories",
-          "headwear",
-          "vinyl"
+          "vinyl",
+          "accessories-1",
+          "hats-1",
+          "vinyl-1"
         ],
         "layout_type": "grid",
         "carousel_on_mobile": true,
