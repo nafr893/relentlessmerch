@@ -124,7 +124,7 @@
         "image_ywG46M": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/A7406141.webp",
+            "image": "shopify://shop_images/A7404060_a8eb8c89-a8fc-47d4-bee2-d905319fd6a3.webp",
             "link": "",
             "image_ratio": "square",
             "width": "fill",
@@ -186,7 +186,7 @@
               "type": "text",
               "name": "t:names.heading",
               "settings": {
-                "text": "<h2>CUSTOM WEBSTORES</h2>",
+                "text": "<h2>SCREEN PRINTING</h2>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -211,7 +211,7 @@
             "text_7Ur967": {
               "type": "text",
               "settings": {
-                "text": "<p>Looking for a place to sell online? Physical and digital sales capabilities available on our responsive platform or easily embed on any website for a seamless customer experience.</p>",
+                "text": "<p>Screenprinting is a process where ink is forced through a mesh screen onto a surface. Making certain areas of the screen impervious to printing ink creates a stencil, which blocks the printing ink from passing through the screen. The ink that passes through forms the printed image. An incredible way we can create one of kind pieces for your project.</p>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -335,7 +335,7 @@
               "type": "text",
               "name": "t:names.heading",
               "settings": {
-                "text": "<h2>FULFILLMENT AND PACKAGING</h2>",
+                "text": "<h2>EMBROIDERY</h2>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -360,7 +360,7 @@
             "text_EVW4tD": {
               "type": "text",
               "settings": {
-                "text": "<p>Whether it’s one project or ALL of your projects, we can bag and tag your orders and send directly to your people! We can help you save time and space, allowing you to focus on creating more designs or freeing up some of your teams time</p><p>Shipping orders all over, the country. We've developed the fastest way to streamline your orders in our warehouse system to keep your products organized and ready to ship with efficiency and care.</p>",
+                "text": "<p>The art or process of forming decorative designs with machine needlework. Whether its hats, jackets, or tees, adding embroidery adds a high class feel to any order. Our embroidery team is one of the best in Nebraska and can prove time and time they have to skills to create your custom items.</p>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -407,7 +407,7 @@
         "image_p89UqF": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/A7406093.webp",
+            "image": "shopify://shop_images/A7404163_6dc99ec2-ff9b-493e-b69b-bda1029e1c5a.webp",
             "link": "",
             "image_ratio": "square",
             "width": "fill",
@@ -430,6 +430,177 @@
       "block_order": [
         "group_Mzdwbg",
         "image_p89UqF"
+      ],
+      "name": "t:names.image_with_text",
+      "settings": {
+        "content_direction": "row",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "center",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 32,
+        "section_width": "page-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "color_scheme": "",
+        "background_media": "none",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_radius": 0,
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "padding-block-start": 40,
+        "padding-block-end": 40
+      }
+    },
+    "section_y9QNcC": {
+      "type": "section",
+      "blocks": {
+        "image_gpn7mA": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Arankai_Custom_Merch.webp",
+            "link": "",
+            "image_ratio": "square",
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "group_gprKqy": {
+          "type": "group",
+          "settings": {
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "center",
+            "align_baseline": false,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 12,
+            "width": "custom",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "background_media": "none",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "toggle_overlay": false,
+            "overlay_color": "#00000026",
+            "overlay_style": "solid",
+            "gradient_direction": "to top",
+            "link": "",
+            "open_in_new_tab": false,
+            "placeholder": "",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "text_ppTTBx": {
+              "type": "text",
+              "name": "t:names.heading",
+              "settings": {
+                "text": "<h2>CUSTOM PIECES</h2>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "h3",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "text_adqLbF": {
+              "type": "text",
+              "settings": {
+                "text": "<p>Promotional items don't have to be boring! We want to help make fun original items for your corporate event or team swag. The items that will be kept and worth your time. Send us a budget and we will pick out some fun products with your logo or design!</p>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "button_JNyDyz": {
+              "type": "button",
+              "disabled": true,
+              "settings": {
+                "label": "Shop now",
+                "link": "shopify://collections/all",
+                "open_in_new_tab": false,
+                "style_class": "button",
+                "width": "fit-content",
+                "custom_width": 100,
+                "width_mobile": "fit-content",
+                "custom_width_mobile": 100
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "text_ppTTBx",
+            "text_adqLbF",
+            "button_JNyDyz"
+          ]
+        }
+      },
+      "block_order": [
+        "image_gpn7mA",
+        "group_gprKqy"
       ],
       "name": "t:names.image_with_text",
       "settings": {
@@ -606,6 +777,7 @@
     "hero_yM6FnB",
     "section_ccF7MA",
     "section_VzgeQ4",
+    "section_y9QNcC",
     "section_3TWAhE",
     "main"
   ]
