@@ -95,14 +95,11 @@
 
 
 {% stylesheet %}
- /* Wrapper should NOT clip the scroll container */
  .quick-filter {
-width: 100%;
- overflow: visible;
+  width: 100%;
+  overflow: hidden;
  }
 
-
- 
 .quick-filter__buttons {
   display: flex;
   flex-wrap: nowrap;
@@ -110,6 +107,8 @@ width: 100%;
   width: 100%;
   overflow-x: auto;
   overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-x;
   font-size: 13px;
   gap: 10px;
   padding-bottom: 15px;
