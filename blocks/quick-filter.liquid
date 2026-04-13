@@ -97,6 +97,8 @@
 {% stylesheet %}
  .quick-filter {
   width: 100%;
+  min-width: 0;
+  max-width: 100%;
   overflow: hidden;
  }
 
@@ -104,11 +106,11 @@
   display: flex;
   flex-wrap: nowrap;
   z-index: 99;
-  width: 100%;
+  min-width: 0;
+  max-width: 100%;
   overflow-x: auto;
   overflow-y: hidden;
   -webkit-overflow-scrolling: touch;
-  touch-action: pan-x;
   font-size: 13px;
   gap: 10px;
   padding-bottom: 15px;
