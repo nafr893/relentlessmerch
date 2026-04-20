@@ -540,9 +540,14 @@
     display: none !important;
   }
 
-  /* Show the tabbed drawer on desktop when the JS adds the desktop-drawer-open class.
-     The JS moves .tabbed-drawer out of <details> so the browser no longer hides it;
-     the transform/visibility/opacity below slide it into view. */
+  /* Reposition drawer to slide in from the left on desktop */
+  tabbed-header-drawer > .tabbed-drawer {
+    right: auto !important;
+    left: 0 !important;
+    transform: translateX(-100%) !important;
+  }
+
+  /* Show the tabbed drawer on desktop when the JS adds the desktop-drawer-open class. */
   tabbed-header-drawer.desktop-drawer-open > .tabbed-drawer {
     transform: translateX(0) !important;
     visibility: visible !important;
