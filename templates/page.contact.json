@@ -246,7 +246,7 @@
                   "type": "text",
                   "name": "t:names.text",
                   "settings": {
-                    "text": "<p><strong>EMAIL <br/>hello@relentlessmerch.com</strong></p>",
+                    "text": "<p><strong>EMAIL<br/>ecom@relentlessmerch.com</strong></p>",
                     "width": "fit-content",
                     "max_width": "normal",
                     "alignment": "left",
