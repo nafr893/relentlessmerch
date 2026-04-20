@@ -277,6 +277,10 @@ class TabbedHeaderDrawer extends Component {
              const tab = btn.dataset.tab;
              if (tab) this.switchTab(tab);
            });
+           btn.addEventListener('pointerenter', () => {
+             const tab = btn.dataset.tab;
+             if (tab) this.switchTab(tab);
+           });
            btn.__tabListenerAttached = true;
          }
        });
@@ -446,7 +450,7 @@ if (!customElements.get('tabbed-header-drawer')) {
        b.setAttribute('role', 'tab');
        b.setAttribute('aria-selected', i === 0 ? 'true' : 'false');
        b.setAttribute('tabindex', i === 0 ? '0' : '-1');
-       b.addEventListener('click', () => {
+       const switchToTab = () => {
          tabButtons.forEach((tb, idx) => {
            tb.setAttribute('aria-selected', idx === i ? 'true' : 'false');
            tb.setAttribute('tabindex', idx === i ? '0' : '-1');
@@ -454,7 +458,9 @@ if (!customElements.get('tabbed-header-drawer')) {
          panels.forEach((p, idx) => {
            p.hidden = idx !== i;
          });
-       });
+       };
+       b.addEventListener('click', switchToTab);
+       b.addEventListener('pointerenter', switchToTab);
      });
      // ensure initial panel visibility
      panels.forEach((p, idx) => { p.hidden = idx !== 0; });
