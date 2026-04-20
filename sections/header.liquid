@@ -540,14 +540,13 @@
     display: none !important;
   }
 
-  /* Force the tabbed-drawer panel into the render tree on desktop.
-     Browsers apply display:none to <details> non-summary children unless
-     the details element has the open attribute. We override that here so
-     visibility is controlled purely by the .menu-open class / transform. */
-  details.menu-drawer-container .tabbed-drawer {
-    /* stylelint-disable-next-line declaration-no-important */
-    display: flex !important;
-    flex-direction: column;
+  /* Show the tabbed drawer on desktop when the JS adds the desktop-drawer-open class.
+     The JS moves .tabbed-drawer out of <details> so the browser no longer hides it;
+     the transform/visibility/opacity below slide it into view. */
+  tabbed-header-drawer.desktop-drawer-open > .tabbed-drawer {
+    transform: translateX(0) !important;
+    visibility: visible !important;
+    opacity: 1 !important;
   }
 }
 </style>
@@ -606,16 +605,32 @@
       var details = drawerEl.querySelector('details');
       if (!details) return;
 
+      // On desktop only: detach .tabbed-drawer from <details> and re-attach directly to
+      // tabbed-header-drawer so it's never subject to <details> browser hiding.
+      // Must guard for mobile so the hamburger open/close still works there.
+      if (window.innerWidth >= 750) {
+        var tabDrawer = drawerEl.querySelector('.tabbed-drawer');
+        if (tabDrawer && tabDrawer.parentElement === details) {
+          drawerEl.appendChild(tabDrawer);
+        }
+      }
+
+      var isOpen = false;
+
       function openTab(tabId) {
         clearTimeout(closeTimer);
-        details.classList.add('menu-open');
+        if (!isOpen) {
+          isOpen = true;
+          drawerEl.classList.add('desktop-drawer-open');
+        }
         requestAnimationFrame(function () {
           if (typeof drawerEl.switchTab === 'function') drawerEl.switchTab(tabId);
         });
       }
 
       function closeNow() {
-        details.classList.remove('menu-open');
+        isOpen = false;
+        drawerEl.classList.remove('desktop-drawer-open');
       }
 
       function scheduleClose() {
@@ -623,7 +638,6 @@
       }
 
       // Wire each desktop nav link whose title matches a tab ID.
-      // Also mark the parent <li> so CSS can suppress the mega-menu dropdown for it.
       document.querySelectorAll('.header-menu .menu-list__link').forEach(function (link) {
         var titleEl = link.querySelector('.menu-list__link-title');
         if (!titleEl) return;
@@ -638,7 +652,6 @@
         // Also prevent header-menu.js from expanding this link's submenu
         link.addEventListener('pointerenter', function () {
           if (window.innerWidth < 750) return;
-          // Force aria-expanded off so header-menu.js won't show the submenu
           requestAnimationFrame(function () { link.setAttribute('aria-expanded', 'false'); });
           openTab(tabId);
         });
@@ -654,10 +667,10 @@
 
       // Close on outside click
       document.addEventListener('click', function (e) {
-        if (!details.classList.contains('menu-open')) return;
+        if (!isOpen) return;
         var target = e.target;
         if (target && !drawerEl.contains(target) && !target.closest('.header-menu')) {
-          details.classList.remove('menu-open');
+          closeNow();
         }
       });
     }
