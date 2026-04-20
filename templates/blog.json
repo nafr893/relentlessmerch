@@ -242,8 +242,8 @@
       ],
       "settings": {
         "color_scheme": "",
-        "padding-block-start": 0,
-        "padding-block-end": 48
+        "padding-block-start": 60,
+        "padding-block-end": 60
       }
     }
   },
