@@ -178,16 +178,8 @@
  /* Tabbed Header Drawer Styles */
 
 
- /* On desktop, override browser's <details> hiding so the fixed-position panel
-    can be shown/hidden purely via .menu-open CSS class + transform/visibility */
+ /* On desktop, the wrapper div takes no space in the header grid */
  @media screen and (min-width: 750px) {
-   details.menu-drawer-container > :not(summary) {
-     /* stylelint-disable-next-line declaration-no-important */
-     display: flex !important;
-     flex-direction: column;
-   }
-
-   /* The wrapper div takes no space in the header — it's only a container */
    .header__drawer:has(tabbed-header-drawer) {
      display: contents;
    }

@@ -539,6 +539,16 @@
   .menu-list__list-item[data-desktop-drawer-trigger] > .menu-list__submenu {
     display: none !important;
   }
+
+  /* Force the tabbed-drawer panel into the render tree on desktop.
+     Browsers apply display:none to <details> non-summary children unless
+     the details element has the open attribute. We override that here so
+     visibility is controlled purely by the .menu-open class / transform. */
+  details.menu-drawer-container .tabbed-drawer {
+    /* stylelint-disable-next-line declaration-no-important */
+    display: flex !important;
+    flex-direction: column;
+  }
 }
 </style>
 
@@ -599,13 +609,17 @@
       function openTab(tabId) {
         clearTimeout(closeTimer);
         details.classList.add('menu-open');
-        if (typeof drawerEl.switchTab === 'function') drawerEl.switchTab(tabId);
+        requestAnimationFrame(function () {
+          if (typeof drawerEl.switchTab === 'function') drawerEl.switchTab(tabId);
+        });
+      }
+
+      function closeNow() {
+        details.classList.remove('menu-open');
       }
 
       function scheduleClose() {
-        closeTimer = setTimeout(function () {
-          details.classList.remove('menu-open');
-        }, 200);
+        closeTimer = setTimeout(closeNow, 200);
       }
 
       // Wire each desktop nav link whose title matches a tab ID.
