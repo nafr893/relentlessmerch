@@ -334,6 +334,17 @@
         "padding-block-end": 60
       }
     },
+    "custom_liquid_e3xPFA": {
+      "type": "custom-liquid",
+      "name": "t:names.custom_liquid",
+      "settings": {
+        "custom_liquid": "<iframe\n      id=\"JotFormIFrame-242845172672158\"\n      title=\"Get In Touch with Us!\"\n      onload=\"window.parent.scrollTo(0,0)\"\n      allowtransparency=\"true\"\n      allow=\"geolocation; microphone; camera; fullscreen; payment\"\n      src=\"https://form.jotform.com/242845172672158\"\n      frameborder=\"0\"\n      style=\"min-width:100%;max-width:100%;height:539px;border:none;\"\n      scrolling=\"no\"\n    >\n    </iframe>\n    <script src='https://cdn.jotfor.ms/s/umd/latest/for-form-embed-handler.js'></script>\n    <script>window.jotformEmbedHandler(\"iframe[id='JotFormIFrame-242845172672158']\", \"https://form.jotform.com/\")</script>",
+        "color_scheme": "",
+        "section_width": "page-width",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
     "section_dAQAiF": {
       "type": "section",
       "blocks": {
@@ -398,6 +409,7 @@
         "text_8kPhrT",
         "contact_form_PY9bLG"
       ],
+      "disabled": true,
       "name": "t:names.contact_form",
       "settings": {
         "content_direction": "column",
@@ -433,6 +445,7 @@
     "section_qhdaTf",
     "main",
     "content_slideshow_fBF76Q",
+    "custom_liquid_e3xPFA",
     "section_dAQAiF"
   ]
 }
