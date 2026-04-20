@@ -666,6 +666,15 @@
         });
       });
 
+      // Close button inside the drawer should also dismiss the desktop overlay
+      drawerEl.addEventListener('click', function (e) {
+        if (window.innerWidth < 750) return;
+        var target = e.target;
+        if (target && target.closest('.tabbed-drawer__close-button')) {
+          closeNow();
+        }
+      });
+
       // Cancel close while mouse is inside the drawer panel
       drawerEl.addEventListener('pointerenter', function () { clearTimeout(closeTimer); });
       drawerEl.addEventListener('pointerleave', function () { scheduleClose(); });
