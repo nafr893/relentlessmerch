@@ -426,11 +426,11 @@
     --cart-item-price-width: 6rem;
 
     display: grid;
-    grid-template-columns: clamp(2.5rem, 15cqi, 7.5rem) minmax(0, 1fr) minmax(var(--cart-item-price-width), auto);
+    grid-template-columns: clamp(2.5rem, 15cqi, 7.5rem) minmax(0, 1fr);
     grid-template-areas:
-      'media details price'
-      'media quantity price'
-      'media error error';
+      'media details'
+      'media quantity'
+      'media error';
     column-gap: var(--gap-md);
     align-items: start;
     padding-bottom: var(--cart-items-gap);
@@ -439,14 +439,14 @@
 
   /* Cart drawer: separate grid areas for variants and unit price */
   .cart-drawer .cart-items__table-row--full-width-variants {
-    grid-template-columns: clamp(2.5rem, 15cqi, 7.5rem) minmax(0, 1fr) auto;
+    grid-template-columns: clamp(2.5rem, 15cqi, 7.5rem) minmax(0, 1fr);
     grid-template-rows: repeat(4, min-content) 1fr;
     grid-template-areas:
-      'media details price'
-      'media variants variants'
-      'media unit_price unit_price'
-      'media quantity quantity'
-      'media error error';
+      'media details'
+      'media variants'
+      'media unit_price'
+      'media quantity'
+      'media error';
 
     .cart-items__details {
       display: contents;
@@ -471,11 +471,6 @@
     .cart-items__unit-price-wrapper {
       grid-area: unit_price;
       font-size: var(--font-size--sm);
-    }
-
-    .cart-items__price {
-      min-width: auto;
-      width: max-content;
     }
   }
 
@@ -614,13 +609,7 @@
   }
 
   .cart-items__price {
-    grid-area: price;
-    min-height: unset;
-    min-width: var(--cart-item-price-width);
-    text-align: end;
-    display: block;
-    font-size: var(--font-size--sm);
-    line-height: var(--line-height);
+    display: none;
   }
 
 
@@ -691,40 +680,28 @@
     .cart-items__table-row {
       --cart-item-price-width: 6rem;
 
-      grid-template-columns: 7.5rem 1fr 1fr minmax(var(--cart-item-price-width), auto);
+      grid-template-columns: 7.5rem 1fr 1fr;
       grid-template-rows: min-content 1fr;
       grid-template-areas:
-        'media details quantity price'
-        'media details error error';
-    }
-
-    .cart-items__quantity,
-    .cart-items__price {
-      grid-area: initial;
+        'media details quantity'
+        'media details error';
     }
 
     .cart-items__quantity {
+      grid-area: initial;
       margin-top: 0;
-    }
-
-    .cart-items__price {
-      min-height: var(--minimum-touch-target);
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
     }
 
     /* Cart drawer: separate areas for variants and unit price */
     .cart-drawer .cart-items__table-row--full-width-variants {
       grid-template-rows: min-content min-content min-content 1fr;
       grid-template-areas:
-        'media details quantity price'
-        'media variants variants variants'
-        'media unit_price unit_price unit_price'
-        'media error error error';
+        'media details quantity'
+        'media variants variants'
+        'media unit_price unit_price'
+        'media error error';
 
-      .cart-items__quantity,
-      .cart-items__price {
+      .cart-items__quantity {
         grid-area: initial;
       }
     }

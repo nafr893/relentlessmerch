@@ -17,7 +17,9 @@
       if product_filter_map != ''
         assign product_filter_map = product_filter_map | append: ','
       endif
-      assign map_entry = '"' | append: product.id | append: '":"' | append: filter_group | append: '"'
+      assign filter_group_json = filter_group | json
+      assign product_id_json = product.id | json
+      assign map_entry = product_id_json | append: ':' | append: filter_group_json
       assign product_filter_map = product_filter_map | append: map_entry
 
       # Track unique filters
