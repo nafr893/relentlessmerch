@@ -579,6 +579,68 @@
       insertDividers();
     }
   })();
+
+  // Desktop: hover over Artists / Apparel / Explore nav links opens the tabbed drawer
+  (function () {
+    var TAB_MAP = { artists: 'artists', apparel: 'apparel', explore: 'explore' };
+    var closeTimer = null;
+
+    function initDesktopDrawerHover() {
+      var drawerEl = document.querySelector('tabbed-header-drawer');
+      if (!drawerEl) return;
+      var details = drawerEl.querySelector('details');
+      if (!details) return;
+
+      function openTab(tabId) {
+        clearTimeout(closeTimer);
+        details.classList.add('menu-open');
+        if (typeof drawerEl.switchTab === 'function') drawerEl.switchTab(tabId);
+      }
+
+      function scheduleClose() {
+        closeTimer = setTimeout(function () {
+          details.classList.remove('menu-open');
+        }, 200);
+      }
+
+      // Wire each desktop nav link whose title matches a tab ID
+      document.querySelectorAll('.header-menu .menu-list__link').forEach(function (link) {
+        var titleEl = link.querySelector('.menu-list__link-title');
+        if (!titleEl) return;
+        var title = titleEl.textContent.trim().toLowerCase();
+        var tabId = TAB_MAP[title];
+        if (!tabId) return;
+
+        link.addEventListener('pointerenter', function () {
+          if (window.innerWidth < 750) return;
+          openTab(tabId);
+        });
+        link.addEventListener('pointerleave', function () {
+          if (window.innerWidth < 750) return;
+          scheduleClose();
+        });
+      });
+
+      // Cancel close while mouse is inside the drawer panel
+      drawerEl.addEventListener('pointerenter', function () { clearTimeout(closeTimer); });
+      drawerEl.addEventListener('pointerleave', function () { scheduleClose(); });
+
+      // Close on outside click
+      document.addEventListener('click', function (e) {
+        if (!details.classList.contains('menu-open')) return;
+        var target = e.target;
+        if (target && !drawerEl.contains(target) && !target.closest('.header-menu')) {
+          details.classList.remove('menu-open');
+        }
+      });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initDesktopDrawerHover);
+    } else {
+      initDesktopDrawerHover();
+    }
+  })();
 </script>
 
 <script
