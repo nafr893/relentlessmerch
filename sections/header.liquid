@@ -534,6 +534,11 @@
   .header-desktop-divider {
     margin-block: -0.5rem !important;
   }
+
+  /* Suppress mega-menu dropdown for nav items that use the tabbed drawer instead */
+  .menu-list__list-item[data-desktop-drawer-trigger] > .menu-list__submenu {
+    display: none !important;
+  }
 }
 </style>
 
@@ -603,7 +608,8 @@
         }, 200);
       }
 
-      // Wire each desktop nav link whose title matches a tab ID
+      // Wire each desktop nav link whose title matches a tab ID.
+      // Also mark the parent <li> so CSS can suppress the mega-menu dropdown for it.
       document.querySelectorAll('.header-menu .menu-list__link').forEach(function (link) {
         var titleEl = link.querySelector('.menu-list__link-title');
         if (!titleEl) return;
@@ -611,8 +617,15 @@
         var tabId = TAB_MAP[title];
         if (!tabId) return;
 
+        // Suppress mega-menu dropdown for this item
+        var li = link.closest('.menu-list__list-item');
+        if (li) li.setAttribute('data-desktop-drawer-trigger', tabId);
+
+        // Also prevent header-menu.js from expanding this link's submenu
         link.addEventListener('pointerenter', function () {
           if (window.innerWidth < 750) return;
+          // Force aria-expanded off so header-menu.js won't show the submenu
+          requestAnimationFrame(function () { link.setAttribute('aria-expanded', 'false'); });
           openTab(tabId);
         });
         link.addEventListener('pointerleave', function () {
