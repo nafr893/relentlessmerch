@@ -85,6 +85,21 @@
           },
           "blocks": {}
         },
+        "button_PiGJUE": {
+          "type": "button",
+          "name": "t:names.button",
+          "settings": {
+            "label": "START YOUR ORDER",
+            "link": "shopify://pages/contact",
+            "open_in_new_tab": false,
+            "style_class": "button",
+            "width": "fit-content",
+            "custom_width": 100,
+            "width_mobile": "fit-content",
+            "custom_width_mobile": 100
+          },
+          "blocks": {}
+        },
         "text_Rzydnk": {
           "type": "text",
           "disabled": true,
@@ -130,6 +145,7 @@
       },
       "block_order": [
         "text_Xq7LrX",
+        "button_PiGJUE",
         "text_Rzydnk",
         "button_Y8Uyzi"
       ],
