@@ -60,7 +60,7 @@
     --font-style: var(--font-body--style);
     --font-weight: 600;
     --artist-logo-invert: {{ artist_logo_invert }};
-    {% if block_settings.desktop_logo_max_width > 0 %}--logo-desktop-override-width: {{ block_settings.desktop_logo_max_width }}px; --logo-desktop-override-height: auto;{% endif %}
+    {% if block_settings.desktop_logo_max_width > 0 %}--logo-desktop-max-width: {{ block_settings.desktop_logo_max_width }}px; --logo-desktop-max-height: {{ settings.logo_height }}px; --logo-desktop-auto: auto;{% endif %}
   "
   {{ block.shopify_attributes }}
 >
@@ -168,8 +168,10 @@
     width: var(--header-logo-image-width-mobile);
 
     @media screen and (min-width: 750px) {
-      width: var(--logo-desktop-override-width, var(--header-logo-image-width));
-      height: var(--logo-desktop-override-height, var(--header-logo-image-height));
+      width: var(--logo-desktop-auto, var(--header-logo-image-width));
+      height: var(--logo-desktop-auto, var(--header-logo-image-height));
+      max-width: var(--logo-desktop-max-width, none);
+      max-height: var(--logo-desktop-max-height, none);
     }
   }
 
