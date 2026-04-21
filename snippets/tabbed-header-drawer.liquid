@@ -161,15 +161,14 @@
      {%- comment -%} Account Section (appears on all tabs) {%- endcomment -%}
      <div class="tabbed-drawer__account-section">
        <div class="tabbed-drawer__account-title">{{ block_settings.tabbed_account_title | default: 'ACCOUNT' }}</div>
-       <a href="/account" class="tabbed-drawer__account-link">
+       <a href="{{ routes.account_url }}" class="tabbed-drawer__account-link">
          {{ block_settings.tabbed_account_link_text | default: 'Log In / Sign Up' }}
        </a>
      </div>
-
-
-     {%- comment -%} Backdrop {%- endcomment -%}
-     <div class="tabbed-drawer__backdrop" on:click="/close"></div>
    </div>
+
+   {%- comment -%} Backdrop sits outside .tabbed-drawer so it doesn't share its stacking context {%- endcomment -%}
+   <div class="tabbed-drawer__backdrop" on:click="/close"></div>
  </details>
 </tabbed-header-drawer>
 
