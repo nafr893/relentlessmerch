@@ -1,0 +1,164 @@
+{% liquid
+  assign artist_name = collection.metafields.custom.bandsintown_artist | strip
+  if artist_name == blank
+    assign artist_name = collection.title | strip
+  endif
+%}
+
+<div class="bandsintown-widget section spacing-style {{ section.settings.color_scheme | prepend: 'color-' }}">
+  <div class="bandsintown-widget__inner section--{{ section.settings.section_width }}">
+    {% if section.settings.heading != blank %}
+      <h2 class="bandsintown-widget__heading">{{ section.settings.heading }}</h2>
+    {% endif %}
+
+    <script charset="utf-8" src="https://widget.bandsintown.com/main.min.js"></script>
+    <a
+      class="bit-widget-initializer"
+      data-artist-name="{{ artist_name }}"
+      data-display-local-dates="{{ section.settings.display_local_dates }}"
+      data-display-past-dates="{{ section.settings.display_past_dates }}"
+      data-auto-style="false"
+      data-text-color="{{ section.settings.text_color }}"
+      data-link-color="{{ section.settings.link_color }}"
+      data-background-color="{{ section.settings.background_color }}"
+      data-display-limit="{{ section.settings.display_limit }}"
+      data-display-start-time="{{ section.settings.display_start_time }}"
+      data-link-text-color="{{ section.settings.link_text_color }}"
+      data-display-lineup="{{ section.settings.display_lineup }}"
+      data-display-play-my-city="{{ section.settings.display_play_my_city }}"
+      data-separator-color="{{ section.settings.separator_color }}"
+    ></a>
+  </div>
+</div>
+
+{% stylesheet %}
+  .bandsintown-widget__inner {
+    margin-inline: auto;
+  }
+
+  .bandsintown-widget__heading {
+    margin-bottom: 1.5rem;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Bands in Town",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Tour Dates"
+    },
+    {
+      "type": "paragraph",
+      "content": "Artist name is pulled automatically from the collection metafield custom.bandsintown_artist, falling back to the collection title."
+    },
+    {
+      "type": "header",
+      "content": "Display"
+    },
+    {
+      "type": "range",
+      "id": "display_limit",
+      "label": "Max dates to show",
+      "min": 1,
+      "max": 100,
+      "step": 1,
+      "default": 15
+    },
+    {
+      "type": "checkbox",
+      "id": "display_local_dates",
+      "label": "Show local dates",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "display_past_dates",
+      "label": "Show past dates",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "display_start_time",
+      "label": "Show start time",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "display_lineup",
+      "label": "Show lineup",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "display_play_my_city",
+      "label": "Show \"Play My City\" button",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "primary"
+    },
+    {
+      "type": "text",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#000000"
+    },
+    {
+      "type": "text",
+      "id": "link_color",
+      "label": "Link color",
+      "default": "#00b4b3"
+    },
+    {
+      "type": "text",
+      "id": "link_text_color",
+      "label": "Link text color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "text",
+      "id": "background_color",
+      "label": "Widget background color",
+      "default": "rgba(0,0,0,0)"
+    },
+    {
+      "type": "text",
+      "id": "separator_color",
+      "label": "Separator color",
+      "default": "rgba(255,255,255,0.5)"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "Width",
+      "options": [
+        { "value": "page-width", "label": "Page width" },
+        { "value": "full-width", "label": "Full width" }
+      ],
+      "default": "page-width"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Bands in Town"
+    }
+  ]
+}
+{% endschema %}
