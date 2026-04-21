@@ -661,6 +661,20 @@
         "padding-block-start": 36,
         "padding-block-end": 36
       }
+    },
+    "divider_nWCPcR": {
+      "type": "divider",
+      "name": "t:names.divider_section",
+      "settings": {
+        "color_scheme": "",
+        "section_width": "full-width",
+        "thickness": 0.5,
+        "corner_radius": "square",
+        "width_percent": 100,
+        "alignment_horizontal": "center",
+        "padding-block-start": 16,
+        "padding-block-end": 16
+      }
     }
   },
   "order": [
@@ -668,6 +682,7 @@
     "main",
     "section_ww37Cf",
     "bandsintown_widget_fajyPp",
-    "similar_collections_wiLgjd"
+    "similar_collections_wiLgjd",
+    "divider_nWCPcR"
   ]
 }
