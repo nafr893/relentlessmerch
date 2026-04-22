@@ -11,18 +11,11 @@
         --badge-font-family: var(--font-{{ settings.badge_font_family }}--family); --badge-font-weight: var(--font-{{ settings.badge_font_family }}--weight); --badge-text-transform: {{ settings.badge_text_transform }};
       "
     >
-      {%- assign is_preorder = false -%}
-      {%- for tag in product.tags -%}
-        {%- assign tag_lower = tag | downcase -%}
-        {%- if tag_lower == 'pre order' or tag_lower == 'pre-order' or tag_lower == 'preorder' -%}
-          {%- assign is_preorder = true -%}
-          {%- break -%}
-        {%- endif -%}
-      {%- endfor -%}
+      {%- assign custom_label = product.metafields.theme.label | strip -%}
 
-      {%- if is_preorder -%}
+      {%- if custom_label != blank -%}
         <div class="product-badges__badge product-badges__badge--rectangle color-{{ settings.badge_sold_out_color_scheme }}">
-          Pre Order
+          {{ custom_label }}
         </div>
       {%- elsif product.available == false or product.compare_at_price > product.price -%}
         <div
