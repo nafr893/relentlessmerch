@@ -565,8 +565,8 @@
       "name": "Bands in Town",
       "settings": {
         "heading": "Tour Dates",
-        "display_limit": 15,
-        "display_local_dates": false,
+        "display_limit": 58,
+        "display_local_dates": true,
         "display_past_dates": true,
         "display_start_time": true,
         "display_lineup": true,
@@ -577,89 +577,7 @@
         "link_text_color": "#FFFFFF",
         "background_color": "rgba(0,0,0,0)",
         "separator_color": "rgba(255,255,255,0.5)",
-        "section_width": "page-width"
-      }
-    },
-    "similar_collections_wiLgjd": {
-      "type": "similar-collections",
-      "blocks": {
-        "text_W39kT7": {
-          "type": "text",
-          "name": "t:names.heading",
-          "settings": {
-            "text": "<h2>SIMILAR ARTISTS</h2>",
-            "width": "fit-content",
-            "max_width": "normal",
-            "alignment": "left",
-            "type_preset": "rte",
-            "font": "var(--font-body--family)",
-            "font_size": "1rem",
-            "line_height": "normal",
-            "letter_spacing": "normal",
-            "case": "none",
-            "wrap": "pretty",
-            "color": "var(--color-foreground)",
-            "background": false,
-            "background_color": "#00000026",
-            "corner_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 24,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
-        },
-        "static-collection-card": {
-          "type": "_collection-card",
-          "static": true,
-          "settings": {
-            "placement": "on_image",
-            "horizontal_alignment": "flex-start",
-            "vertical_alignment": "center",
-            "collection_card_gap": 8,
-            "inherit_color_scheme": false,
-            "color_scheme": "scheme-5",
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_radius": 0
-          },
-          "blocks": {
-            "collection-card-image": {
-              "type": "_collection-card-image",
-              "static": true,
-              "settings": {
-                "image_ratio": "square",
-                "toggle_overlay": false,
-                "overlay_color": "#00000026",
-                "overlay_style": "solid",
-                "gradient_direction": "to top",
-                "border": "none",
-                "border_width": 1,
-                "border_opacity": 100,
-                "border_radius": 0
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": []
-        }
-      },
-      "block_order": [
-        "text_W39kT7"
-      ],
-      "name": "Similar Collections",
-      "settings": {
-        "layout_type": "carousel",
-        "columns": 3,
-        "mobile_columns": "1",
-        "mobile_card_size": "60cqw",
-        "columns_gap": 8,
-        "gap": 12,
-        "section_width": "page-width",
-        "color_scheme": "",
-        "padding-block-start": 36,
-        "padding-block-end": 36
+        "section_width": "full-width"
       }
     },
     "section_7YqkFW": {
@@ -699,7 +617,6 @@
     "main",
     "section_ww37Cf",
     "bandsintown_widget_fajyPp",
-    "similar_collections_wiLgjd",
     "section_7YqkFW"
   ]
 }
