@@ -203,7 +203,7 @@
           "settings": {
             "enable_filtering": true,
             "filter_style": "horizontal",
-            "filter_width": "centered",
+            "filter_width": "full-width",
             "text_label_case": "default",
             "show_swatch_label": false,
             "show_filter_label": false,
@@ -257,8 +257,8 @@
               "name": "t:names.product_title",
               "settings": {
                 "width": "100%",
-                "max_width": "normal",
-                "alignment": "left",
+                "max_width": "narrow",
+                "alignment": "center",
                 "type_preset": "rte",
                 "font": "var(--font-body--family)",
                 "font_size": "1rem",
@@ -285,7 +285,7 @@
                 "show_tax_info": false,
                 "type_preset": "h6",
                 "width": "100%",
-                "alignment": "left",
+                "alignment": "center",
                 "font": "var(--font-body--family)",
                 "font_size": "1rem",
                 "line_height": "normal",
