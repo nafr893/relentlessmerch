@@ -164,6 +164,7 @@
                     "text_gU9myf": {
                       "type": "text",
                       "name": "t:names.text",
+                      "disabled": true,
                       "settings": {
                         "text": "<p>Artist: {{ closest.product.vendor }}</p>",
                         "width": "fit-content",
