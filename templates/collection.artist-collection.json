@@ -404,8 +404,8 @@
         "full_width_on_mobile": true,
         "columns_gap_horizontal": 0,
         "columns_gap_vertical": 0,
-        "padding-inline-start": 0,
-        "padding-inline-end": 0,
+        "padding-inline-start": 37,
+        "padding-inline-end": 37,
         "color_scheme": "scheme-1",
         "padding-block-start": 32,
         "padding-block-end": 32
