@@ -41,7 +41,6 @@
         "popup_link_EXW73X": {
           "type": "popup-link",
           "name": "t:names.popup_link",
-          "disabled": true,
           "settings": {
             "behavior": "default",
             "heading": "Learn more",
@@ -175,7 +174,7 @@
         "gap": 12,
         "section_width": "page-width",
         "section_height": "custom",
-        "section_height_custom": 60,
+        "section_height_custom": 75,
         "color_scheme": "scheme-5",
         "background_media": "image",
         "video_position": "cover",
@@ -213,8 +212,8 @@
             "color_scheme": "",
             "padding-block-start": 8,
             "padding-block-end": 8,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0,
+            "padding-inline-start": 35,
+            "padding-inline-end": 35,
             "facets_margin_bottom": 8,
             "facets_margin_right": 20
           },
