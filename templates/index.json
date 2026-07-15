@@ -1001,11 +1001,11 @@
         "slide_CFzC7f": {
           "type": "slide",
           "settings": {
-            "background_image": "shopify://shop_images/ezgif-4a663dddf845f108.webp",
-            "artist_image": "shopify://shop_images/1900x1900-000000-80-0-0-2.webp",
-            "artist_name": "Emma Harner",
+            "background_image": "shopify://shop_images/Volumes_Banner_Pic_v1.webp",
+            "artist_image": "shopify://shop_images/Volumes_Banner_Pic_v1.webp",
+            "artist_name": "VOLUMES",
             "link_label": "View Bio",
-            "link": "shopify://collections/emma-harner"
+            "link": "shopify://collections/volumes"
           }
         }
       },
