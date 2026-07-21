@@ -577,7 +577,7 @@
         "link_text_color": "#FFFFFF",
         "background_color": "rgba(0,0,0,0)",
         "separator_color": "rgba(255,255,255,0.5)",
-        "section_width": "full-width"
+        "section_width": "page-width"
       }
     },
     "section_7YqkFW": {
