@@ -532,6 +532,7 @@
         "video_JXDhCE",
         "group_gEaaeR"
       ],
+      "disabled": true,
       "name": "t:names.video_section",
       "settings": {
         "content_direction": "column",
@@ -563,6 +564,7 @@
     },
     "bandsintown_widget_fajyPp": {
       "type": "bandsintown-widget",
+      "disabled": true,
       "name": "Bands in Town",
       "settings": {
         "heading": "Tour Dates",
@@ -583,6 +585,7 @@
     },
     "section_7YqkFW": {
       "type": "section",
+      "disabled": true,
       "name": "Spacer",
       "settings": {
         "content_direction": "column",
