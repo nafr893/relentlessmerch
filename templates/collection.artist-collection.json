@@ -81,6 +81,7 @@
             "popup_link_ceyXEQ": {
               "type": "popup-link",
               "name": "t:names.popup_link",
+              "disabled": true,
               "settings": {
                 "behavior": "drawer",
                 "heading": "VIEW BIO",
@@ -268,7 +269,7 @@
         "background_media": "image",
         "video_position": "cover",
         "background_image": "{{ collection.metafields.custom.collection_image.value }}",
-        "fallback_image": "shopify://shop_images/DYLAN_HERO_IMAGE.png",
+        "fallback_image": "shopify://shop_images/hero.png",
         "background_image_position": "cover",
         "border": "none",
         "border_width": 1,
