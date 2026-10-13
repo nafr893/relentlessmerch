@@ -99,6 +99,16 @@
     "variant_button_radius": 0,
     "variant_button_width": "equal-width-buttons",
     "content_for_index": [],
+    "blocks": {
+      "8315608621410374781": {
+        "type": "shopify://apps/pify-size-charts/blocks/size-chart-app-embed/6acea2e6-5389-4b9c-9a1f-ae00732bccb4",
+        "disabled": false,
+        "settings": {
+          "custom_liquid_css": "",
+          "custom_liquid_js": ""
+        }
+      }
+    },
     "color_schemes": {
       "scheme-1": {
         "settings": {
