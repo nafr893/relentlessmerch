@@ -12,6 +12,11 @@
     "main": {
       "type": "product-information",
       "blocks": {
+        "pify_size_charts_size_chart_inline_block_aDqbBd": {
+          "type": "shopify://apps/pify-size-charts/blocks/size-chart-inline-block/6acea2e6-5389-4b9c-9a1f-ae00732bccb4",
+          "disabled": true,
+          "settings": {}
+        },
         "media-gallery": {
           "type": "_product-media-gallery",
           "static": true,
@@ -478,6 +483,9 @@
           ]
         }
       },
+      "block_order": [
+        "pify_size_charts_size_chart_inline_block_aDqbBd"
+      ],
       "settings": {
         "content_width": "content-center-aligned",
         "desktop_media_position": "left",
